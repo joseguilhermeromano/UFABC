@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.ifsp.lds.beans;
+package br.com.ifsp.lds.dao;
 
 /**
  *
  * @author eddie
  */
-public class colaborador {
+public class UsuarioDAO {
     
 }
