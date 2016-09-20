@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/eddie/NetBeansProjects/UFABC/src/conf/persistence.xml</file>
-            <file>file:/home/eddie/NetBeansProjects/UFABC/src/java/br/com/ifsp/lds/beans/colaborador.java</file>
+            <file>file:/C:/Users/naveg/Desktop/IFSP/LDS/UFABC/web/WEB-INF/views/tabelas/index.jsp</file>
+            <file>file:/C:/Users/naveg/Desktop/IFSP/LDS/UFABC/web/WEB-INF/views/layout/importes.jsp</file>
+            <file>file:/C:/Users/naveg/Desktop/IFSP/LDS/UFABC/web/WEB-INF/views/layout/footer.jsp</file>
+            <file>file:/C:/Users/naveg/Desktop/IFSP/LDS/UFABC/web/WEB-INF/glassfish-web.xml</file>
+            <file>file:/C:/Users/naveg/Desktop/IFSP/LDS/UFABC/web/WEB-INF/views/layout/menu.jsp</file>
         </group>
     </open-files>
 </project-private>
