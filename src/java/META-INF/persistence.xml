@@ -3,8 +3,8 @@
   <persistence-unit name="UFABC" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ufabc"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql:http://hospedagem.ifspguarulhos.edu.br/phpmyadmin/gu1462083"/>
+      <property name="javax.persistence.jdbc.user" value="gu1462083"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="*3lvKq5QygiMDBeTQSqmkSP0tws83BOwD57syLGQ+P9U="/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
