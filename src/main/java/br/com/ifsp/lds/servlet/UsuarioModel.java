@@ -5,11 +5,19 @@
  */
 package br.com.ifsp.lds.servlet;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author Luiz Felipe
  */
-public class UsuarioModel {
+public class UsuarioModel implements Tarefa {
+    
+    @Override
+    public String index(HttpServletRequest req, HttpServletResponse resp) {
+        return "index";
+    }
     
     public boolean login(String senha, String login) {
         
@@ -17,6 +25,10 @@ public class UsuarioModel {
         
         return false;
     }
+
+    
+    
+    
     
     
     
