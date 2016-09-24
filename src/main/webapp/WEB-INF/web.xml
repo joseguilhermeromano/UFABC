@@ -34,12 +34,12 @@
     
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>br.ifsp.lds.controller.Controller</servlet-class>
+        <servlet-class>br.com.ifsp.lds.controller.Controller</servlet-class>
     </servlet>
     
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
-        <url-pattern>/executa</url-pattern>
+        <url-pattern>/executa/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
