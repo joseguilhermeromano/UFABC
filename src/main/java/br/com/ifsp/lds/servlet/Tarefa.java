@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luiz Felipe
  */
-public interface Tarefa {
-    
+public interface Tarefa {  
+
     public String index(HttpServletRequest req, HttpServletResponse resp);
 }
