@@ -41,7 +41,7 @@ public class Controller extends HttpServlet {
             
         } catch (URISyntaxException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch(NoClassDefFoundError | NoSuchMethodException ex) {
+        } catch(ClassNotFoundException | NoSuchMethodException ex) {
             
             //criar pagina para o erro 404
             
@@ -50,7 +50,6 @@ public class Controller extends HttpServlet {
         }
         
         pagina = "/WEB-INF/views/"+ segmento +"/"+ pagina +".jsp";
-        
         req.getRequestDispatcher(pagina).forward(req, resp);
     }
 }
