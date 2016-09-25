@@ -17,12 +17,22 @@ public class App {
     
     private String segments[];
     private String classe;
-    private String metodo;
+    private String metodo = "index";
+    private String segmento;
     
     public App(HttpServletRequest req) throws URISyntaxException {
         this.segments = new URI(req.getRequestURI()).getPath().split("/");
         this.setClasse();
         this.setMetodo();
+        this.setSegmento();
+    }
+    
+    private void setSegmento() {
+        this.segmento = this.segments[1];
+    }
+    
+    public String getSegmento() {
+        return this.segmento;
     }
     
     private void setClasse() {
