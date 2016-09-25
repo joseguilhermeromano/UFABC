@@ -19,13 +19,13 @@ public class Usuario {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer cola_cd;
+    private int cola_cd;
     
     @Column(name = "usu_nm", nullable = false, length = 50)
     private String nome;
     
     @Column(name = "usu_id", nullable = false)
-    private Integer ID;
+    private int ID;
     
     @Column(name = "usu_espe", nullable = false, length = 80)
     private String especialidade;
@@ -40,7 +40,7 @@ public class Usuario {
     private String telefone;
     
     @Column(name = "usu_isAdmin", nullable = false)
-    private Integer administrador;
+    private int administrador;
     
     @OneToMany(targetEntity = Treinamento.class, cascade=CascadeType.MERGE)
     @JoinColumn(name="usu_trei_cd")
@@ -52,18 +52,17 @@ public class Usuario {
     @Column(name = "usu_senh",nullable = false)
     private String senha;
     
-
     /**
      * @return the cola_cd
      */
-    public Integer getCola_cd() {
+    public int getCola_cd() {
         return cola_cd;
     }
 
     /**
      * @param cola_cd the cola_cd to set
      */
-    public void setCola_cd(Integer cola_cd) {
+    public void setCola_cd(int cola_cd) {
         this.cola_cd = cola_cd;
     }
 
@@ -84,14 +83,14 @@ public class Usuario {
     /**
      * @return the ID
      */
-    public Integer getID() {
+    public int getID() {
         return ID;
     }
 
     /**
      * @param ID the ID to set
      */
-    public void setID(Integer ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -154,14 +153,14 @@ public class Usuario {
     /**
      * @return the administrador
      */
-    public Integer getAdministrador() {
+    public int getAdministrador() {
         return administrador;
     }
 
     /**
      * @param administrador the administrador to set
      */
-    public void setAdministrador(Integer administrador) {
+    public void setAdministrador(int administrador) {
         this.administrador = administrador;
     }
 
