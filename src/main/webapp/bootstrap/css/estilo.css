@@ -1,0 +1,260 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+
+ body {
+    overflow-x: hidden;
+ }
+
+/* Toggle Styles */
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 201px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 201px;
+    width: 0;
+    height: 100%;
+    margin-left: -201px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #F5F5F5;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 200px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -201px;
+}
+
+/* Sidebar Styles */
+.borda{
+    border:1px solid #CDC9C9;
+    height:100%;
+    border-left-color: #F5F5F5;
+    border-top-color: #F5F5F5;
+    border-bottom-color: #F5F5F5;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 201px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 10px;
+    line-height: 15px;
+}
+
+.sidebar-nav hr{
+    width: 175px;
+    background-color: #CFCFCF;
+    height: 1px;
+    color:black;
+}
+
+.sidebar-nav > li > a {
+    display: block;
+    text-decoration: none;
+    color: #8B8B7A;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #2E8B57;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 100px;
+    font-size: 40px;
+    line-height: 60px;
+    padding-top: 15px;
+}
+
+.sidebar-nav > .sidebar-brand > a {
+    color: #ffffff;
+}
+
+.sidebar-nav > .sidebar-brand > a:hover {
+    color: #008B00;
+    background: none;
+}
+
+#menu-toggle {
+    z-index: 2;
+    position:absolute;
+    top:5px;
+    left:5px;
+    font-size: 18pt;
+    color:#828282;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 201px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 201px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 8px 70px 70px 70px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+h3{
+    color: #008B45;
+}
+
+/* FORMATAÇÃO DE FORMULÁRIOS*/
+
+
+.estilo-input{
+    border-radius: 5px;
+    margin: 10px 10px 10px 0px;
+    font-family:helvetica; color:#666;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #DCDCDC;
+    outline:none;
+    height: 40px;
+}
+
+.estilo-input:focus {
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    -webkit-box-shadow: 0px 0px 15px 1px #00FF00;
+    -moz-box-shadow: 0px 0px 15px 1px #00FF00;
+    box-shadow: 0px 0px 5px 0px #00FF00;
+    border:1px solid #00CD00;
+    outline:none;
+}
+.button{
+    width: 150px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 14pt;
+}
+
+
+
+/*FORMATAÇÃO DE TABELAS*/
+
+
+#tabela1 thead{
+    background-color: #00CD66;
+    color: white;
+}
+#tabela1 > thead > tr > th{
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid #00CD66; 
+    border-top: 1px solid #00CD66; 
+}
+
+#tabela1 > tbody > tr.primeira-cor{
+    background-color: white; 
+}
+
+#tabela1 > tbody > tr.segunda-cor{
+    background-color: #E8E8E8; 
+}
+
+#tabela1 > tbody > tr:hover{
+    background-color: #FFFFE0; 
+}
+
+#tabela1 > tbody > tr > td{
+    border: 1px solid #CFCFCF; 
+}
+
+.estilo-botao-edicao{
+    color: green;
+    font-size: 14pt;
+}
+
+.estilo-botao-exclusao{
+    color: red;
+    font-size: 14pt;
+}
+
+.estilo-botao-busca{
+    border-radius: 5px;
+    font-family:helvetica; color:#666;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #DCDCDC;
+    outline:none;
+}
+
+.estilo-botao-busca:focus {
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    -webkit-box-shadow: 0px 0px 15px 1px #00FF00;
+    -moz-box-shadow: 0px 0px 15px 1px #00FF00;
+    box-shadow: 0px 0px 5px 0px #00FF00;
+    border:1px solid #00CD00;
+    outline:none; 
+}
+
+.pagination > li > a{
+    color: green;
+}
