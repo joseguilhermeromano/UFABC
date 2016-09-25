@@ -41,5 +41,12 @@ public class Usuario {
     
     @Column(name = "cola_isAdmin")
     private Integer administrador;
-   
+    
+    @Column(unique = true)
+    private String login;
+    
+    @Column(nullable = false)
+    private String senha;
+    
+    
 }
