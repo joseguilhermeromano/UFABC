@@ -25,7 +25,7 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String pagina = "index.jsp";
+        String pagina = "/index.jsp";
         try {
             App app = new App(req);
             String metodo = "br.com.ifsp.lds.servlet." + app.getClasse() + "Model";
