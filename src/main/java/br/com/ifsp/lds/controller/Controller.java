@@ -25,13 +25,10 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        String pagina = "index";
-        String segmento = "";
+        String pagina = "index.jsp";
         try {
             App app = new App(req);
             String metodo = "br.com.ifsp.lds.servlet." + app.getClasse() + "Model";
-            segmento = app.getClasse().toLowerCase();
             
             Class<?> tipo = Class.forName(metodo);
             Tarefa instancia = (Tarefa) tipo.newInstance();
@@ -49,7 +46,7 @@ public class Controller extends HttpServlet {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        pagina = "/WEB-INF/views/"+ segmento +"/"+ pagina +".jsp";
+        System.out.println(pagina);
         req.getRequestDispatcher(pagina).forward(req, resp);
     }
 }
