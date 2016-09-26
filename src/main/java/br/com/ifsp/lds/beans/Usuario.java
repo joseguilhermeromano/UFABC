@@ -42,9 +42,9 @@ public class Usuario {
     @Column(name = "usu_isAdmin", nullable = false)
     private int administrador;
     
-    @OneToMany(targetEntity = Treinamento.class, cascade=CascadeType.MERGE)
+/*    @OneToMany(targetEntity = Treinamento.class, cascade=CascadeType.MERGE)
     @JoinColumn(name="usu_trei_cd")
-    private Treinamento treino;
+    private Treinamento treino;*/
     
     @Column(name = "usu_login",unique = true)
     private String login;
@@ -167,16 +167,16 @@ public class Usuario {
     /**
      * @return the treino
      */
-    public Treinamento getTreino() {
+/*    public Treinamento getTreino() {
         return treino;
     }
 
     /**
      * @param treino the treino to set
      */
-    public void setTreino(Treinamento treino) {
+   /* public void setTreino(Treinamento treino) {
         this.treino = treino;
-    }
+    }/*
 
     /**
      * @return the login
