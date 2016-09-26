@@ -20,11 +20,11 @@ public class TreinamentoModel implements Tarefa {
     }
     
     public String exibe(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/treinamentos";
+        return "/WEB-INF/views/administrador/treinamentos.jsp";
     }
     
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/novo-treinamento";
+        return "/WEB-INF/views/administrador/novo-treinamento.jsp";
         
     }
     

@@ -19,7 +19,7 @@ public class UsuarioModel implements Tarefa {
     
     @Override
     public String index(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/index";
+        return "/WEB-INF/views/administrador/index.jsp";
     }
     
     public String login(HttpServletRequest req, HttpServletResponse resp) {
@@ -37,7 +37,7 @@ public class UsuarioModel implements Tarefa {
             else 
                 segmento = "colaborador";
             
-            return "/WEB-INF/views/" + segmento +"/index";
+            return "/WEB-INF/views/" + segmento +"/index.jsp";
         }
         return "/index.jsp";
     }

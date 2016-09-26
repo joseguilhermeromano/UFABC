@@ -16,14 +16,11 @@ public class AdministradorModel implements Tarefa {
 
     @Override
     public String index(HttpServletRequest req, HttpServletResponse resp) {
-        return "index";
+        return "/WEB-INF/views/administrador/index.jsp";
     }
     
-    public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
-        return "cadastrar";
+    public String perfil(HttpServletRequest req, HttpServletResponse resp) {
+        return "/WEB-INF/views/administrador/perfil.jsp";
     }
     
-    public String teste(HttpServletRequest req, HttpServletResponse resp) {
-        return "teste";
-    }
 }
