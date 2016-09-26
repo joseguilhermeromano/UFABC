@@ -41,7 +41,7 @@
     
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
-        <url-pattern>/executa/*</url-pattern>
+        <url-pattern>/administrador/*</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
@@ -56,7 +56,7 @@
     
     <servlet-mapping>
         <servlet-name>Administrador</servlet-name>
-        <url-pattern>/administrador/*</url-pattern>
+        <url-pattern>/adsministrador/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
