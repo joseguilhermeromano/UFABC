@@ -21,10 +21,10 @@ public class App {
     private String segmento;
     
     public App(HttpServletRequest req) throws URISyntaxException {
-        this.segments = new URI(req.getRequestURI()).getPath().split("/");
+        this.segments = new URI(req.getRequestURI()).getPath().substring(1).split("/");
+        this.setSegmento();
         this.setClasse();
         this.setMetodo();
-        this.setSegmento();
     }
     
     private void setSegmento() {
@@ -36,17 +36,24 @@ public class App {
     }
     
     private void setClasse() {
-        this.classe = this.segments[this.segments.length-2];
-        this.classe = this.formataNomeClasse();
+        this.classe = this.segments[1].toLowerCase();
+        if(this.segments.length > 2 && !this.segments[2].equals("index"))
+            this.classe = this.segments[1].toLowerCase();
+        
+        this.formataNomeClasse();
     }
     
-    private String formataNomeClasse() {
-        return this.classe.substring(0,1).toUpperCase() 
+    private void formataNomeClasse() {
+        this.classe = this.classe.substring(0,1).toUpperCase() 
                 + this.classe.substring(1);
     }
     
     private void setMetodo() {
-        this.metodo = this.segments[this.segments.length-1];
+        if(this.segments.length > 3)
+            this.metodo = this.segments[3];
+        else if(this.segments.length == 3) {
+            this.metodo = this.segments[2];
+        }
     }
     
     public String getMetodo() {
