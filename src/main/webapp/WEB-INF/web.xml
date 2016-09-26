@@ -56,7 +56,7 @@
     
     <servlet-mapping>
         <servlet-name>Administrador</servlet-name>
-        <url-pattern>/adsministrador/*</url-pattern>
+        <url-pattern>/app/administrador/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
