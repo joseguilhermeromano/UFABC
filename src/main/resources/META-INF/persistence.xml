@@ -3,7 +3,7 @@
   <persistence-unit name="UFABC">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ufbc"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ufabc"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="aluno"/>
