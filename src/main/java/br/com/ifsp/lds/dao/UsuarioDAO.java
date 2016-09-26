@@ -20,8 +20,8 @@ public class UsuarioDAO {
     
     public Usuario buscaUsuario(String login) {
         try {
-            Query query = entityManager.createQuery("SELECT FROM Usuario u "
-                    + "u.login='"+login+"'");
+            Query query = entityManager.createQuery("SELECT u FROM "
+                    + "Usuario u WHERE u.login='"+login+"'");
             Usuario usuario = (Usuario) query.getSingleResult();
             return usuario;
         } catch(Exception ex) {
