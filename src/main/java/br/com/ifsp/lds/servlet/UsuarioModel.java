@@ -5,8 +5,11 @@
  */
 package br.com.ifsp.lds.servlet;
 
+import br.com.ifsp.lds.beans.Usuario;
+import br.com.ifsp.lds.dao.UsuarioDAO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,12 +22,28 @@ public class UsuarioModel implements Tarefa {
         return "index";
     }
     
-    public boolean login(String senha, String login) {
+    public String login(HttpServletRequest req, HttpServletResponse resp) {
+        String senha = req.getParameter("senha");
+        String login = req.getParameter("username");
         
-        
-        
-        return false;
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = usuarioDAO.buscaUsuario(login);
+        if(usuario != null && usuario.getSenha().equals(senha)) {
+            HttpSession session =  req.getSession();
+            session.setAttribute("sessaoUsuario", usuario);
+            String segmento;
+            if(usuario.getAdministrador() == 1) 
+                segmento = "administrador";
+            else 
+                segmento = "colaborador";
+            
+            return "WEB-INF/view/" + segmento +"/index";
+        }
+        return "index.jsp";
     }
+    
+    
+    
 
     
     
