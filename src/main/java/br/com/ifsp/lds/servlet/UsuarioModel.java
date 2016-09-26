@@ -39,7 +39,7 @@ public class UsuarioModel implements Tarefa {
             
             return "WEB-INF/view/" + segmento +"/index";
         }
-        return "index.jsp";
+        return "/index.jsp";
     }
     
     
