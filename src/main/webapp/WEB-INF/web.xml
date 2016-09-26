@@ -46,7 +46,7 @@
     
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
-        <url-pattern>/usuario/login</url-pattern>
+        <url-pattern>/app/usuario/login</url-pattern>
     </servlet-mapping>
     
     <servlet>
