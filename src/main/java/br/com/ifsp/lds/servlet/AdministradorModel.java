@@ -20,7 +20,7 @@ public class AdministradorModel implements Tarefa {
     }
     
     public String perfil(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/perfil.jsp";
+        return "/WEB-INF/views/administrador/index.jsp";
     }
     
 }
