@@ -37,8 +37,11 @@ public class App {
     
     private void setClasse() {
         this.classe = this.segments[1].toLowerCase();
-        if(this.segments.length > 2 && !this.segments[2].equals("index"))
+        if(this.segments.length <= 3)
             this.classe = this.segments[1].toLowerCase();
+        else if(this.segments.length > 3) {
+            this.classe = this.segments[2].toLowerCase();
+        }
         
         this.formataNomeClasse();
     }
