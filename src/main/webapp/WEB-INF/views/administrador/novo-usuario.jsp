@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Novo Colaborador</title>
+        <title>Novo Usuário</title>
         <c:import url="../layout/importes.jsp"></c:import>
     </head>
     <body>
@@ -28,15 +28,15 @@
                     <div class="col-lg-12">
 
                         <!-- AQUI COMEÇA O CONTEÚDO DA PÁGINA -->
-                        <h3><span class="glyphicon glyphicon-plus"></span> Novo Colaborador</h3><hr>
+                        <h3><span class="glyphicon glyphicon-plus"></span> Novo Usuário</h3><hr>
                         
-                        <form action="" method=""><!--FORM -->
+                        <form action="usuario/cadastro" method="POST"><!--FORM -->
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <b><label for="nome">Nome Completo</label></b>
-                                    <input type="text" name="" value="" placeholder="Nome Completo" class="form-control estilo-input"  />
+                                    <input type="text" name="nome" placeholder="Nome Completo" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -45,13 +45,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="cpf">CPF</label></b>
-                                    <input type="text" name="" value="" placeholder="CPF" class="form-control estilo-input"  />
+                                    <input type="text" name="cpf" placeholder="CPF" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="rg">RG</label></b>
-                                    <input type="text" name="" value="" placeholder="RG" class="form-control estilo-input"  />
+                                    <input type="text" name="rg" placeholder="RG" class="form-control estilo-input"  />
                                     </div>
                                 </div>
 
@@ -61,13 +61,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="nome">E-mail</label></b>
-                                    <input type="text" name="" value="" placeholder="ex: exemplo@exemplo.com.br" class="form-control estilo-input"  />
+                                    <input type="text" name="email" placeholder="ex: exemplo@exemplo.com.br" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="cpf">Telefone</label></b>
-                                    <input type="text" name="" value="" placeholder="Telefone" class="form-control estilo-input"  />
+                                    <input type="text" name="telefone" value="" placeholder="Telefone" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <b><label for="nome">Endereço</label></b>
-                                    <input type="text" name="" value="" placeholder="ex: exemplo@exemplo.com.br" class="form-control estilo-input"  />
+                                    <input type="text" name="endereco" placeholder="ex: exemplo@exemplo.com.br" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -83,25 +83,25 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                     <b><label for="nome">Número</label></b>
-                                    <input type="text" name="" value="" placeholder="Número" class="form-control estilo-input"  />
+                                    <input type="text" name="numero" placeholder="Número" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                     <b><label for="nome">Bairro</label></b>
-                                    <input type="text" name="" value="" placeholder="Bairro" class="form-control estilo-input"  />
+                                    <input type="text" name="bairro" placeholder="Bairro" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                     <b><label for="nome">Cidade</label></b>
-                                    <input type="text" name="" value="" placeholder="Cidade" class="form-control estilo-input"  />
+                                    <input type="text" name="cidade" placeholder="Cidade" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                     <b><label for="nome">Complemento</label></b>
-                                    <input type="text" name="" value="" placeholder="Complemento" class="form-control estilo-input"  />
+                                    <input type="text" name="complemento" placeholder="Complemento" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -119,12 +119,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <b><label for="cpf">Permissão de Acesso</label></b><br>
+                                        <b><label for="permissao">Permissão de Acesso</label></b><br>
                                     <div class="col-md-6">
-                                        <input type="radio" name="gender" value="male"> Administrador do Sistema
+                                        <input type="radio" name="permissao" value="true"> Administrador do Sistema
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="radio" name="gender" value="female"> Colaborador<br>
+                                        <input type="radio" name="permissao" value="false"> Colaborador<br>
                                     </div>
                                     </div>
                                 </div>

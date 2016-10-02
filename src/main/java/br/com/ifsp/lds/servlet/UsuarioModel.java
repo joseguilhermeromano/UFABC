@@ -16,10 +16,16 @@ import javax.servlet.http.HttpSession;
  * @author Luiz Felipe
  */
 public class UsuarioModel implements Tarefa {
+    /*
+    * @permAdmin É um Map estático utilizado para especificar 
+    * os nomes dos métodos de classes de models que são permitidos 
+    * apenas para usuários que são administradores do sistema.
+    */
+    private static final String[] permAdmin = {""};
     
     @Override
-    public String index(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/index.jsp";
+    public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp){
+        return this.permAdmin;
     }
     
     public String login(HttpServletRequest req, HttpServletResponse resp) {
@@ -40,6 +46,31 @@ public class UsuarioModel implements Tarefa {
             return "/WEB-INF/views/" + segmento +"/index.jsp";
         }
         return "/index.jsp";
+    }
+
+    @Override
+    public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String alterar(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String buscar(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String excluir(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package br.com.ifsp.lds.controller;
+import br.com.ifsp.lds.beans.Usuario;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -38,6 +39,18 @@ public class Filtro implements Filter  {
         
         
         chain.doFilter(request, response);
+    }
+    
+    public boolean usuarioLogado(HttpServletRequest req){
+        Usuario usuario = (Usuario) req.getSession().getAttribute("sessaoUsuario");
+        if(usuario == null) return false;
+        return true;
+    }
+    
+    public boolean isAdmin(HttpServletRequest req){
+//       Usuario usuario = (Usuario) req.getSession().getAttribute("sessaoUsuario");
+//        if(usuario == null) return false;
+        return true;
     }
     
 }

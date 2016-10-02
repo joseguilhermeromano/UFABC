@@ -13,14 +13,41 @@ import javax.servlet.http.HttpServletResponse;
  * @author Luiz Felipe
  */
 public class AdministradorModel implements Tarefa {
-
+    
+    private static final String[] permAdmin = {"index","usuarios"};
+    
     @Override
-    public String index(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/index.jsp";
+    public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp){
+        return permAdmin;
     }
     
-    public String perfil(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/index.jsp";
+    public String usuarios(HttpServletRequest req, HttpServletResponse resp) {
+        return "/WEB-INF/views/administrador/usuarios.jsp";
+    }
+
+    @Override
+    public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String alterar(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String buscar(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String excluir(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

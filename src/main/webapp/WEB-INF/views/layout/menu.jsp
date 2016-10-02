@@ -21,7 +21,7 @@
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}administrador/colaboradores"><span class="glyphicon glyphicon-list"></span> Colaboradores</a>
+                    <a href="${baseURL}administrador/usuarios"><span class="glyphicon glyphicon-list"></span> Usuários</a>
                 </li>
                 <hr>
                 <li>

@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!--     Captura base da url da requisição -->
+<c:set var="baseURL" value="${pageContext.request.requestURL.substring(0, pageContext.request.requestURL.length() - pageContext.request.requestURI.length())}${pageContext.request.contextPath}/" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +28,7 @@
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                           
                         <!-- FORM -->
-                        <form id="loginform" class="form-horizontal" role="form" action="usuario/login" method="POST">
+                        <form id="loginform" class="form-horizontal" role="form" action="area-restrita/usuario/login" method="POST">
                                     
                             <div style="margin-bottom: 25px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
