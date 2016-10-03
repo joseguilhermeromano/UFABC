@@ -5,7 +5,6 @@
  */
 package br.com.ifsp.lds.beans;
 
-import static com.sun.xml.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import javax.persistence.*;
 
 /**
@@ -18,38 +17,38 @@ import javax.persistence.*;
 public class Usuario {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue
     private int cola_cd;
     
-    @Column(name = "usu_nm", nullable = false, length = 50)
-    private String nome;
-    
-    @Column(name = "usu_id", nullable = false)
-    private int ID;
-    
-    @Column(name = "usu_espe", nullable = false, length = 80)
-    private String especialidade;
-    
-    @Column(name = "usu_setor", nullable = false, length = 80)
-    private String setor;
-    
-    @Column(name = "usu_email", nullable = false, length = 100)
-    private String email;
-    
-    @Column(name = "usu_phone", nullable = false, length = 20)
-    private String telefone;
-    
-    @Column(name = "usu_isAdmin", nullable = false)
+//    @Column(name = "usu_nm", nullable = false, length = 50)
+//    private String nome;
+//    
+//    @Column(name = "usu_id", nullable = false)
+//    private int ID;
+//    
+//    @Column(name = "usu_espe", nullable = false, length = 80)
+//    private String especialidade;
+//    
+//    @Column(name = "usu_setor", nullable = false, length = 80)
+//    private String setor;
+//    
+//    @Column(name = "usu_email", nullable = false, length = 100)
+//    private String email;
+//    
+//    @Column(name = "usu_phone", nullable = false, length = 20)
+//    private String telefone;
+//    
+    @Column(name = "usu_isAdmin")
     private int administrador;
-    
-/*    @OneToMany(targetEntity = Treinamento.class, cascade=CascadeType.MERGE)
-    @JoinColumn(name="usu_trei_cd")
-    private Treinamento treino;*/
-    
-    @Column(name = "usu_login",unique = true)
+//    
+///*  @OneToMany(targetEntity = Treinamento.class, cascade=CascadeType.MERGE)
+//    @JoinColumn(name="usu_trei_cd")
+//    private Treinamento treino;*/
+//    
+    @Column(name = "usu_login")
     private String login;
     
-    @Column(name = "usu_senh",nullable = false)
+    @Column(name = "usu_senh")
     private String senha;
     
     /**
@@ -65,91 +64,91 @@ public class Usuario {
     public void setCola_cd(int cola_cd) {
         this.cola_cd = cola_cd;
     }
-
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * @return the ID
-     */
-    public int getID() {
-        return ID;
-    }
-
-    /**
-     * @param ID the ID to set
-     */
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    /**
-     * @return the especialidade
-     */
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    /**
-     * @param especialidade the especialidade to set
-     */
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
-    }
-
-    /**
-     * @return the setor
-     */
-    public String getSetor() {
-        return setor;
-    }
-
-    /**
-     * @param setor the setor to set
-     */
-    public void setSetor(String setor) {
-        this.setor = setor;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the telefone
-     */
-    public String getTelefone() {
-        return telefone;
-    }
-
-    /**
-     * @param telefone the telefone to set
-     */
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
+//
+//    /**
+//     * @return the nome
+//     */
+//    public String getNome() {
+//        return nome;
+//    }
+//
+//    /**
+//     * @param nome the nome to set
+//     */
+//    public void setNome(String nome) {
+//        this.nome = nome;
+//    }
+//
+//    /**
+//     * @return the ID
+//     */
+//    public int getID() {
+//        return ID;
+//    }
+//
+//    /**
+//     * @param ID the ID to set
+//     */
+//    public void setID(int ID) {
+//        this.ID = ID;
+//    }
+//
+//    /**
+//     * @return the especialidade
+//     */
+//    public String getEspecialidade() {
+//        return especialidade;
+//    }
+//
+//    /**
+//     * @param especialidade the especialidade to set
+//     */
+//    public void setEspecialidade(String especialidade) {
+//        this.especialidade = especialidade;
+//    }
+//
+//    /**
+//     * @return the setor
+//     */
+//    public String getSetor() {
+//        return setor;
+//    }
+//
+//    /**
+//     * @param setor the setor to set
+//     */
+//    public void setSetor(String setor) {
+//        this.setor = setor;
+//    }
+//
+//    /**
+//     * @return the email
+//     */
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    /**
+//     * @param email the email to set
+//     */
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+//
+//    /**
+//     * @return the telefone
+//     */
+//    public String getTelefone() {
+//        return telefone;
+//    }
+//
+//    /**
+//     * @param telefone the telefone to set
+//     */
+//    public void setTelefone(String telefone) {
+//        this.telefone = telefone;
+//    }
+//
     /**
      * @return the administrador
      */
@@ -163,21 +162,21 @@ public class Usuario {
     public void setAdministrador(int administrador) {
         this.administrador = administrador;
     }
-
-    /**
-     * @return the treino
-     */
-/*    public Treinamento getTreino() {
-        return treino;
-    }
-
-    /**
-     * @param treino the treino to set
-     */
-   /* public void setTreino(Treinamento treino) {
-        this.treino = treino;
-    }/*
-
+//
+//    /**
+//     * @return the treino
+//     */
+///*    public Treinamento getTreino() {
+//        return treino;
+//    }
+//
+//    /**
+//     * @param treino the treino to set
+//     */
+//   /* public void setTreino(Treinamento treino) {
+//        this.treino = treino;
+//    }/*
+//
     /**
      * @return the login
      */

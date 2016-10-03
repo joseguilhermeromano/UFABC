@@ -45,19 +45,23 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     <b><label for="datainicio">Data de Início</label></b>
+<<<<<<< HEAD
+                                    <input type="text" name="dataIni" value="" placeholder="Data de Início" class="form-control estilo-input"  />
+=======
                                     <input type="text" name="" value="" placeholder="Data de Início" class="form-control estilo-input"  />
+>>>>>>> parent of ab3f018... Criação do model treinamento
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     <b><label for="datatermino">Data de Término</label></b>
-                                    <input type="text" name="" value="" placeholder="Data de Término" class="form-control estilo-input"  />
+                                    <input type="text" name="dataTerm" value="" placeholder="Data de Término" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     <b><label for="datatermino">Horário</label></b>
-                                    <input type="text" name="" value="" placeholder="ex: 8:00 h às 9:00 h" class="form-control estilo-input"  />
+                                    <input type="text" name="hora" value="" placeholder="ex: 8:00 h às 9:00 h" class="form-control estilo-input"  />
                                     </div>
                                 </div>
 
@@ -67,13 +71,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <b><label for="nome">Turma</label></b>
-                                    <input type="text" name="" value="" placeholder="ex: Turma A ADS Noturno 2º Semestre" class="form-control estilo-input"  />
+                                    <input type="text" name="turma" value="" placeholder="ex: Turma A ADS Noturno 2º Semestre" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="cpf">Laboratório</label></b>
-                                    <input type="text" name="" value="" placeholder="ex: labF010" class="form-control estilo-input"  />
+                                    <input type="text" name="lab" value="" placeholder="ex: labF010" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +85,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     <b><label for="nome">Responsável</label></b>
-                                    <input type="text" name="" value="" placeholder="Responsável" class="form-control estilo-input"  />
+                                    <input type="text" name="resp" value="" placeholder="Responsável" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>

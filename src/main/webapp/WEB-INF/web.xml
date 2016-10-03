@@ -41,22 +41,7 @@
     
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
-        <url-pattern>/administrador/*</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/usuario/login</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>Administrador</servlet-name>
-        <servlet-class>br.com.ifsp.lds.controller.Administrador</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>Administrador</servlet-name>
-        <url-pattern>/app/administrador/*</url-pattern>
+        <url-pattern>/area-restrita/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

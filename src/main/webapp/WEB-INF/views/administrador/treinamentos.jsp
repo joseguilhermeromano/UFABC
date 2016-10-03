@@ -35,10 +35,10 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                <div class="input-group">
-                                 <span class="input-group-btn">
-                                     <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                                 </span>
                                  <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Descrição de Treinamento...">
+                                 <span class="input-group-btn">
+                                     <button class="btn btn-default estilo-botao-busca" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                 </span>
                                </div><!-- /input-group -->
                              </div><!-- /.col-lg-6 -->
                             <div class="col-md-6 col-sm-6">

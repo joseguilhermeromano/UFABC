@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Colaboradores</title>
+        <title>Usuários</title>
         <c:import url="../layout/importes.jsp"></c:import>
     </head>
     <body>
@@ -27,23 +27,23 @@
                             <span class="glyphicon glyphicon-menu-hamburger hidden-lg hidden-md hidden-sm"></span>
                         </a><!-- /#Botão de exibir/ocultar menu lateral -->
                     <div class="col-lg-12">
-                        <h3><span class="glyphicon glyphicon-list"></span> Colaboradores</h3><hr>
+                        <h3><span class="glyphicon glyphicon-list"></span> Usuários</h3><hr>
                         <div class="row">
                             <div class="col-sm-6">
-                                <a class="btn btn-default visible-xs" href="${baseURL}administrador/novo-colaborador"><span class="glyphicon glyphicon-plus" ></span> Novo Colaborador</a><br>
+                                <a class="btn btn-default visible-xs" href="${baseURL}administrador/novo-usuario"><span class="glyphicon glyphicon-plus" ></span> Novo Usuário</a><br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                <div class="input-group">
-                                 <span class="input-group-btn">
-                                     <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                                 </span>
-                                 <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Nome do Colaborador...">
+                                    <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Nome do Usuário...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default estilo-botao-busca" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
                                </div><!-- /input-group -->
                              </div><!-- /.col-lg-6 -->
                             <div class="col-md-6 col-sm-6">
-                                 <a class="btn btn-default hidden-xs" href="${baseURL}administrador/novo-colaborador" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Colaborador</a>
+                                 <a class="btn btn-default hidden-xs" href="${baseURL}administrador/novo-usuario" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
                             </div>
                         </div><!-- /row -->
                         <br><br>
