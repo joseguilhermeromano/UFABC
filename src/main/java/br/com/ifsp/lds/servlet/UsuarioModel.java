@@ -64,6 +64,19 @@ public class UsuarioModel implements Tarefa {
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
         Usuario usuario = new Usuario();
         
+        usuario.setNome(req.getParameter("nome"));
+        usuario.setCpf(req.getParameter("cpf"));
+        usuario.setRg(req.getParameter("rg"));
+        usuario.setEmail(req.getParameter("email"));
+        usuario.setTelefone(req.getParameter("telefone"));
+        usuario.setEndereco(req.getParameter("endereco"));
+        usuario.setNumero(req.getParameter("numero"));
+        usuario.setBairro(req.getParameter("bairro"));
+        usuario.setCidade(req.getParameter("cidade"));
+        usuario.setComplemento(req.getParameter("Complemento"));
+        usuario.setEspecialidade(req.getParameter("especialidade"));
+        usuario.setAdministrador(Integer.parseInt(req.getParameter("permissao")));
+        
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }
 

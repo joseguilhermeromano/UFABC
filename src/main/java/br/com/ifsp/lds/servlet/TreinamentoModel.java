@@ -5,6 +5,9 @@
  */
 package br.com.ifsp.lds.servlet;
 
+import br.com.ifsp.lds.beans.Treinamento;
+import br.com.ifsp.lds.beans.Usuario;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,6 +34,18 @@ public class TreinamentoModel implements Tarefa {
     
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
+        Treinamento treinamento = new Treinamento();
+        
+        treinamento.setDescricao(req.getParameter("descricao"));
+//        treinamento.setDatainicio(new Date(req.getParameter("dataTerm")));
+//        treinamento.setDatafim(new Date(req.getParameter("dataIni")));
+//        treinamento.setHora(new Date(req.getParameter("hora")));
+        treinamento.setTurma(req.getParameter("turma"));
+        Usuario usuario = new Usuario();
+        usuario.setCodigo(Integer.parseInt(req.getParameter("resp")));
+        treinamento.setUsuario(usuario);
+        
+        
         return "/WEB-INF/views/administrador/novo-treinamento.jsp";
         
     }

@@ -36,6 +36,9 @@ public class Usuario {
     @Column(name = "usua_email")
     private String email;
     
+    @Column(name = "usua_telefone")
+    private String telefone;
+    
     @Column(name = "usua_endereco")
     private String endereco;
     
@@ -275,6 +278,20 @@ public class Usuario {
      */
     public void setTreinamentos(List<Treinamento> treinamentos) {
         this.treinamentos = treinamentos;
+    }
+
+    /**
+     * @return the telefone
+     */
+    public String getTelefone() {
+        return telefone;
+    }
+
+    /**
+     * @param telefone the telefone to set
+     */
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
       
 }
