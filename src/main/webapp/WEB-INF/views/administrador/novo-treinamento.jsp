@@ -30,13 +30,13 @@
                         <!-- AQUI COMEÇA O CONTEÚDO DA PÁGINA -->
                         <h3><span class="glyphicon glyphicon-plus"></span> Novo Treinamento</h3><hr>
                         
-                        <form action="" method=""><!--FORM -->
+                        <form action="${baseURL}area-restrita/treinamento/cadastrar" method="POST"><!--FORM -->
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <b><label for="descricao">Descrição</label></b>
-                                    <input type="text" name="" value="" placeholder="Descrição do Treinamento..." class="form-control estilo-input"  />
+                                    <input type="text" name="descricao"  placeholder="Descrição do Treinamento..." class="form-control estilo-input" value="foda-se amigo"  />
                                     </div>
                                 </div>
                             </div>
@@ -46,22 +46,19 @@
                                     <div class="form-group">
                                     <b><label for="datainicio">Data de Início</label></b>
 
-                                    <input type="text" name="dataIni" value="" placeholder="Data de Início" class="form-control estilo-input"  />
-
-                                    <input type="text" name="" value="" placeholder="Data de Início" class="form-control estilo-input"  />
-
+                                    <input type="text" name="dataIni"  placeholder="Data de Início" class="form-control estilo-input" value="25/10/2016" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     <b><label for="datatermino">Data de Término</label></b>
-                                    <input type="text" name="dataTerm" value="" placeholder="Data de Término" class="form-control estilo-input"  />
+                                    <input type="text" name="dataTerm" placeholder="Data de Término" class="form-control estilo-input" value="25/10/2016" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     <b><label for="datatermino">Horário</label></b>
-                                    <input type="text" name="hora" value="" placeholder="ex: 8:00 h às 9:00 h" class="form-control estilo-input"  />
+                                    <input type="text" name="hora"  placeholder="ex: 8:00 h às 9:00 h" class="form-control estilo-input" value="16:32:14" />
                                     </div>
                                 </div>
 
@@ -71,13 +68,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <b><label for="nome">Turma</label></b>
-                                    <input type="text" name="turma" value="" placeholder="ex: Turma A ADS Noturno 2º Semestre" class="form-control estilo-input"  />
+                                    <input type="text" name="turma"  placeholder="ex: Turma A ADS Noturno 2º Semestre" class="form-control estilo-input" value="dfsdfdsf"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="cpf">Laboratório</label></b>
-                                    <input type="text" name="lab" value="" placeholder="ex: labF010" class="form-control estilo-input"  />
+                                    <input type="text" name="lab"  placeholder="ex: labF010" class="form-control estilo-input" value="gfhfghfgh" />
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +82,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     <b><label for="nome">Responsável</label></b>
-                                    <input type="text" name="resp" value="" placeholder="Responsável" class="form-control estilo-input"  />
+                                    <input type="text" name="resp"  placeholder="Responsável" class="form-control estilo-input" value="2" />
                                     </div>
                                 </div>
                             </div>

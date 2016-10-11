@@ -8,6 +8,7 @@ package br.com.ifsp.lds.beans;
 
 import java.util.Date;
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -16,8 +17,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "treinamanto")
-
 public class Treinamento {
+ 
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -42,23 +43,14 @@ public class Treinamento {
     @Column(name = "trei_lab")
     private String laboratorio;
     
-    @ManyToOne(targetEntity = Treinamento.class, cascade=CascadeType.MERGE)
-    @JoinColumn(name = "trei_usua_cd")
+    //@ManyToOne(targetEntity = Treinamento.class, cascade=CascadeType.MERGE)
+    //@JoinColumn(name = "trei_usua_cd")
+    
+    //codico acima não funciona
+    @ManyToOne
+    @JoinColumn(name = "trei_usua_cd", referencedColumnName = "usua_cd")
     private Usuario usuario;
 
-    /**
-     * @return the trei_cd
-     */
-    public int getCodigo() {
-        return codigo;
-    }
-
-    /**
-     * @param trei_cd the trei_cd to set
-     */
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
 
     /**
      * @return the descricao
@@ -77,14 +69,14 @@ public class Treinamento {
     /**
      * @return the dataincio
      */
-    public Date getDataincio() {
+    public Date getDatainicio() {
         return dataincio;
     }
 
     /**
      * @param dataincio the dataincio to set
      */
-    public void setDataincio(Date dataincio) {
+    public void setDatainicio(Date dataincio) {
         this.dataincio = dataincio;
     }
 
@@ -156,6 +148,20 @@ public class Treinamento {
      */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    /**
+     * @return the codigo
+     */
+    public int getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * @param codigo the codigo to set
+     */
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
     
 
