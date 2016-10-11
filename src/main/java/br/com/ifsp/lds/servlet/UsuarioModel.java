@@ -55,7 +55,7 @@ public class UsuarioModel implements Tarefa {
             else 
                 segmento = "colaborador";
             
-            return "/WEB-INF/views/" +"administrador" +"/index.jsp";
+            return "/WEB-INF/views/" +segmento +"/index.jsp";
         }
         return "/index.jsp";
     }
@@ -63,7 +63,7 @@ public class UsuarioModel implements Tarefa {
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
         Usuario usuario = new Usuario();
-        
+//        
         usuario.setNome(req.getParameter("nome"));
         usuario.setCpf(req.getParameter("cpf"));
         usuario.setRg(req.getParameter("rg"));
@@ -73,9 +73,15 @@ public class UsuarioModel implements Tarefa {
         usuario.setNumero(req.getParameter("numero"));
         usuario.setBairro(req.getParameter("bairro"));
         usuario.setCidade(req.getParameter("cidade"));
-        usuario.setComplemento(req.getParameter("Complemento"));
+        usuario.setComplemento(req.getParameter("complemento"));
         usuario.setEspecialidade(req.getParameter("especialidade"));
         usuario.setAdministrador(Integer.parseInt(req.getParameter("permissao")));
+        usuario.setLogin(req.getParameter("login"));
+        usuario.setSenha(req.getParameter("senha"));
+        
+        UsuarioDAO userdao = new UsuarioDAO();
+        
+        userdao.Cadastrar(usuario);
         
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }

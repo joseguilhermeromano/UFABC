@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="baseURL" value="${pageContext.request.requestURL.substring(0, pageContext.request.requestURL.length() - pageContext.request.requestURI.length())}${pageContext.request.contextPath}/" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,7 +31,7 @@
                         <!-- AQUI COMEÇA O CONTEÚDO DA PÁGINA -->
                         <h3><span class="glyphicon glyphicon-plus"></span> Novo Usuário</h3><hr>
                         
-                        <form action="usuario/cadastro" method="POST"><!--FORM -->
+                        <form action="${baseURL}area-restrita/usuario/cadastrar" method="POST"><!--FORM -->
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -121,11 +122,26 @@
                                     <div class="form-group">
                                         <b><label for="permissao">Permissão de Acesso</label></b><br>
                                     <div class="col-md-6">
-                                        <input type="radio" name="permissao" value="true"> Administrador do Sistema
+                                        <input type="radio" name="permissao" value="1"> Administrador do Sistema
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="radio" name="permissao" value="false"> Colaborador<br>
+                                        <input type="radio" name="permissao" value="0"> Colaborador<br>
                                     </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    <b><label for="nome">Username</label></b>
+                                    <input type="text" name="login" placeholder="usuario01" class="form-control estilo-input"  />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    <b><label for="cpf">Senha</label></b>
+                                    <input type="password" name="senha" value="" placeholder="*******" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
