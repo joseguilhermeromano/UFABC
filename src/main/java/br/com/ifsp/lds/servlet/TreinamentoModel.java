@@ -25,6 +25,10 @@ public class TreinamentoModel implements Tarefa {
         return this.permAdmin;
     }
     
+    public String novotreinamento(HttpServletRequest req, HttpServletResponse resp){
+        return "/WEB-INF/views/administrador/novo-treinamento.jsp";
+    }
+    
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
         return "/WEB-INF/views/administrador/novo-treinamento.jsp";
@@ -38,7 +42,7 @@ public class TreinamentoModel implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "/WEB-INF/views/administrador/treinamentos.jsp";
     }
 
     @Override

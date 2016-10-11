@@ -45,11 +45,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     <b><label for="datainicio">Data de Início</label></b>
-<<<<<<< HEAD
+
                                     <input type="text" name="dataIni" value="" placeholder="Data de Início" class="form-control estilo-input"  />
-=======
+
                                     <input type="text" name="" value="" placeholder="Data de Início" class="form-control estilo-input"  />
->>>>>>> parent of ab3f018... Criação do model treinamento
+
                                     </div>
                                 </div>
                                 <div class="col-md-4">
