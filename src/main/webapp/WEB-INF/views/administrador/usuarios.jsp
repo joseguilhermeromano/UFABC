@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="baseURL" value="${pageContext.request.requestURL.substring(0, pageContext.request.requestURL.length() - pageContext.request.requestURI.length())}${pageContext.request.contextPath}/" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,7 +31,7 @@
                         <h3><span class="glyphicon glyphicon-list"></span> Usuários</h3><hr>
                         <div class="row">
                             <div class="col-sm-6">
-                                <a class="btn btn-default visible-xs" href="${baseURL}administrador/novo-usuario"><span class="glyphicon glyphicon-plus" ></span> Novo Usuário</a><br>
+                                <a class="btn btn-default visible-xs" href="${baseURL}area-restrita/usuario/novousuario"><span class="glyphicon glyphicon-plus" ></span> Novo Usuário</a><br>
                             </div>
                         </div>
                         <div class="row">
@@ -43,7 +44,7 @@
                                </div><!-- /input-group -->
                              </div><!-- /.col-lg-6 -->
                             <div class="col-md-6 col-sm-6">
-                                 <a class="btn btn-default hidden-xs" href="${baseURL}administrador/novo-usuario" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
+                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/usuario/novousuario" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
                             </div>
                         </div><!-- /row -->
                         <br><br>

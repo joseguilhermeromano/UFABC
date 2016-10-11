@@ -13,19 +13,19 @@
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}administrador/index"><span class="glyphicon glyphicon-home"></span> Início</a>
+                    <a href="${baseURL}area-restrita/usuario/inicio"><span class="glyphicon glyphicon-home"></span> Início</a>
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}administrador/perfil"><span class="glyphicon glyphicon-cog"></span> Perfil</a>
+                    <a href="${baseURL}area-restrita/usuario/perfil"><span class="glyphicon glyphicon-cog"></span> Perfil</a>
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}administrador/usuarios"><span class="glyphicon glyphicon-list"></span> Usuários</a>
+                    <a href="${baseURL}area-restrita/usuario/listartudo"><span class="glyphicon glyphicon-list"></span> Usuários</a>
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}administrador/treinamentos"><span class="glyphicon glyphicon-list"></span> Treinamentos</a>
+                    <a href="${baseURL}area-restrita/treinamento/listartudo"><span class="glyphicon glyphicon-list"></span> Treinamentos</a>
                 </li>
                 <hr>
                 <li>
