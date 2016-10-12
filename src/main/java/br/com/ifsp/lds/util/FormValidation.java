@@ -115,7 +115,6 @@ public class FormValidation {
     }
 
     public boolean executaRegras() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
-        this.erros = null;
         int falsos=0;
         String tarefa = "br.com.ifsp.lds.util.FormValidation";
         Class<?> tipo = Class.forName(tarefa);
