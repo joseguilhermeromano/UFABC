@@ -164,7 +164,4 @@ public class Treinamento {
         this.codigo = codigo;
     }
     
-
-
-    
 }

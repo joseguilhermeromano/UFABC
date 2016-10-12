@@ -1,0 +1,17 @@
+@startuml
+
+class UsuarioDAO <? implements DAO<Usuario>>{
+    
+       entityManager:EntityManager 
+    
+    + buscaUsuario(login:String):Usuario
+    + Cadastrar(obj:Usuario):void
+    + ConsultarTudo(string:String)ArrayList<Usuario>
+    + Consultar(codigo:Integer):Usuario
+    + Alterar(obj:Usuario):void 
+    + Deletar(codigo:Integer):void
+
+}
+
+
+@enduml
