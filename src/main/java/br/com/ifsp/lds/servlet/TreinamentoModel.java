@@ -42,7 +42,7 @@ public class TreinamentoModel implements Tarefa {
     public String novotreinamento(HttpServletRequest req, HttpServletResponse resp) {
         return "/WEB-INF/views/administrador/novo-treinamento.jsp";
     }
-
+    
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -50,30 +50,27 @@ public class TreinamentoModel implements Tarefa {
         Treinamento treinamento = new Treinamento();
         UseRules validation = new UseRules();
         try {
-            validation.addRule("isValidEmail", "", "");
-            validation.addRule("pjhkjh", "", "");
+            //primeiro campo é a regra, segundo é o nome da coluna que vai aparacer para o usuarios 
+            //, terceiro é o valor
             validation.addRule("isValidDate", "data de término", req.getParameter("dataTerm"));
             validation.addRule("isValidDate", "data de inicio", req.getParameter("dataIni"));
             validation.addRule("isValidDate", "data de teste", "24/11/1996");
             validation.addRule("isInteger", "responsavel", req.getParameter("resp"));
             validation.addRule("isValidEmail", "", "rafael@hotmail.com.br");
             if (validation.executaRegras()) {
-                System.out.println("ALRIGHT JACK, KEEP YOUR HANDS OF MY STACK");
                 treinamento.setDatafim((Date) formato.parse(req.getParameter("dataTerm")));
                 treinamento.setDatainicio((Date) formato.parse(req.getParameter("dataIni")));
                 treinamento.setHora((Date) horaFormato.parse(req.getParameter("hora")));
                 treinamento.setDescricao(req.getParameter("descricao"));
                 treinamento.setTurma(req.getParameter("turma"));
                 treinamento.setLaboratorio(req.getParameter("lab"));
-                Usuario usuario = new UsuarioDAO().Consultar(1);
-                System.out.println("email:" + usuario.getEmail());
+                Usuario usuario = new UsuarioDAO().Consultar(Integer.parseInt(req.getParameter("resp")));
                 treinamento.setUsuario(usuario);
                 TreinamentoDAO daoTreino = new TreinamentoDAO();
                 daoTreino.Cadastrar(treinamento);
                 return "/WEB-INF/views/administrador/treinamentos.jsp";
             } else {
                 List<String> erros = validation.getTodosErros();
-                
                 for (String temp : erros) {
                     System.out.println(temp);
                 }
@@ -85,7 +82,7 @@ public class TreinamentoModel implements Tarefa {
 
         return "/WEB-INF/views/administrador/treinamentos.jsp";
     }
-
+    
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
