@@ -9,6 +9,8 @@ import br.com.ifsp.lds.beans.Treinamento;
 import br.com.ifsp.lds.beans.Usuario;
 import br.com.ifsp.lds.dao.TreinamentoDAO;
 import br.com.ifsp.lds.dao.UsuarioDAO;
+import br.com.ifsp.lds.util.FormValidation;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,8 +43,35 @@ public class TreinamentoModel implements Tarefa {
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-         SimpleDateFormat horaFormato = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat horaFormato = new SimpleDateFormat("HH:mm:ss");
         Treinamento treinamento = new Treinamento();
+        FormValidation validation =  new FormValidation();
+        try {
+            validation.addRule("isValidEmail", "email", "rafael@hotmail.com.br");
+            validation.addRule("isValidEmail", "email", "rafael@hotmail.com.br");
+            validation.addRule("isValidEmail", "email", "rafael@hotmail.com.br");
+            validation.addRule("isValidEmail", "email", "");
+            validation.addRule("isValidEmail", "", "");
+            validation.addRule("isValidEmail", "", "rafael@hotmail.com.br");
+            if(validation.executaRegras()){
+                System.out.println("ALRIGHT JACK, KEEP YOUR HANDS OF MY STACK");
+            }else{
+                System.out.println("erro, se fode ae cusao");
+            }
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         try {
             Date dataIni = formato.parse(req.getParameter("dataTerm"));
         } catch (ParseException ex) {
@@ -66,7 +95,7 @@ public class TreinamentoModel implements Tarefa {
         treinamento.setDescricao(req.getParameter("descricao"));
         treinamento.setTurma(req.getParameter("turma"));
         treinamento.setLaboratorio(req.getParameter("lab"));
-        Usuario usuario = new UsuarioDAO().Consultar(2);
+        Usuario usuario = new UsuarioDAO().Consultar(1);
         System.out.println("email:" + usuario.getEmail());
         treinamento.setUsuario(usuario);
         TreinamentoDAO daoTreino = new TreinamentoDAO();

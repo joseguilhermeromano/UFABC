@@ -46,13 +46,13 @@
                                     <div class="form-group">
                                     <b><label for="datainicio">Data de Início</label></b>
 
-                                    <input type="text" name="dataIni"  placeholder="Data de Início" class="form-control estilo-input" value="25/10/2016" />
+                                    <input type="text" name="dataIni" id="datepicker-13" placeholder="Data de Início" class="form-control estilo-input" value="25/10/2016" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     <b><label for="datatermino">Data de Término</label></b>
-                                    <input type="text" name="dataTerm" placeholder="Data de Término" class="form-control estilo-input" value="25/10/2016" />
+                                    <input type="text" name="dataTerm" id="datepicker-14" placeholder="Data de Término" class="form-control estilo-input" value="25/10/2016" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
