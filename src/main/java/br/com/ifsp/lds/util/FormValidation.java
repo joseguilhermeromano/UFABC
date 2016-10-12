@@ -15,22 +15,21 @@ import java.util.List;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
 
 /**
  *
  * @author rafin
  */
 public class FormValidation {
-
+   
     private List<String> erros = new ArrayList<String>();
-    private List<Metodo> regras = new ArrayList<Metodo>();
-
     /**
      * @param str Como String que recebera um provável INT como conteudo
      * @param campo Será o nome do campo no formulário
      * @return verdadeiro ou falso para caso seja inteiro
      */
-    public boolean isInteger(String campo, String str) {
+    protected boolean isInteger(String campo, String str) {
         if (campo.isEmpty()) {
             campo = "Campo sem nome :";
         }
@@ -54,15 +53,14 @@ public class FormValidation {
      * @param campo Será o nome do campo no formulário
      * @return verdadeiro ou falso para caso seja um email válido
      */
-    public boolean isValidEmail(String campo, String str) {
+    protected boolean isValidEmail(String campo, String str) {
         if (campo.isEmpty()) {
-            campo = "Campo sem nome :";
+            campo = "Campo sem nome";
         }
         if (str == null || str.length() == 0) {
             this.erros.add(campo + ": Campo vazio !!! \n");
             return false;
         }
-
         boolean verifica = Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}+\\.[A-Za-z]{2,}", str);
         if (verifica) {
             return true;
@@ -72,7 +70,7 @@ public class FormValidation {
         }
     }
 
-    public boolean isValidDate(String campo, String dataV) {
+    protected boolean isValidDate(String campo, String dataV) {
         if (campo.isEmpty()) {
             campo = "Campo sem nome :";
         }
@@ -91,49 +89,8 @@ public class FormValidation {
         }
 
     }
-
-    public void addRule(String regra, String campo, String dado) throws NoSuchMethodException, ClassNotFoundException {
-        
-        /*
-        Class<?> tipo = Class.forName(tarefa);
-        FormValidation instancia = (FormValidation) tipo.newInstance();
-        for (Metodo temp : regras) {
-            Method metodo = tipo.getDeclaredMethod(temp.getMetodo(), String.class, String.class);
-        */
-        String classname = "br.com.ifsp.lds.util.FormValidation";
-        Class<?> tipo = Class.forName(classname);
-        Metodo metodo = new Metodo();
-        Method methodToFind = tipo.getDeclaredMethod(regra, String.class,String.class);
-        if (methodToFind != null) {
-            metodo.setCampo(campo);
-            metodo.setDado(dado);
-            metodo.setMetodo(regra);
-            regras.add(metodo);
-        } else {
-            erros.add("a regra '" + regra + "' não existe");
-        }
+    protected List<String> getErros(){
+       return erros;
     }
-
-    public boolean executaRegras() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
-        int falsos=0;
-        String tarefa = "br.com.ifsp.lds.util.FormValidation";
-        Class<?> tipo = Class.forName(tarefa);
-        FormValidation instancia = (FormValidation) tipo.newInstance();
-        for (Metodo temp : regras) {
-            Method metodo = tipo.getDeclaredMethod(temp.getMetodo(), String.class, String.class);
-            boolean pagina = (boolean) metodo.invoke(instancia, temp.getCampo(), temp.getDado());
-            if(pagina == false){
-                falsos++;
-            }
-        }
-        if (falsos == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    public boolean carro(){
-        return true;
-    }
+   
 }
