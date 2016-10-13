@@ -1,0 +1,11 @@
+@startuml
+
+interface Tarefa {  	
+    + getPermAdmin(req:HttpServletRequest , resp:HttpServletResponse ):String[]
+    + cadastrar(req:HttpServletRequest , resp:HttpServletResponse ):String
+    + alterar(req:HttpServletRequest , resp:HttpServletResponse):String
+    + listartudo(req:HttpServletRequest , resp:HttpServletResponse):String
+    + buscar(req:HttpServletRequest , resp:HttpServletResponse):String
+    + excluir(req:HttpServletRequest , resp:HttpServletResponse):String
+}
+@enduml

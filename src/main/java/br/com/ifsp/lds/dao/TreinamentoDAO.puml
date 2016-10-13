@@ -1,0 +1,14 @@
+@startuml
+
+
+class TreinamentoDAO <? implements DAO<Treinamento>> {
+    
+    entityManage:EntityManager 
+    + Cadastrar(treina:Treinamento):void
+    + Alterar( obj:Treinamento):void
+    + ConsultarTudo(string:String):ArrayList<Treinamento>
+    + Treinamento Consultar(codigo:Integer):Treinamento
+    + Deletar(codigo:Integer) :void      
+}
+
+@enduml

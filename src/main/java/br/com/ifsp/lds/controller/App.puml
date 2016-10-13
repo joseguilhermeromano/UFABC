@@ -1,0 +1,20 @@
+@startuml
+
+
+class App {
+    
+    -segments:String[]
+    -classe:String
+    -metodo:String
+    
+    
+    +App(req:HttpServletRequest)
+    -setClasse():void
+    -formataNomeClasse():void
+    -setMetodo():void
+    +getMetodo():String
+    +getClasse():String 
+
+}
+
+@enduml

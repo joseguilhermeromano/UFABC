@@ -14,6 +14,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -37,6 +38,15 @@ public class Filtro implements Filter  {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         
+        
+        
+        HttpSession session =  req.getSession();
+        if (session.getAttribute("baseURL")==null){
+            /*Essa é a base da url (ex: https://localhost:8080/UFABC/) utilizada para todos os links do sistema!*/
+            String baseURL = req.getRequestURL().substring(0, req.getRequestURL().length()-req.getRequestURI().length())
+                +req.getContextPath()+"/";
+            session.setAttribute("baseURL", baseURL);
+        }
         
         chain.doFilter(request, response);
     }

@@ -1,0 +1,20 @@
+@startuml
+
+
+class UsuarioModel <? implements Tarefa> {
+
+   - {static}permAdmin:String[]
+    
+    + getPermAdmin(req:HttpServletRequest, resp:HttpServletResponse):String[]
+    + inicio(req:HttpServletRequest, resp:HttpServletResponse):String
+    + perfil(req:HttpServletRequest, resp:HttpServletResponse):String
+    + novousuario(req:HttpServletRequest, resp:HttpServletResponse):String
+    + login( req:HttpServletRequest, resp:HttpServletResponse):String
+    + cadastrar(req:HttpServletRequest, resp:HttpServletResponse):String
+    + alterar(req:HttpServletRequest, resp:HttpServletResponse):String
+    + listartudo(req:HttpServletRequest, resp:HttpServletResponse):String
+    + buscar(req:HttpServletRequest, resp:HttpServletResponse):String
+    + excluir(req:HttpServletRequest, resp:HttpServletResponse):String
+}
+
+@enduml

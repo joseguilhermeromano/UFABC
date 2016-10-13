@@ -1,0 +1,59 @@
+/' Para exibir os diagramas é necessário obter o graphviz e o plugin plantuml para o netbeans
+http://plugins.netbeans.org/plugin/49069/plantuml
+http://www.graphviz.org/Download_windows.php
+ '/
+@startuml
+class Usuario {
+ 
+    -codigo:Integer
+    -nome:String
+    -cpf:String
+    -rg:String
+    -email:String
+    -telefone:String
+    -endereco:String
+    -numero:String
+    -bairro:String
+    -cidade:String
+    -complemento:String
+    -especialidade:String
+    -administrador:Integer
+    -treinamentos:ArrayList
+    -login:String
+    -senha:String
+
+    +getCodigo():Integer
+    +setCodigo(codigo:Integer):void
+    +getNome():String
+    +setNome(nome:String):void
+    +getCpf():String
+    +setCpf(cpf:String):void
+    +getRg():String
+    +setRg(rg:String):void
+    +getEmail():String
+    +setEmail(email:String):void
+    +getEndereco():String
+    +setEndereco(endereco:String):void
+    +getNumero():String
+    +setNumero(numero:String):void
+    +getBairro():String
+    +setBairro(bairro:String):void
+    +getCidade():String
+    +setCidade(cidade:String):void
+    +getComplemento():String
+    +setComplemento(complemento:String):void
+    +getEspecialidade():String
+    +setEspecialidade(especialidade:String):void
+    +getAdministrador():Integer
+    +setAdministrador(iadministrador:Integer):void
+    +getLogin():String
+    +setLogin(login:String):void
+    +getSenha():String
+    +setSenha(senha:String):void
+    +getTreinamentos():ArrayList
+    +setTreinamentos(treinamentos:ArrayList) :void
+    +getTelefone():String
+    +setTelefone(telefone:String) :void
+}
+
+@enduml

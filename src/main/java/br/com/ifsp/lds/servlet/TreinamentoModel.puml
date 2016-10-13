@@ -1,0 +1,15 @@
+@startuml
+
+class TreinamentoModel<? implements Tarefa>{
+    - {static} permAdmin:String[]
+    + getPermAdmin(req:HttpServletRequest , resp:HttpServletResponse ):String[] 
+    + novotreinamento(req:HttpServletRequest , resp:HttpServletResponse):String 
+    + String cadastrar(req:HttpServletRequest , resp:HttpServletResponse):String
+    + String alterar(req:HttpServletRequest , resp:HttpServletResponse):String
+    + String listartudo(req:HttpServletRequest , resp:HttpServletResponse):String
+    + String buscar(req:HttpServletRequest , resp:HttpServletResponse):String
+    + String excluir(req:HttpServletRequest , resp:HttpServletResponse):String
+}
+
+
+@enduml

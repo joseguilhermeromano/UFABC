@@ -1,0 +1,9 @@
+@startuml
+
+class JPAUtil {
+    
+    - {static} entityManagerFactory:EntityManagerFactory
+    + getEntityManager ():EntityManager 
+    
+}
+@enduml

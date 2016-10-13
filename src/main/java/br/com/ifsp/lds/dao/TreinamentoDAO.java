@@ -16,12 +16,13 @@ import javax.persistence.TypedQuery;
  *
  * @author eddie
  */
-public class TreinamentoDAO {
+public class TreinamentoDAO implements DAO<Treinamento> {
     
     EntityManager entityManager = new JPAUtil().getEntityManager();
     
     
     //Método cadastra treinamento
+    @Override
     public void Cadastrar(Treinamento treina) {
         EntityManager entityManager = new JPAUtil().getEntityManager();
         entityManager.getTransaction().begin();
@@ -30,9 +31,22 @@ public class TreinamentoDAO {
         entityManager.close();
     }
     
+    //Método que atualiza as informações de treinamento
+    @Override
+    public void Alterar(Treinamento obj){
+        try { 
+            entityManager.getTransaction().begin();
+            entityManager.merge(obj);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) { 
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+    }
     
-    //Método consulta todos os treinametos cadastrados 
-    public ArrayList<Treinamento> Consultar(){
+    //Método consulta todos os treinametos cadastrados
+    @Override
+    public ArrayList<Treinamento> ConsultarTudo(String string){
         try { 
             entityManager.getTransaction().begin(); 
             TypedQuery<Treinamento> query = entityManager.createQuery("select t from Treinamento t",Treinamento.class);
@@ -50,7 +64,8 @@ public class TreinamentoDAO {
      
      
     //Método consulta treinamento específico 
-    public Treinamento Exibir(int codigo) {
+    @Override
+    public Treinamento Consultar(int codigo) {
         EntityManager entityManager = new JPAUtil().getEntityManager();
         Treinamento treina = entityManager.find(Treinamento.class, codigo);
         return treina;
@@ -58,6 +73,7 @@ public class TreinamentoDAO {
      
     
     //Método deleta treinamento específico
+    @Override
     public void Deletar(int codigo) {      
         try { 
             entityManager.getTransaction().begin(); 
