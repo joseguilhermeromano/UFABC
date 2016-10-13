@@ -40,16 +40,22 @@ public class UseRules extends FormValidation{
         }
     }
 
-    public boolean executaRegras() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
+    public boolean executaRegras() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
         int falsos=0;
         String tarefa = "br.com.ifsp.lds.util.FormValidation";
         Class<?> tipo = Class.forName(tarefa);
         FormValidation instancia = (FormValidation) tipo.newInstance();
         for (Metodo temp : regras) {
-            Method metodo = tipo.getDeclaredMethod(temp.getMetodo(), String.class, String.class);
-            boolean pagina = (boolean) metodo.invoke(instancia, temp.getCampo(), temp.getDado());
-            if(pagina == false){
-                falsos++;
+            try {
+                Method metodo = tipo.getDeclaredMethod(temp.getMetodo(), String.class, String.class);
+                boolean pagina = (boolean) metodo.invoke(instancia, temp.getCampo(), temp.getDado());
+                if(pagina == false){
+                    falsos++;
+                }
+            } catch (NoSuchMethodException ex) {
+                System.out.println(temp.getMetodo()+ " não existe --!");
+            } catch (SecurityException ex) {
+                Logger.getLogger(UseRules.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (falsos == 0 && todosErros.isEmpty()) {

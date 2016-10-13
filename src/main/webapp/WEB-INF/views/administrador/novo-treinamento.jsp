@@ -58,7 +58,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                     <b><label for="datatermino">Horário</label></b>
-                                    <input type="text" name="hora"  placeholder="ex: 8:00 h às 9:00 h" class="form-control estilo-input" value="16:32:14" />
+                                    <input type="text" name="hora"  placeholder="ex: 08:00" class="form-control estilo-input" value="16:32" />
                                     </div>
                                 </div>
 
