@@ -32,7 +32,7 @@
                 </li>
                 <hr>
                 <li>
-                    <a href="#"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
+                    <a href="${baseURL}area-restrita/usuario/logoff"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
                     
                 </li>
                 <hr>

@@ -41,14 +41,20 @@ public class UsuarioModel implements Tarefa {
     }
     
     public String login(HttpServletRequest req, HttpServletResponse resp) {
-        String senha = req.getParameter("senha");
-        String login = req.getParameter("username");
-        
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Usuario usuario = usuarioDAO.buscaUsuario(login);
+//        String senha = req.getParameter("senha");
+//        String login = req.getParameter("username");
+//        
+//        UsuarioDAO usuarioDAO = new UsuarioDAO();
+//        Usuario usuario = usuarioDAO.buscaUsuario(login);
+        /*Código temporário para desativar login*/
+        String senha="teste";
+        Usuario usuario = new Usuario();
+        usuario.setAdministrador(1);
+        usuario.setLogin("teste");
+        usuario.setSenha("teste");
         if(usuario != null && usuario.getSenha().equals(senha)) {
             HttpSession session =  req.getSession();
-            session.setAttribute("sessaoUsuario", usuario);
+            session.setAttribute("usuarioLogado", usuario);
             String segmento;
             if(usuario.getAdministrador() == 1) 
                 segmento = "administrador";
@@ -57,6 +63,11 @@ public class UsuarioModel implements Tarefa {
             
             return "/WEB-INF/views/" +segmento +"/index.jsp";
         }
+        return "/index.jsp";
+    }
+    
+    public String logoff(HttpServletRequest req, HttpServletResponse resp){
+        req.getSession().removeAttribute("usuarioLogado");
         return "/index.jsp";
     }
 
