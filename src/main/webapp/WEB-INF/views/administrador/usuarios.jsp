@@ -36,9 +36,10 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                <div class="input-group">
-                                    <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Nome do Usuário...">
+                                   <form id="buscarUsuario" method="post" action="${baseURL}area-restrita/usuario/listartudo"></form>
+                                   <input form="buscarUsuario" type="text" class="form-control estilo-botao-busca" name="nome" placeholder="Buscar por Nome do Usuário...">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default estilo-botao-busca" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                        <button form="buscarUsuario" class="btn btn-default estilo-botao-busca" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                                     </span>
                                </div><!-- /input-group -->
                              </div><!-- /.col-lg-6 -->
@@ -61,8 +62,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <c:forEach items="${usuarios}" var="usuario">
+                                    
                                     <tr class="primeira-cor">
 
+                                            <td>${usuario.nome}</td>
+                                            <td class="text-center"><c:if test="${usuario.administrador == 1}">Administrador(a)</c:if>
+                                                                    <c:if test="${usuario.administrador == 0}">Colaborador</c:if></td>
+                                            <td class="text-center">${usuario.especialidade}</td>
+                                            <td class="text-center">${usuario.email}</td>
+                                            <td class="text-center">${usuario.telefone}</td>
+                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
+                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+
+                                    </tr>
+                                    <!--<tr class="segunda-cor">
+
                                             <td>Ana Maria</td>
                                             <td class="text-center">Administrador(a)</td>
                                             <td class="text-center">Informática</td>
@@ -71,18 +86,8 @@
                                             <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
                                             <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
 
-                                    </tr>
-                                    <tr class="segunda-cor">
-
-                                            <td>Ana Maria</td>
-                                            <td class="text-center">Administrador(a)</td>
-                                            <td class="text-center">Informática</td>
-                                            <td class="text-center">ana@ana.com.br</td>
-                                            <td class="text-center">(11) 98765-4321</td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-
-                                    </tr>
+                                    </tr>-->
+                                    </c:forEach> 
                                 </tbody>
                             </table>
                         </div><!-- /TABELA-->
