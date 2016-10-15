@@ -89,7 +89,15 @@ public class UsuarioModel implements Tarefa {
 
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int codigo = Integer.parseInt(req.getParameter("codigo"));
+        Usuario usuario = new UsuarioDAO().Consultar(codigo);
+        
+        if(req.getParameter("alterar") != null) {
+            
+        }
+        
+        req.setAttribute("usuario", usuario);
+        return "/WEB-INF/views/administrador/edita-usuario.jsp";
     }
 
     @Override

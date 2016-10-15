@@ -36,7 +36,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <b><label for="nome">Nome Completo</label></b>
-                                    <input type="text" name="" value="" placeholder="Nome Completo" class="form-control estilo-input"  />
+                                    <input type="text" name="nome" value="${usuario.nome}" placeholder="Nome Completo" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -45,13 +45,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="cpf">CPF</label></b>
-                                    <input type="text" name="" value="" placeholder="CPF" class="form-control estilo-input"  />
+                                    <input type="text" name="cpf" value="${usuario.cpf}" placeholder="CPF" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="rg">RG</label></b>
-                                    <input type="text" name="" value="" placeholder="RG" class="form-control estilo-input"  />
+                                    <input type="text" name="rg" value="${usuario.rg}" placeholder="RG" class="form-control estilo-input"  />
                                     </div>
                                 </div>
 
@@ -61,13 +61,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="nome">E-mail</label></b>
-                                    <input type="text" name="" value="" placeholder="ex: exemplo@exemplo.com.br" class="form-control estilo-input"  />
+                                    <input type="text" name="email" value="${usuario.email}" placeholder="ex: exemplo@exemplo.com.br" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="cpf">Telefone</label></b>
-                                    <input type="text" name="" value="" placeholder="Telefone" class="form-control estilo-input"  />
+                                    <input type="text" name="telefone" value="${usuario.telefone}" placeholder="Telefone" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <b><label for="nome">Endereço</label></b>
-                                    <input type="text" name="" value="" placeholder="ex: exemplo@exemplo.com.br" class="form-control estilo-input"  />
+                                    <input type="text" name="endereco" value="${usuario.endereco}" placeholder="ex: exemplo@exemplo.com.br" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -83,25 +83,25 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                     <b><label for="nome">Número</label></b>
-                                    <input type="text" name="" value="" placeholder="Número" class="form-control estilo-input"  />
+                                    <input type="text" name="numero" value="${usuario.numero}" placeholder="Número" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                     <b><label for="nome">Bairro</label></b>
-                                    <input type="text" name="" value="" placeholder="Bairro" class="form-control estilo-input"  />
+                                    <input type="text" name="bairro" value="${usuario.bairro}" placeholder="Bairro" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                     <b><label for="nome">Cidade</label></b>
-                                    <input type="text" name="" value="" placeholder="Cidade" class="form-control estilo-input"  />
+                                    <input type="text" name="cidade" value="${usuario.cidade}" placeholder="Cidade" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                     <b><label for="nome">Complemento</label></b>
-                                    <input type="text" name="" value="" placeholder="Complemento" class="form-control estilo-input"  />
+                                    <input type="text" name="complemento" value="${usuario.complemento}" placeholder="Complemento" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -121,10 +121,10 @@
                                     <div class="form-group">
                                         <b><label for="cpf">Permissão de Acesso</label></b><br>
                                     <div class="col-md-6">
-                                        <input type="radio" name="gender" value="male"> Administrador do Sistema
+                                        <input type="radio" name="acesso" value="1" <c:if test="${usuario.administrador eq 1}">checked="checked"</c:if>> Administrador do Sistema
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="radio" name="gender" value="female"> Colaborador<br>
+                                        <input type="radio" name="acesso" value="0"<c:if test="${usuario.administrador eq 0}">checked="checked"</c:if>> Colaborador<br>
                                     </div>
                                     </div>
                                 </div>

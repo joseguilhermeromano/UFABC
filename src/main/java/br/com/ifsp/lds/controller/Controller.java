@@ -34,6 +34,7 @@ public class Controller extends HttpServlet {
         boolean EstaNoArray=false;
         Filtro filtro = new Filtro();
         
+        
         try {
             App app = new App(req);
             String classe = app.getClasse()+"Model";
@@ -74,7 +75,7 @@ public class Controller extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        System.out.println(pagina);
         req.getRequestDispatcher(pagina).forward(req, resp);
     }
 }
