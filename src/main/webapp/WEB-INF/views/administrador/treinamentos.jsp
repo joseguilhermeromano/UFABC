@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                <div class="input-group">
-                                 <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Descrição de Treinamento...">
+                                 <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Nome de Treinamento...">
                                  <span class="input-group-btn">
                                      <button class="btn btn-default estilo-botao-busca" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                  </span>
@@ -50,23 +50,18 @@
                             <table class="table ls-table" id="tabela1">
                                 <thead>
                                     <tr>
+                                            <th class="text-center">Código</th>
+                                            <th class="text-center">Nome</th>
                                             <th>Descrição</th>
-                                            <th class="text-center">Início</th>
-                                            <th class="text-center">Término</th>
-                                            <th class="text-center">Horário</th>
-                                            <th class="text-center">Responsável</th>
                                             <th class="text-center">Detalhar/Alterar</th>
                                             <th class="text-center">Excluir</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr class="primeira-cor">
-
+                                            <td class="text-center">1</td>
                                             <td>Configuração de Servidor DNS</td>
-                                            <td class="text-center">23/09/2016</td>
-                                            <td class="text-center">24/09/2016</td>
-                                            <td class="text-center">8:00 às 10:00</td>
-                                            <td class="text-center">Claudio Marques</td>
+                                            <td>Descrição do Treinamento</td>
                                             <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
                                             <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
 
@@ -74,11 +69,9 @@
                                     <tr class="segunda-cor">
 
                                             
+                                            <td class="text-center">1</td>
                                             <td>Configuração de Servidor DNS</td>
-                                            <td class="text-center">23/09/2016</td>
-                                            <td class="text-center">24/09/2016</td>
-                                            <td class="text-center">8:00 às 10:00</td>
-                                            <td class="text-center">Claudio Marques</td>
+                                            <td>Descrição do Treinamento</td>
                                             <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
                                             <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
 

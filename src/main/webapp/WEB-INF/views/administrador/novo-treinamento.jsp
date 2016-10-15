@@ -29,60 +29,28 @@
 
                         <!-- AQUI COMEÇA O CONTEÚDO DA PÁGINA -->
                         <h3><span class="glyphicon glyphicon-plus"></span> Novo Treinamento</h3><hr>
-                        
+                        <c:if test="${not empty erros}">
+                            <c:forEach var="erro" items="${erros}}">
+                                <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                                </div>
+                            </c:forEach>
+                        </c:if>
                         <form action="${baseURL}area-restrita/treinamento/cadastrar" method="POST"><!--FORM -->
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    <b><label for="nome">Nome</label></b>
+                                    <input type="text" name="nome"  placeholder="Nome do Treinamento" class="form-control estilo-input"/>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <b><label for="descricao">Descrição</label></b>
-                                    <input type="text" name="descricao"  placeholder="Descrição do Treinamento..." class="form-control estilo-input" value="foda-se amigo"  />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                    <b><label for="datainicio">Data de Início</label></b>
-
-                                    <input type="text" name="dataIni" id="datepicker-13" placeholder="Data de Início" class="form-control estilo-input" value="25/10/2016" />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                    <b><label for="datatermino">Data de Término</label></b>
-                                    <input type="text" name="dataTerm" id="datepicker-14" placeholder="Data de Término" class="form-control estilo-input" value="25/10/2016" />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                    <b><label for="datatermino">Horário</label></b>
-                                    <input type="text" name="hora"  placeholder="ex: 08:00" class="form-control estilo-input" value="16:32" />
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <b><label for="nome">Turma</label></b>
-                                    <input type="text" name="turma"  placeholder="ex: Turma A ADS Noturno 2º Semestre" class="form-control estilo-input" value="dfsdfdsf"  />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                    <b><label for="cpf">Laboratório</label></b>
-                                    <input type="text" name="lab"  placeholder="ex: labF010" class="form-control estilo-input" value="gfhfghfgh" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                    <b><label for="nome">Responsável</label></b>
-                                    <input type="text" name="resp"  placeholder="Responsável" class="form-control estilo-input" value="2" />
+                                    <textarea name="descricao"  rows="10" placeholder="Descrição do Treinamento..." class="form-control estilo-input"/></textarea>
                                     </div>
                                 </div>
                             </div>

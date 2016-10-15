@@ -33,6 +33,7 @@ public class TreinamentoModel implements Tarefa {
      */
 
     private static final String[] permAdmin = {""};
+    private TreinamentoDAO daoTreino = new TreinamentoDAO();
 
     @Override
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp) {
@@ -45,43 +46,32 @@ public class TreinamentoModel implements Tarefa {
     
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat horaFormato = new SimpleDateFormat("HH:mm");
         Treinamento treinamento = new Treinamento();
         UseRules validation = new UseRules();
         try {
             //primeiro campo é a regra, segundo é o nome da coluna que vai aparacer para o usuarios 
             //, terceiro é o valor
-            validation.addRule("required", "responsavel", req.getParameter("resp"));
-            validation.addRule("isValidHour", "horário", req.getParameter("hora"));
-            validation.addRule("isValidDate", "data de término", req.getParameter("dataTerm"));
-            validation.addRule("isValidDate", "data de inicio", req.getParameter("dataIni"));
-            validation.addRule("isInteger", "responsavel", req.getParameter("resp"));
-            validation.addRule("isValidEmail", "", "rafael@hotmail.com.br");
+            validation.addRule("required", "nome", req.getParameter("nome"));
+            validation.addRule("required", "descricao", req.getParameter("descricao"));
+
             if (validation.executaRegras()) {
-                treinamento.setDatafim((Date) formato.parse(req.getParameter("dataTerm")));
-                treinamento.setDatainicio((Date) formato.parse(req.getParameter("dataIni")));
-                treinamento.setHora((Date) horaFormato.parse(req.getParameter("hora")));
+                treinamento.setNome(req.getParameter("nome"));
                 treinamento.setDescricao(req.getParameter("descricao"));
-                treinamento.setTurma(req.getParameter("turma"));
-                treinamento.setLaboratorio(req.getParameter("lab"));
-                Usuario usuario = new UsuarioDAO().Consultar(Integer.parseInt(req.getParameter("resp")));
-                treinamento.setUsuario(usuario);
-                TreinamentoDAO daoTreino = new TreinamentoDAO();
                 daoTreino.Cadastrar(treinamento);
                 return "/WEB-INF/views/administrador/treinamentos.jsp";
             } else {
                 List<String> erros = validation.getTodosErros();
+                req.setAttribute("erros", erros);
                 for (String temp : erros) {
                     System.out.println(temp);
                 }
-                return "/WEB-INF/views/administrador/treinamentos.jsp";
             }
-        } catch (NoSuchMethodException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ParseException ex) {
+        
+        } catch (NoSuchMethodException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return "/WEB-INF/views/administrador/treinamentos.jsp";
+        return "/WEB-INF/views/administrador/novo-treinamento.jsp";
     }
     
     @Override

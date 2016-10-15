@@ -7,6 +7,7 @@ package br.com.ifsp.lds.servlet;
 
 import br.com.ifsp.lds.beans.Usuario;
 import br.com.ifsp.lds.dao.UsuarioDAO;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ public class UsuarioModel implements Tarefa {
     * apenas para usuários que são administradores do sistema.
     */
     private static final String[] permAdmin = {""};
+    private UsuarioDAO userdao = new UsuarioDAO();
     
     @Override
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp){
@@ -43,15 +45,11 @@ public class UsuarioModel implements Tarefa {
     public String login(HttpServletRequest req, HttpServletResponse resp) {
 //        String senha = req.getParameter("senha");
 //        String login = req.getParameter("username");
-//        
-//        UsuarioDAO usuarioDAO = new UsuarioDAO();
-//        Usuario usuario = usuarioDAO.buscaUsuario(login);
         /*Código temporário para desativar login*/
         String senha="teste";
-        Usuario usuario = new Usuario();
-        usuario.setAdministrador(1);
-        usuario.setLogin("teste");
-        usuario.setSenha("teste");
+        String login="teste";
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = usuarioDAO.buscaUsuario(login);
         if(usuario != null && usuario.getSenha().equals(senha)) {
             HttpSession session =  req.getSession();
             session.setAttribute("usuarioLogado", usuario);
@@ -90,8 +88,6 @@ public class UsuarioModel implements Tarefa {
         usuario.setLogin(req.getParameter("login"));
         usuario.setSenha(req.getParameter("senha"));
         
-        UsuarioDAO userdao = new UsuarioDAO();
-        
         userdao.Cadastrar(usuario);
         
         return "/WEB-INF/views/administrador/usuarios.jsp";
@@ -104,6 +100,7 @@ public class UsuarioModel implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
+        
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }
 
