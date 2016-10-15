@@ -49,7 +49,7 @@ public class UsuarioDAO implements DAO<Usuario> {
                 entityManager.getTransaction().commit();
                 return consulta;
             }else{
-                Query query = entityManager.createQuery("select u from Usuario u where u.nome'" +string+"'");
+                Query query = entityManager.createQuery("select u from Usuario u where u.nome='" +string+"'");
                 ArrayList<Usuario> consulta = (ArrayList<Usuario>) query.getResultList();
                 return consulta;
             }
