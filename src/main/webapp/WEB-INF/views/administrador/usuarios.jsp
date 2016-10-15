@@ -61,7 +61,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="primeira-cor">
+                                    <c:forEach items="${usuarios}" var="usuario" varStatus="loop">
+                                        <c:if test="${loop.index % 2 == 0}"><tr class="primeira-cor"></c:if>
+                                        <c:if test="${loop.index % 2 != 0}"><tr class="segunda-cor"></c:if>    
+
+                                            <td>${usuario.nome}</td>
+                                            <td class="text-center"><c:if test="${usuario.administrador == 1}">Administrador(a)</c:if>
+                                                                     <c:if test="${usuario.administrador == 0}">Colaborador</c:if></td>
+                                            <td class="text-center">${usuario.especialidade}</td>
+                                            <td class="text-center">${usuario.email}</td>
+                                            <td class="text-center">${usuario.telefone}</td>
+                                            <td class="text-center"><a href="<c:url value="${baseURL}area-restrita/usuario/alterar">
+                                                                        <c:param name="codigo" value="${usuario.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
+                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+
+                                    </tr>
+                                    <!--<tr class="segunda-cor">
 
                                             <td>Ana Maria</td>
                                             <td class="text-center">Administrador(a)</td>
@@ -71,18 +86,8 @@
                                             <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
                                             <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
 
-                                    </tr>
-                                    <tr class="segunda-cor">
-
-                                            <td>Ana Maria</td>
-                                            <td class="text-center">Administrador(a)</td>
-                                            <td class="text-center">Informática</td>
-                                            <td class="text-center">ana@ana.com.br</td>
-                                            <td class="text-center">(11) 98765-4321</td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-
-                                    </tr>
+                                    </tr>-->
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div><!-- /TABELA-->
