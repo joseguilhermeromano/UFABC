@@ -50,32 +50,23 @@
                             <table class="table ls-table" id="tabela1">
                                 <thead>
                                     <tr>
-                                            <th class="text-center">Código</th>
-                                            <th class="text-center">Nome</th>
-                                            <th>Descrição</th>
-                                            <th class="text-center">Detalhar/Alterar</th>
-                                            <th class="text-center">Excluir</th>
+                                            <th class="text-center col-md-1">Código</th>
+                                            <th class="col-md-3">Nome</th>
+                                            <th class="col-md-6">Descrição</th>
+                                            <th class="text-center col-md-1">Detalhar/Alterar</th>
+                                            <th class="text-center col-md-1">Excluir</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="primeira-cor">
-                                            <td class="text-center">1</td>
-                                            <td>Configuração de Servidor DNS</td>
-                                            <td>Descrição do Treinamento</td>
+                                    <c:forEach var="item" items="${itens}">
+                                    <tr>
+                                            <td class="text-center">${item.codigo}</td>
+                                            <td>${item.nome}</td>
+                                            <td>${item.descricao}</td>
                                             <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-
+                                            <td class="text-center"><a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
                                     </tr>
-                                    <tr class="segunda-cor">
-
-                                            
-                                            <td class="text-center">1</td>
-                                            <td>Configuração de Servidor DNS</td>
-                                            <td>Descrição do Treinamento</td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-
-                                    </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div><!-- /TABELA-->
@@ -103,6 +94,27 @@
             </div>
         </div>
         <!-- /#page-content-wrapper -->
+        
+        <!-- Modal -->
+            <div id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Confirmar</h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <p>Deseja reamente fazer a Excusão do item?</p>
+                            <p class="text-warning"><small>Apos confirmar o serviço será excluso.</small></p>
+                        </div>
+                        <div class="modal-footer">
+                            <h:commandButton value="Cancelar" type="button" class="btn btn-default" />
+                            <h:commandButton value="Confirmar" class="btn btn-primary"/>
+                        </div>
+                    </div>
+                </div>
+            </div> 
             
         </div><!-- /Corpo da Página --> 
         <c:import url="../layout/footer.jsp"></c:import>

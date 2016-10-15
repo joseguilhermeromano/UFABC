@@ -14,6 +14,7 @@ import br.com.ifsp.lds.util.UseRules;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -46,6 +47,9 @@ public class TreinamentoModel implements Tarefa {
     
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
+        if(req.getParameterMap().isEmpty()){
+            return "/WEB-INF/views/administrador/novo-treinamento.jsp";
+        }
         Treinamento treinamento = new Treinamento();
         UseRules validation = new UseRules();
         try {
@@ -81,6 +85,8 @@ public class TreinamentoModel implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
+        ArrayList<Treinamento> treinamentos = daoTreino.ConsultarTudo("");
+        req.setAttribute("itens", treinamentos);
         return "/WEB-INF/views/administrador/treinamentos.jsp";
     }
 
