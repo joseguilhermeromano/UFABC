@@ -22,28 +22,7 @@
             </div>
         </div>
     </div>
-</div> 
-
-<!-- Modal de Editar -->
-<div id="modalEditar" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Confirmar Alterações</h4>
-            </div>
-            <div class="modal-body">
-
-                <p>Deseja realmente alterar as informações desse registro?</p>
-                <p class="text-warning"><small>Após confirmar o registro será atualizado!</small></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                <button class="btn btn-danger" onclick="Editar();">Atualizar</button>
-            </div>
-        </div>
-    </div>
-</div> 
+</div>  
 
 <!-- jQuery -->
 <script src="${baseURL}bootstrap/js/jquery.min.js"></script>

@@ -36,14 +36,11 @@ public class TreinamentoModel implements Tarefa {
     private static final String[] permAdmin = {""};
     private TreinamentoDAO daoTreino = new TreinamentoDAO();
     private  ArrayList<Treinamento> treinamentos;
+    private UseRules validation = new UseRules();
 
     @Override
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp) {
         return this.permAdmin;
-    }
-
-    public String novotreinamento(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/novo-treinamento.jsp";
     }
     
     @Override
@@ -52,7 +49,7 @@ public class TreinamentoModel implements Tarefa {
             return "/WEB-INF/views/administrador/novo-treinamento.jsp";
         }
         Treinamento treinamento = new Treinamento();
-        UseRules validation = new UseRules();
+        
         try {
             //primeiro campo é a regra, segundo é o nome da coluna que vai aparacer para o usuarios 
             //, terceiro é o valor
@@ -63,7 +60,7 @@ public class TreinamentoModel implements Tarefa {
                 treinamento.setNome(req.getParameter("nome"));
                 treinamento.setDescricao(req.getParameter("descricao"));
                 daoTreino.Cadastrar(treinamento);
-                return "/WEB-INF/views/administrador/treinamentos.jsp";
+                return "/WEB-INF/views/administrador/novo-treinamento.jsp";
             } else {
                 List<String> erros = validation.getTodosErros();
                 req.setAttribute("erros", erros);
@@ -81,7 +78,37 @@ public class TreinamentoModel implements Tarefa {
     
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(req.getParameter("codigo")!=null&&req.getParameterMap().size()==1){
+            int codigo = Integer.parseInt(req.getParameter("codigo"));
+            req.setAttribute("treinamento",daoTreino.Consultar(codigo));
+            return "/WEB-INF/views/administrador/edita-treinamento.jsp";
+        }
+        Treinamento treinamento = (Treinamento) daoTreino.Consultar(Integer.parseInt(req.getParameter("codigo")));
+
+        try {
+            //primeiro campo é a regra, segundo é o nome da coluna que vai aparacer para o usuarios 
+            //, terceiro é o valor
+            validation.addRule("required", "nome", req.getParameter("nome"));
+            validation.addRule("required", "descricao", req.getParameter("descricao"));
+
+            if (validation.executaRegras()) {
+                treinamento.setNome(req.getParameter("nome"));
+                treinamento.setDescricao(req.getParameter("descricao"));
+                daoTreino.Alterar(treinamento);
+                return "/WEB-INF/views/administrador/edita-treinamento.jsp";
+            } else {
+                List<String> erros = validation.getTodosErros();
+                req.setAttribute("erros", erros);
+                for (String temp : erros) {
+                    System.out.println(temp);
+                }
+            }
+        
+        } catch (NoSuchMethodException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return "/WEB-INF/views/administrador/edita-treinamento.jsp";
     }
 
     @Override
@@ -93,7 +120,8 @@ public class TreinamentoModel implements Tarefa {
 
     @Override
     public String buscar(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        req.setAttribute("itens",daoTreino.ConsultarTudo(req.getParameter("busca")));
+        return "/WEB-INF/views/administrador/treinamentos.jsp";
     }
 
     @Override

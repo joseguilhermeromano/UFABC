@@ -62,8 +62,7 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach items="${usuarios}" var="usuario" varStatus="loop">
-                                        <c:if test="${loop.index % 2 == 0}"><tr class="primeira-cor"></c:if>
-                                        <c:if test="${loop.index % 2 != 0}"><tr class="segunda-cor"></c:if>    
+                                    <tr>    
 
                                             <td>${usuario.nome}</td>
                                             <td class="text-center"><c:if test="${usuario.administrador == 1}">Administrador(a)</c:if>
@@ -71,10 +70,14 @@
                                             <td class="text-center">${usuario.especialidade}</td>
                                             <td class="text-center">${usuario.email}</td>
                                             <td class="text-center">${usuario.telefone}</td>
-                                            <td class="text-center"><a href="<c:url value="${baseURL}area-restrita/usuario/alterar">
-                                                                        <c:param name="codigo" value="${usuario.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a href="<c:url value="${baseURL}area-restrita/usuario/excluir">
-                                                                        <c:param name="codigo" value="${usuario.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+                                            <td class="text-center">
+                                                <a href="<c:url value="${baseURL}area-restrita/usuario/alterar">
+                                                <c:param name="codigo" value="${usuario.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
+                                            </td> 
+                                            <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
+                                                onclick="setCodigo('${usuario.codigo}'); setLink('${baseURL}area-restrita/usuario/excluir?codigo=');">
+                                                    <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
+                                            </td>
 
                                     </tr>
                                     </c:forEach>

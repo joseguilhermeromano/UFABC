@@ -48,8 +48,13 @@ public class TreinamentoDAO implements DAO<Treinamento> {
     @Override
     public ArrayList<Treinamento> ConsultarTudo(String string){
         try { 
-            entityManager.getTransaction().begin(); 
-            TypedQuery<Treinamento> query = entityManager.createQuery("select t from Treinamento t",Treinamento.class);
+            entityManager.getTransaction().begin();
+            TypedQuery<Treinamento> query;
+            if(string.equals("")){
+                query = entityManager.createQuery("select t from Treinamento t",Treinamento.class);
+            }else{
+                query = (TypedQuery<Treinamento>) entityManager.createQuery("select t from Treinamento t where t.nome='"+string+"'");
+            }
             ArrayList<Treinamento> cont = (ArrayList<Treinamento>) query.getResultList();
             entityManager.getTransaction().commit();
             return cont;
