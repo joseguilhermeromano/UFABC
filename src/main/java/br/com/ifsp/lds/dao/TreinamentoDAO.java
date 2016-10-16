@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -23,7 +25,7 @@ public class TreinamentoDAO implements DAO<Treinamento> {
     
     //Método cadastra treinamento
     @Override
-    public void Cadastrar(Treinamento treina) {
+    public void Cadastrar(Treinamento treina,HttpServletRequest req, HttpServletResponse resp) {
         EntityManager entityManager = new JPAUtil().getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(treina);
@@ -33,7 +35,7 @@ public class TreinamentoDAO implements DAO<Treinamento> {
     
     //Método que atualiza as informações de treinamento
     @Override
-    public void Alterar(Treinamento obj){
+    public void Alterar(Treinamento obj,HttpServletRequest req, HttpServletResponse resp){
         try { 
             entityManager.getTransaction().begin();
             entityManager.merge(obj);
@@ -46,7 +48,7 @@ public class TreinamentoDAO implements DAO<Treinamento> {
     
     //Método consulta todos os treinametos cadastrados
     @Override
-    public ArrayList<Treinamento> ConsultarTudo(String string){
+    public ArrayList<Treinamento> ConsultarTudo(String string,HttpServletRequest req, HttpServletResponse resp){
         try { 
             entityManager.getTransaction().begin();
             TypedQuery<Treinamento> query;
@@ -70,7 +72,7 @@ public class TreinamentoDAO implements DAO<Treinamento> {
      
     //Método consulta treinamento específico 
     @Override
-    public Treinamento Consultar(int codigo) {
+    public Treinamento Consultar(int codigo,HttpServletRequest req, HttpServletResponse resp) {
         EntityManager entityManager = new JPAUtil().getEntityManager();
         Treinamento treina = entityManager.find(Treinamento.class, codigo);
         return treina;
@@ -79,7 +81,7 @@ public class TreinamentoDAO implements DAO<Treinamento> {
     
     //Método deleta treinamento específico
     @Override
-    public void Deletar(int codigo) {      
+    public void Deletar(int codigo,HttpServletRequest req, HttpServletResponse resp) {      
         try { 
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select t from Treinamento t where t.codigo=" + codigo);

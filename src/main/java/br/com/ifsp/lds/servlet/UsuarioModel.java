@@ -89,7 +89,7 @@ public class UsuarioModel implements Tarefa {
         usuario.setLogin(req.getParameter("login"));
         usuario.setSenha(req.getParameter("senha"));
         
-        userdao.Cadastrar(usuario);
+        userdao.Cadastrar(usuario,req,resp);
         
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }
@@ -102,7 +102,7 @@ public class UsuarioModel implements Tarefa {
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
         String nome = req.getParameter("nome") == null ? "": req.getParameter("nome");
-        List<Usuario> usuarios = userdao.ConsultarTudo(nome);
+        List<Usuario> usuarios = userdao.ConsultarTudo(nome,req,resp);
         req.setAttribute("usuarios", usuarios);
         for(Usuario u : usuarios)
             System.out.println(u.getNome());
@@ -117,7 +117,7 @@ public class UsuarioModel implements Tarefa {
     @Override
     public String excluir(HttpServletRequest req, HttpServletResponse resp) {
         int codigo = Integer.parseInt(req.getParameter("codigo"));
-        userdao.Deletar(codigo);
+        userdao.Deletar(codigo,req,resp);
         return this.listartudo(req, resp);
     }
     

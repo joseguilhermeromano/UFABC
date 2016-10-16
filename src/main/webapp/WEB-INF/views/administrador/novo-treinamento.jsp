@@ -56,7 +56,10 @@
                             </div>
 
                             <!-- BOTÃO DO FORMULÁRIO -->
-                            <center><input type="submit" value="Cadastrar"  class="btn btn-success button" /></center>
+                            <center>
+                                <a  class="btn btn-warning button" href="${baseURL}area-restrita/treinamento/listartudo">Voltar</a>
+                                <input type="submit" value="Cadastrar"  class="btn btn-success button" />
+                            </center>
                             
                         </form><!-- /FORMULÁRIO -->
                             
