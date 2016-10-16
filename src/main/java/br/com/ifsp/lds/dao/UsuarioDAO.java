@@ -85,7 +85,7 @@ public class UsuarioDAO implements DAO<Usuario> {
     public void Deletar(int codigo) {
         try { 
             entityManager.getTransaction().begin(); 
-            Query query = entityManager.createQuery("select u from Usuario u where u.codigo" + codigo);
+            Query query = entityManager.createQuery("select u from Usuario u where u.codigo=" + codigo);
             Usuario consulta = (Usuario) query.getResultList().get(0); 
             entityManager.remove(consulta); 
             entityManager.getTransaction().commit();
@@ -93,6 +93,5 @@ public class UsuarioDAO implements DAO<Usuario> {
             ex.printStackTrace(); 
             entityManager.getTransaction().rollback();
         }
-        entityManager.close();
     }
 }
