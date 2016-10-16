@@ -53,7 +53,7 @@ public class TreinamentoDAO implements DAO<Treinamento> {
             if(string.equals("")){
                 query = entityManager.createQuery("select t from Treinamento t",Treinamento.class);
             }else{
-                query = (TypedQuery<Treinamento>) entityManager.createQuery("select t from Treinamento t where t.nome='"+string+"'");
+                query = (TypedQuery<Treinamento>) entityManager.createQuery("select t from Treinamento t where t.nome like '%"+string+"%'");
             }
             ArrayList<Treinamento> cont = (ArrayList<Treinamento>) query.getResultList();
             entityManager.getTransaction().commit();
