@@ -73,7 +73,8 @@
                                             <td class="text-center">${usuario.telefone}</td>
                                             <td class="text-center"><a href="<c:url value="${baseURL}area-restrita/usuario/alterar">
                                                                         <c:param name="codigo" value="${usuario.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+                                            <td class="text-center"><a href="<c:url value="${baseURL}area-restrita/usuario/excluir">
+                                                                        <c:param name="codigo" value="${usuario.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
 
                                     </tr>
                                     </c:forEach>
