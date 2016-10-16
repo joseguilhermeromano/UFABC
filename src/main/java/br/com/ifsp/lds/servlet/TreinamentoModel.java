@@ -35,6 +35,7 @@ public class TreinamentoModel implements Tarefa {
 
     private static final String[] permAdmin = {""};
     private TreinamentoDAO daoTreino = new TreinamentoDAO();
+    private  ArrayList<Treinamento> treinamentos;
 
     @Override
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp) {
@@ -85,7 +86,7 @@ public class TreinamentoModel implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
-        ArrayList<Treinamento> treinamentos = daoTreino.ConsultarTudo("");
+        treinamentos = daoTreino.ConsultarTudo("");
         req.setAttribute("itens", treinamentos);
         return "/WEB-INF/views/administrador/treinamentos.jsp";
     }
@@ -96,8 +97,9 @@ public class TreinamentoModel implements Tarefa {
     }
 
     @Override
-    public String excluir(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String excluir(HttpServletRequest req, HttpServletResponse resp) { 
+        daoTreino.Deletar(Integer.parseInt(req.getParameter("codigo")));
+        return listartudo(req,resp);
     }
 
 }

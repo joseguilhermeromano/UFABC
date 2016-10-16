@@ -64,7 +64,10 @@
                                             <td>${item.nome}</td>
                                             <td>${item.descricao}</td>
                                             <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+                                            <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
+                                                onclick="setCodigo('${item.codigo}'); setLink('${baseURL}area-restrita/treinamento/excluir?codigo=');">
+                                                    <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
+                                            </td>
                                     </tr>
                                     </c:forEach>
                                 </tbody>
@@ -94,27 +97,6 @@
             </div>
         </div>
         <!-- /#page-content-wrapper -->
-        
-        <!-- Modal -->
-            <div id="myModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title">Confirmar</h4>
-                        </div>
-                        <div class="modal-body">
-                            
-                            <p>Deseja reamente fazer a Excusão do item?</p>
-                            <p class="text-warning"><small>Apos confirmar o serviço será excluso.</small></p>
-                        </div>
-                        <div class="modal-footer">
-                            <h:commandButton value="Cancelar" type="button" class="btn btn-default" />
-                            <h:commandButton value="Confirmar" class="btn btn-primary"/>
-                        </div>
-                    </div>
-                </div>
-            </div> 
             
         </div><!-- /Corpo da Página --> 
         <c:import url="../layout/footer.jsp"></c:import>

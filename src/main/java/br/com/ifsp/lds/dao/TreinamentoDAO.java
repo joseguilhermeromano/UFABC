@@ -76,16 +76,15 @@ public class TreinamentoDAO implements DAO<Treinamento> {
     @Override
     public void Deletar(int codigo) {      
         try { 
-            entityManager.getTransaction().begin(); 
+            entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select t from Treinamento t where t.codigo=" + codigo);
-            Treinamento treina = (Treinamento) query.getResultList().get(0); 
-            entityManager.remove(treina); 
+            Treinamento obj = (Treinamento) query.getResultList().get(0); 
+            entityManager.remove(obj); 
             entityManager.getTransaction().commit();
         } catch (Exception ex) { 
             ex.printStackTrace(); 
             entityManager.getTransaction().rollback();
         }
-        entityManager.close();
     }
     
 }

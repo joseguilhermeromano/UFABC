@@ -3,6 +3,48 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!-- Modal de Excluir -->
+<div id="modalExcluir" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Confirmar Exclusão</h4>
+            </div>
+            <div class="modal-body">
+
+                <p>Deseja realmente excluir este item?</p>
+                <p class="text-warning"><small>Após confirmar o item será excluído do banco de dados!</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <button class="btn btn-danger" onclick="Excluir();">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Modal de Editar -->
+<div id="modalEditar" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Confirmar Alterações</h4>
+            </div>
+            <div class="modal-body">
+
+                <p>Deseja realmente alterar as informações desse registro?</p>
+                <p class="text-warning"><small>Após confirmar o registro será atualizado!</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <button class="btn btn-danger" onclick="Editar();">Atualizar</button>
+            </div>
+        </div>
+    </div>
+</div> 
+
 <!-- jQuery -->
 <script src="${baseURL}bootstrap/js/jquery.min.js"></script>
 
@@ -15,6 +57,7 @@
 
 <!-- Menu Toggle Script -->
 <script>
+    
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
@@ -36,7 +79,24 @@
         $("#datepicker-13,#datepicker-14" ).datepicker("show");
         
     });
+    
 
+</script>
+<script text="javascript">
+    var codigo=0;
+    var link="";
+    
+    function setCodigo(codigo){
+        this.codigo=codigo;
+    }
+    
+    function setLink(link){
+        this.link=link;
+    }
+    
+    function Excluir(){
+        window.location=this.link+this.codigo;
+    }   
 </script>
 
 
