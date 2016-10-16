@@ -104,6 +104,8 @@ public class UsuarioModel implements Tarefa {
         String nome = req.getParameter("nome") == null ? "": req.getParameter("nome");
         List<Usuario> usuarios = userdao.ConsultarTudo(nome);
         req.setAttribute("usuarios", usuarios);
+        for(Usuario u : usuarios)
+            System.out.println(u.getNome());
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }
 
@@ -116,7 +118,7 @@ public class UsuarioModel implements Tarefa {
     public String excluir(HttpServletRequest req, HttpServletResponse resp) {
         int codigo = Integer.parseInt(req.getParameter("codigo"));
         userdao.Deletar(codigo);
-        return "/WEB-INF/views/administrador/usuarios.jsp";
+        return this.listartudo(req, resp);
     }
     
 }
