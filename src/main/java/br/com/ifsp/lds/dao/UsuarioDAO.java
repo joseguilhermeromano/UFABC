@@ -35,10 +35,17 @@ public class UsuarioDAO implements DAO<Usuario> {
 
     @Override
     public void Cadastrar(Usuario obj,HttpServletRequest req, HttpServletResponse resp) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(obj);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        try { 
+            entityManager.getTransaction().begin();
+            entityManager.persist(obj);
+            entityManager.getTransaction().commit();
+            entityManager.close();
+            req.setAttribute("sucesso", "Usuário cadastrado com sucesso!");
+        }catch(Exception ex){
+             ex.printStackTrace(); 
+            entityManager.getTransaction().rollback();
+            req.setAttribute("erro", "Não foi possível cadastrar o Usuário!");
+        }
     }
 
     @Override
@@ -77,9 +84,11 @@ public class UsuarioDAO implements DAO<Usuario> {
             entityManager.getTransaction().begin();
             entityManager.merge(obj);
             entityManager.getTransaction().commit();
+            req.setAttribute("sucesso", "Usuário atualizado com sucesso!");
         } catch (Exception ex) { 
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
+            req.setAttribute("erro", "Não foi possível atualizar o Usuário!");
         }
     }
 
@@ -91,9 +100,11 @@ public class UsuarioDAO implements DAO<Usuario> {
             Usuario consulta = (Usuario) query.getResultList().get(0); 
             entityManager.remove(consulta); 
             entityManager.getTransaction().commit();
+            req.setAttribute("sucesso", "Usuário excluído com sucesso!");
         } catch (Exception ex) { 
             ex.printStackTrace(); 
             entityManager.getTransaction().rollback();
+            req.setAttribute("erro", "Não foi possível excluir o Usuário!");
         }
     }
 }

@@ -95,6 +95,7 @@ public class TreinamentoModel implements Tarefa {
                 treinamento.setNome(req.getParameter("nome"));
                 treinamento.setDescricao(req.getParameter("descricao"));
                 daoTreino.Alterar(treinamento,req,resp);
+                req.setAttribute("treinamento", treinamento);
                 return "/WEB-INF/views/administrador/edita-treinamento.jsp";
             } else {
                 List<String> erros = validation.getTodosErros();

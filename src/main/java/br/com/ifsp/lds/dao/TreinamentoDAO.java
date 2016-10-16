@@ -26,11 +26,18 @@ public class TreinamentoDAO implements DAO<Treinamento> {
     //Método cadastra treinamento
     @Override
     public void Cadastrar(Treinamento treina,HttpServletRequest req, HttpServletResponse resp) {
-        EntityManager entityManager = new JPAUtil().getEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(treina);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        try{
+            EntityManager entityManager = new JPAUtil().getEntityManager();
+            entityManager.getTransaction().begin();
+            entityManager.persist(treina);
+            entityManager.getTransaction().commit();
+            entityManager.close();
+            req.setAttribute("sucesso", "O Treinamento foi cadastrado com sucesso!");
+        }catch(Exception ex){
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+            req.setAttribute("erro", "Não foi possível cadastrar o Treinamento!");
+        }
     }
     
     //Método que atualiza as informações de treinamento
@@ -40,9 +47,11 @@ public class TreinamentoDAO implements DAO<Treinamento> {
             entityManager.getTransaction().begin();
             entityManager.merge(obj);
             entityManager.getTransaction().commit();
+            req.setAttribute("sucesso", "O Treinamento foi atualizado com sucesso!");
         } catch (Exception ex) { 
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
+            req.setAttribute("erro", "Não foi possível atualizar o Treinamento!");
         }
     }
     
@@ -88,9 +97,11 @@ public class TreinamentoDAO implements DAO<Treinamento> {
             Treinamento obj = (Treinamento) query.getResultList().get(0); 
             entityManager.remove(obj); 
             entityManager.getTransaction().commit();
+            req.setAttribute("sucesso", "O Treinamento foi excluído com sucesso!");
         } catch (Exception ex) { 
             ex.printStackTrace(); 
             entityManager.getTransaction().rollback();
+            req.setAttribute("erro", "Não foi possível excluir o Treinamento!");
         }
     }
     

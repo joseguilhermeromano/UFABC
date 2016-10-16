@@ -28,6 +28,20 @@
                         </a><!-- /#Botão de exibir/ocultar menu lateral -->
                     <div class="col-lg-12">
                         <h3><span class="glyphicon glyphicon-list"></span> Usuários</h3><hr>
+                        
+                        <!-- Mensagens sucesso/erro -->
+                        <c:if test="${not empty sucesso}">
+                            <div class="alert alert-success" role="alert">
+                                  ${sucesso}
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty erro}">
+                            <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                            </div>
+                        </c:if>
+                        <!-- / Mensagens sucesso/erro -->
+                        
                         <div class="row">
                             <div class="col-sm-6">
                                 <a class="btn btn-default visible-xs" href="${baseURL}area-restrita/usuario/novousuario"><span class="glyphicon glyphicon-plus" ></span> Novo Usuário</a><br>
