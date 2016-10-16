@@ -8,6 +8,7 @@ package br.com.ifsp.lds.servlet;
 import br.com.ifsp.lds.beans.Usuario;
 import br.com.ifsp.lds.dao.UsuarioDAO;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -100,7 +101,11 @@ public class UsuarioModel implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
-        
+        String nome = req.getParameter("nome") == null ? "": req.getParameter("nome");
+        List<Usuario> usuarios = userdao.ConsultarTudo(nome);
+        req.setAttribute("usuarios", usuarios);
+        for(Usuario u : usuarios)
+            System.out.println(u.getNome());
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }
 
@@ -111,7 +116,9 @@ public class UsuarioModel implements Tarefa {
 
     @Override
     public String excluir(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int codigo = Integer.parseInt(req.getParameter("codigo"));
+        userdao.Deletar(codigo);
+        return this.listartudo(req, resp);
     }
     
 }
