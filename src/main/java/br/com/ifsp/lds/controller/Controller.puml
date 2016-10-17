@@ -1,0 +1,9 @@
+@startuml
+
+class Controller <? extends HttpServlet>{
+
+    #service(req:HttpServletRequest , resp:HttpServletResponse ):void
+        
+}
+
+@enduml

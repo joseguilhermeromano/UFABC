@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- Captura base da url da requisição -->
-<c:set var="baseURL" value="${pageContext.request.requestURL.substring(0, pageContext.request.requestURL.length() - pageContext.request.requestURI.length())}${pageContext.request.contextPath}/" />
+
  <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <div class="borda"><!-- borda -->
@@ -13,19 +12,19 @@
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}administrador/index"><span class="glyphicon glyphicon-home"></span> Início</a>
+                    <a href="${baseURL}area-restrita/usuario/inicio"><span class="glyphicon glyphicon-home"></span> Início</a>
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}administrador/perfil"><span class="glyphicon glyphicon-cog"></span> Perfil</a>
+                    <a href="${baseURL}area-restrita/usuario/perfil"><span class="glyphicon glyphicon-cog"></span> Perfil</a>
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}administrador/usuarios"><span class="glyphicon glyphicon-list"></span> Usuários</a>
+                    <a href="${baseURL}area-restrita/usuario/listartudo"><span class="glyphicon glyphicon-list"></span> Usuários</a>
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}administrador/treinamentos"><span class="glyphicon glyphicon-list"></span> Treinamentos</a>
+                    <a href="${baseURL}area-restrita/treinamento/listartudo"><span class="glyphicon glyphicon-list"></span> Treinamentos</a>
                 </li>
                 <hr>
                 <li>

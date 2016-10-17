@@ -5,6 +5,15 @@
  */
 package br.com.ifsp.lds.servlet;
 
+import br.com.ifsp.lds.beans.Treinamento;
+import br.com.ifsp.lds.beans.Usuario;
+import br.com.ifsp.lds.dao.TreinamentoDAO;
+import br.com.ifsp.lds.dao.UsuarioDAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,9 +34,44 @@ public class TreinamentoModel implements Tarefa {
         return this.permAdmin;
     }
     
+    public String novotreinamento(HttpServletRequest req, HttpServletResponse resp){
+        return "/WEB-INF/views/administrador/novo-treinamento.jsp";
+    }
+    
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/novo-treinamento.jsp";
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+         SimpleDateFormat horaFormato = new SimpleDateFormat("HH:mm:ss");
+        Treinamento treinamento = new Treinamento();
+        try {
+            Date dataIni = formato.parse(req.getParameter("dataTerm"));
+        } catch (ParseException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            treinamento.setDatafim((Date) formato.parse(req.getParameter("dataTerm")));
+        } catch (ParseException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            treinamento.setDatainicio((Date) formato.parse(req.getParameter("dataIni")));
+        } catch (ParseException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            treinamento.setHora((Date) horaFormato.parse(req.getParameter("hora")));
+        } catch (ParseException ex) {
+            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        treinamento.setDescricao(req.getParameter("descricao"));
+        treinamento.setTurma(req.getParameter("turma"));
+        treinamento.setLaboratorio(req.getParameter("lab"));
+        Usuario usuario = new UsuarioDAO().Consultar(2);
+        System.out.println("email:" + usuario.getEmail());
+        treinamento.setUsuario(usuario);
+        TreinamentoDAO daoTreino = new TreinamentoDAO();
+        daoTreino.Cadastrar(treinamento);
+        return "/WEB-INF/views/administrador/treinamentos.jsp";
         
     }
 
@@ -38,7 +82,7 @@ public class TreinamentoModel implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "/WEB-INF/views/administrador/treinamentos.jsp";
     }
 
     @Override

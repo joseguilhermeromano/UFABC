@@ -28,6 +28,18 @@ public class UsuarioModel implements Tarefa {
         return this.permAdmin;
     }
     
+    public String inicio(HttpServletRequest req, HttpServletResponse resp){
+        return "/WEB-INF/views/administrador/index.jsp";
+    }
+    
+    public String perfil(HttpServletRequest req, HttpServletResponse resp){
+        return "/WEB-INF/views/administrador/perfil.jsp";
+    }
+    
+    public String novousuario(HttpServletRequest req, HttpServletResponse resp){
+        return "/WEB-INF/views/administrador/novo-usuario.jsp";
+    }
+    
     public String login(HttpServletRequest req, HttpServletResponse resp) {
         String senha = req.getParameter("senha");
         String login = req.getParameter("username");
@@ -43,14 +55,35 @@ public class UsuarioModel implements Tarefa {
             else 
                 segmento = "colaborador";
             
-            return "/WEB-INF/views/" + segmento +"/index.jsp";
+            return "/WEB-INF/views/" +segmento +"/index.jsp";
         }
         return "/index.jsp";
     }
 
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Usuario usuario = new Usuario();
+//        
+        usuario.setNome(req.getParameter("nome"));
+        usuario.setCpf(req.getParameter("cpf"));
+        usuario.setRg(req.getParameter("rg"));
+        usuario.setEmail(req.getParameter("email"));
+        usuario.setTelefone(req.getParameter("telefone"));
+        usuario.setEndereco(req.getParameter("endereco"));
+        usuario.setNumero(req.getParameter("numero"));
+        usuario.setBairro(req.getParameter("bairro"));
+        usuario.setCidade(req.getParameter("cidade"));
+        usuario.setComplemento(req.getParameter("complemento"));
+        usuario.setEspecialidade(req.getParameter("especialidade"));
+        usuario.setAdministrador(Integer.parseInt(req.getParameter("permissao")));
+        usuario.setLogin(req.getParameter("login"));
+        usuario.setSenha(req.getParameter("senha"));
+        
+        UsuarioDAO userdao = new UsuarioDAO();
+        
+        userdao.Cadastrar(usuario);
+        
+        return "/WEB-INF/views/administrador/usuarios.jsp";
     }
 
     @Override
@@ -60,7 +93,7 @@ public class UsuarioModel implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "/WEB-INF/views/administrador/usuarios.jsp";
     }
 
     @Override

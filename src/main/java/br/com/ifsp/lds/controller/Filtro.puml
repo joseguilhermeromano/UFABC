@@ -1,0 +1,10 @@
+@startuml
+
+class Filtro<? implements Filter>{
+   +destroy():void
+   +init( filterConfig:FilterConfig):void
+   +doFilter(request:ServletRequest , response:ServletResponse , chain:FilterChain ) :void
+   +usuarioLogado(req:HttpServletRequest ):boolean
+   +isAdmin(req:HttpServletRequest ):boolean
+}
+@enduml

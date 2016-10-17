@@ -5,6 +5,8 @@
  */
 package br.com.ifsp.lds.beans;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -14,141 +16,215 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "usuario")
+
+
 public class Usuario {
     
     @Id
-    @GeneratedValue
-    private int cola_cd;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="usua_cd")
+    private int codigo;
     
-//    @Column(name = "usu_nm", nullable = false, length = 50)
-//    private String nome;
-//    
-//    @Column(name = "usu_id", nullable = false)
-//    private int ID;
-//    
-//    @Column(name = "usu_espe", nullable = false, length = 80)
-//    private String especialidade;
-//    
-//    @Column(name = "usu_setor", nullable = false, length = 80)
-//    private String setor;
-//    
-//    @Column(name = "usu_email", nullable = false, length = 100)
-//    private String email;
-//    
-//    @Column(name = "usu_phone", nullable = false, length = 20)
-//    private String telefone;
-//    
-    @Column(name = "usu_isAdmin")
+    @Column(name = "usua_nm")
+    private String nome;
+    
+    @Column(name = "usua_cpf")
+    private String cpf;
+    
+    @Column(name = "usua_rg")
+    private String rg;
+    
+    @Column(name = "usua_email")
+    private String email;
+    
+    @Column(name = "usua_telefone")
+    private String telefone;
+    
+    @Column(name = "usua_endereco")
+    private String endereco;
+    
+    @Column(name = "usua_numero")
+    private String numero;
+    
+    @Column(name = "usua_bairro")
+    private String bairro;
+    
+    @Column(name = "usua_cidade")
+    private String cidade;
+    
+    @Column(name = "usua_complemento")
+    private String complemento;
+    
+    @Column(name = "usua_espe")
+    private String especialidade;
+    
+    @Column(name = "usua_isAdmin")
     private int administrador;
-//    
-///*  @OneToMany(targetEntity = Treinamento.class, cascade=CascadeType.MERGE)
-//    @JoinColumn(name="usu_trei_cd")
-//    private Treinamento treino;*/
-//    
-    @Column(name = "usu_login")
+    
+   
+    @OneToMany(mappedBy = "usuario")
+    private List<Treinamento> treinamentos;
+    
+    @Column(name = "usua_login")
     private String login;
     
-    @Column(name = "usu_senh")
+    @Column(name = "usua_senha")
     private String senha;
-    
+
     /**
      * @return the cola_cd
      */
-    public int getCola_cd() {
-        return cola_cd;
+    public int getCodigo() {
+        return codigo;
     }
 
     /**
-     * @param cola_cd the cola_cd to set
+     * @param codigo the cola_cd to set
      */
-    public void setCola_cd(int cola_cd) {
-        this.cola_cd = cola_cd;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
-//
-//    /**
-//     * @return the nome
-//     */
-//    public String getNome() {
-//        return nome;
-//    }
-//
-//    /**
-//     * @param nome the nome to set
-//     */
-//    public void setNome(String nome) {
-//        this.nome = nome;
-//    }
-//
-//    /**
-//     * @return the ID
-//     */
-//    public int getID() {
-//        return ID;
-//    }
-//
-//    /**
-//     * @param ID the ID to set
-//     */
-//    public void setID(int ID) {
-//        this.ID = ID;
-//    }
-//
-//    /**
-//     * @return the especialidade
-//     */
-//    public String getEspecialidade() {
-//        return especialidade;
-//    }
-//
-//    /**
-//     * @param especialidade the especialidade to set
-//     */
-//    public void setEspecialidade(String especialidade) {
-//        this.especialidade = especialidade;
-//    }
-//
-//    /**
-//     * @return the setor
-//     */
-//    public String getSetor() {
-//        return setor;
-//    }
-//
-//    /**
-//     * @param setor the setor to set
-//     */
-//    public void setSetor(String setor) {
-//        this.setor = setor;
-//    }
-//
-//    /**
-//     * @return the email
-//     */
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    /**
-//     * @param email the email to set
-//     */
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-//
-//    /**
-//     * @return the telefone
-//     */
-//    public String getTelefone() {
-//        return telefone;
-//    }
-//
-//    /**
-//     * @param telefone the telefone to set
-//     */
-//    public void setTelefone(String telefone) {
-//        this.telefone = telefone;
-//    }
-//
+
+    /**
+     * @return the nome
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * @param nome the nome to set
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    /**
+     * @return the cpf
+     */
+    public String getCpf() {
+        return cpf;
+    }
+
+    /**
+     * @param cpf the cpf to set
+     */
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    /**
+     * @return the rg
+     */
+    public String getRg() {
+        return rg;
+    }
+
+    /**
+     * @param rg the rg to set
+     */
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the endereco
+     */
+    public String getEndereco() {
+        return endereco;
+    }
+
+    /**
+     * @param endereco the endereco to set
+     */
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    /**
+     * @return the numero
+     */
+    public String getNumero() {
+        return numero;
+    }
+
+    /**
+     * @param numero the numero to set
+     */
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    /**
+     * @return the bairro
+     */
+    public String getBairro() {
+        return bairro;
+    }
+
+    /**
+     * @param bairro the bairro to set
+     */
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    /**
+     * @return the cidade
+     */
+    public String getCidade() {
+        return cidade;
+    }
+
+    /**
+     * @param cidade the cidade to set
+     */
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    /**
+     * @return the complemento
+     */
+    public String getComplemento() {
+        return complemento;
+    }
+
+    /**
+     * @param complemento the complemento to set
+     */
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    /**
+     * @return the especialidade
+     */
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    /**
+     * @param especialidade the especialidade to set
+     */
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
+
     /**
      * @return the administrador
      */
@@ -162,21 +238,7 @@ public class Usuario {
     public void setAdministrador(int administrador) {
         this.administrador = administrador;
     }
-//
-//    /**
-//     * @return the treino
-//     */
-///*    public Treinamento getTreino() {
-//        return treino;
-//    }
-//
-//    /**
-//     * @param treino the treino to set
-//     */
-//   /* public void setTreino(Treinamento treino) {
-//        this.treino = treino;
-//    }/*
-//
+
     /**
      * @return the login
      */
@@ -204,6 +266,33 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
+
+    /**
+     * @return the treinamentos
+     */
+    public List<Treinamento> getTreinamentos() {
+        return treinamentos;
+    }
+
+    /**
+     * @param treinamentos the treinamentos to set
+     */
+    public void setTreinamentos(List<Treinamento> treinamentos) {
+        this.treinamentos = treinamentos;
+    }
+
+    /**
+     * @return the telefone
+     */
+    public String getTelefone() {
+        return telefone;
+    }
+
+    /**
+     * @param telefone the telefone to set
+     */
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+      
 }
