@@ -84,7 +84,7 @@ public class UsuarioModel implements Tarefa {
         usuario.setBairro(req.getParameter("bairro"));
         usuario.setCidade(req.getParameter("cidade"));
         usuario.setComplemento(req.getParameter("complemento"));
-        usuario.setEspecialidade(req.getParameter("especialidade"));
+        //usuario.setEspecialidade(req.getParameter("especialidade"));
         usuario.setAdministrador(Integer.parseInt(req.getParameter("permissao")));
         usuario.setLogin(req.getParameter("login"));
         usuario.setSenha(req.getParameter("senha"));
