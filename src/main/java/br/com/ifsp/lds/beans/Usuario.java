@@ -61,10 +61,6 @@ public class Usuario {
     @Column(name = "usua_isAdmin")
     private int administrador;
     
-   
-    @OneToMany(mappedBy = "usuario")
-    private List<Treinamento> treinamentos;
-    
     @Column(name = "usua_login")
     private String login;
     
@@ -265,20 +261,6 @@ public class Usuario {
      */
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    /**
-     * @return the treinamentos
-     */
-    public List<Treinamento> getTreinamentos() {
-        return treinamentos;
-    }
-
-    /**
-     * @param treinamentos the treinamentos to set
-     */
-    public void setTreinamentos(List<Treinamento> treinamentos) {
-        this.treinamentos = treinamentos;
     }
 
     /**

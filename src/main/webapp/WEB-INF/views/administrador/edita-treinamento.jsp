@@ -30,64 +30,51 @@
                         <!-- AQUI COMEÇA O CONTEÚDO DA PÁGINA -->
                         <h3><span class="glyphicon glyphicon-pencil"></span> Alteração de Treinamento</h3><hr>
                         
-                        <form action="" method=""><!--FORM -->
+                        
+                        <!-- Mensagens sucesso/erro -->
+                        <c:if test="${not empty erros}">
+                            <c:forEach var="erro" items="${erros}}">
+                                <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                                </div>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${not empty sucesso}">
+                            <div class="alert alert-success" role="alert">
+                                  ${sucesso}
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty erro}">
+                            <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                            </div>
+                        </c:if>
+                        <!-- / Mensagens sucesso/erro -->
+                         
+                        <form action="${baseURL}area-restrita/treinamento/alterar" method="POST"><!--FORM -->
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    <b><label for="nome">Nome</label></b>
+                                    <input type="hidden" name="codigo" value="${treinamento.codigo}" />
+                                    <input type="text" name="nome" value="${treinamento.nome}" placeholder="Nome do Treinamento" class="form-control estilo-input"/>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <b><label for="descricao">Descrição</label></b>
-                                    <input type="text" name="" value="" placeholder="Descrição do Treinamento..." class="form-control estilo-input"  />
+                                    <textarea name="descricao"  rows="10" placeholder="Descrição do Treinamento..." class="form-control estilo-input"/>${treinamento.descricao}</textarea>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                    <b><label for="datainicio">Data de Início</label></b>
-                                    <input type="text" name="" value="" placeholder="Data de Início" class="form-control estilo-input"  />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                    <b><label for="datatermino">Data de Término</label></b>
-                                    <input type="text" name="" value="" placeholder="Data de Término" class="form-control estilo-input"  />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                    <b><label for="datatermino">Horário</label></b>
-                                    <input type="text" name="" value="" placeholder="ex: 8:00 h às 9:00 h" class="form-control estilo-input"  />
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <b><label for="nome">Turma</label></b>
-                                    <input type="text" name="" value="" placeholder="ex: Turma A ADS Noturno 2º Semestre" class="form-control estilo-input"  />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                    <b><label for="cpf">Laboratório</label></b>
-                                    <input type="text" name="" value="" placeholder="ex: labF010" class="form-control estilo-input"  />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                    <b><label for="nome">Responsável</label></b>
-                                    <input type="text" name="" value="" placeholder="Responsável" class="form-control estilo-input"  />
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- BOTÃO DO FORMULÁRIO -->
-                            <center><input type="submit" value="Atualizar"  class="btn btn-success button" /></center>
+                            <center>
+                                <a  class="btn btn-warning button" href="${baseURL}area-restrita/treinamento/listartudo">Voltar</a>
+                                <input type="submit" value="Atualizar"  class="btn btn-success button" />
+                            </center>
                             
                         </form><!-- /FORMULÁRIO -->
                             

@@ -7,6 +7,8 @@ package br.com.ifsp.lds.servlet;
 
 import br.com.ifsp.lds.beans.Usuario;
 import br.com.ifsp.lds.dao.UsuarioDAO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,6 +24,7 @@ public class UsuarioModel implements Tarefa {
     * apenas para usuários que são administradores do sistema.
     */
     private static final String[] permAdmin = {""};
+    private UsuarioDAO userdao = new UsuarioDAO();
     
     @Override
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp){
@@ -41,14 +44,16 @@ public class UsuarioModel implements Tarefa {
     }
     
     public String login(HttpServletRequest req, HttpServletResponse resp) {
-        String senha = req.getParameter("senha");
-        String login = req.getParameter("username");
-        
+//        String senha = req.getParameter("senha");
+//        String login = req.getParameter("username");
+        /*Código temporário para desativar login*/
+        String senha="teste";
+        String login="teste";
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = usuarioDAO.buscaUsuario(login);
         if(usuario != null && usuario.getSenha().equals(senha)) {
             HttpSession session =  req.getSession();
-            session.setAttribute("sessaoUsuario", usuario);
+            session.setAttribute("usuarioLogado", usuario);
             String segmento;
             if(usuario.getAdministrador() == 1) 
                 segmento = "administrador";
@@ -57,6 +62,11 @@ public class UsuarioModel implements Tarefa {
             
             return "/WEB-INF/views/" +segmento +"/index.jsp";
         }
+        return "/index.jsp";
+    }
+    
+    public String logoff(HttpServletRequest req, HttpServletResponse resp){
+        req.getSession().removeAttribute("usuarioLogado");
         return "/index.jsp";
     }
 
@@ -79,9 +89,7 @@ public class UsuarioModel implements Tarefa {
         usuario.setLogin(req.getParameter("login"));
         usuario.setSenha(req.getParameter("senha"));
         
-        UsuarioDAO userdao = new UsuarioDAO();
-        
-        userdao.Cadastrar(usuario);
+        userdao.Cadastrar(usuario,req,resp);
         
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }
@@ -93,6 +101,11 @@ public class UsuarioModel implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
+        String nome = req.getParameter("nome") == null ? "": req.getParameter("nome");
+        List<Usuario> usuarios = userdao.ConsultarTudo(nome,req,resp);
+        req.setAttribute("usuarios", usuarios);
+        for(Usuario u : usuarios)
+            System.out.println(u.getNome());
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }
 
@@ -103,7 +116,9 @@ public class UsuarioModel implements Tarefa {
 
     @Override
     public String excluir(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int codigo = Integer.parseInt(req.getParameter("codigo"));
+        userdao.Deletar(codigo,req,resp);
+        return this.listartudo(req, resp);
     }
     
 }

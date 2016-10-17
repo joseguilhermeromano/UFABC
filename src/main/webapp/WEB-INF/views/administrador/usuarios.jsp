@@ -28,6 +28,20 @@
                         </a><!-- /#Botão de exibir/ocultar menu lateral -->
                     <div class="col-lg-12">
                         <h3><span class="glyphicon glyphicon-list"></span> Usuários</h3><hr>
+                        
+                        <!-- Mensagens sucesso/erro -->
+                        <c:if test="${not empty sucesso}">
+                            <div class="alert alert-success" role="alert">
+                                  ${sucesso}
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty erro}">
+                            <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                            </div>
+                        </c:if>
+                        <!-- / Mensagens sucesso/erro -->
+                        
                         <div class="row">
                             <div class="col-sm-6">
                                 <a class="btn btn-default visible-xs" href="${baseURL}area-restrita/usuario/novousuario"><span class="glyphicon glyphicon-plus" ></span> Novo Usuário</a><br>
@@ -61,28 +75,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="primeira-cor">
+                                    <c:forEach items="${usuarios}" var="usuario" varStatus="loop">
+                                    <tr>    
 
-                                            <td>Ana Maria</td>
-                                            <td class="text-center">Administrador(a)</td>
-                                            <td class="text-center">Informática</td>
-                                            <td class="text-center">ana@ana.com.br</td>
-                                            <td class="text-center">(11) 98765-4321</td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-
-                                    </tr>
-                                    <tr class="segunda-cor">
-
-                                            <td>Ana Maria</td>
-                                            <td class="text-center">Administrador(a)</td>
-                                            <td class="text-center">Informática</td>
-                                            <td class="text-center">ana@ana.com.br</td>
-                                            <td class="text-center">(11) 98765-4321</td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+                                            <td>${usuario.nome}</td>
+                                            <td class="text-center"><c:if test="${usuario.administrador == 1}">Administrador(a)</c:if>
+                                                                     <c:if test="${usuario.administrador == 0}">Colaborador</c:if></td>
+                                            <td class="text-center">${usuario.especialidade}</td>
+                                            <td class="text-center">${usuario.email}</td>
+                                            <td class="text-center">${usuario.telefone}</td>
+                                            <td class="text-center">
+                                                <a href="<c:url value="${baseURL}area-restrita/usuario/alterar">
+                                                <c:param name="codigo" value="${usuario.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
+                                            </td> 
+                                            <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
+                                                onclick="setCodigo('${usuario.codigo}'); setLink('${baseURL}area-restrita/usuario/excluir?codigo=');">
+                                                    <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
+                                            </td>
 
                                     </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div><!-- /TABELA-->

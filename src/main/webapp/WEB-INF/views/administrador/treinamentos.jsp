@@ -27,22 +27,38 @@
                         </a><!-- /#Botão de exibir/ocultar menu lateral -->
                     <div class="col-lg-12">
                         <h3><span class="glyphicon glyphicon-list"></span> Treinamentos</h3><hr>
+                        
+                        <!-- Mensagens sucesso/erro -->
+                        <c:if test="${not empty sucesso}">
+                            <div class="alert alert-success" role="alert">
+                                  ${sucesso}
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty erro}">
+                            <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                            </div>
+                        </c:if>
+                        <!-- / Mensagens sucesso/erro -->
+                        
                         <div class="row">
                             <div class="col-sm-6">
-                                <a class="btn btn-default visible-xs" href="${baseURL}area-restrita/treinamento/novotreinamento"><span class="glyphicon glyphicon-plus" ></span> Novo Treinamento</a><br>
+                                <a class="btn btn-default visible-xs" href="${baseURL}area-restrita/treinamento/cadastrar"><span class="glyphicon glyphicon-plus" ></span> Novo Treinamento</a><br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
-                               <div class="input-group">
-                                 <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Descrição de Treinamento...">
-                                 <span class="input-group-btn">
-                                     <button class="btn btn-default estilo-botao-busca" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                                 </span>
-                               </div><!-- /input-group -->
+                               <form method="GET" action="${baseURL}area-restrita/treinamento/buscar"> 
+                                    <div class="input-group">
+                                      <input type="text" name="busca" class="form-control estilo-botao-busca" placeholder="Buscar por Nome de Treinamento...">
+                                      <span class="input-group-btn">
+                                          <button class="btn btn-default estilo-botao-busca" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                      </span>
+                                    </div><!-- /input-group -->
+                               </form>
                              </div><!-- /.col-lg-6 -->
                             <div class="col-md-6 col-sm-6">
-                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/treinamento/novotreinamento" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Treinamento</a>
+                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/treinamento/cadastrar" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Treinamento</a>
                             </div>
                         </div><!-- /row -->
                         <br><br>
@@ -50,39 +66,29 @@
                             <table class="table ls-table" id="tabela1">
                                 <thead>
                                     <tr>
-                                            <th>Descrição</th>
-                                            <th class="text-center">Início</th>
-                                            <th class="text-center">Término</th>
-                                            <th class="text-center">Horário</th>
-                                            <th class="text-center">Responsável</th>
-                                            <th class="text-center">Detalhar/Alterar</th>
-                                            <th class="text-center">Excluir</th>
+                                            <th class="text-center col-md-1">Código</th>
+                                            <th class="col-md-3">Nome</th>
+                                            <th class="col-md-6">Descrição</th>
+                                            <th class="text-center col-md-1">Detalhar/Alterar</th>
+                                            <th class="text-center col-md-1">Excluir</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="primeira-cor">
-
-                                            <td>Configuração de Servidor DNS</td>
-                                            <td class="text-center">23/09/2016</td>
-                                            <td class="text-center">24/09/2016</td>
-                                            <td class="text-center">8:00 às 10:00</td>
-                                            <td class="text-center">Claudio Marques</td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-
+                                    <c:forEach var="item" items="${itens}">
+                                    <tr>
+                                            <td class="text-center">${item.codigo}</td>
+                                            <td>${item.nome}</td>
+                                            <td>${item.descricao}</td>
+                                            <td class="text-center">
+                                                <a href="<c:url value="${baseURL}area-restrita/treinamento/alterar">
+                                                <c:param name="codigo" value="${item.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
+                                            </td>
+                                            <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
+                                                onclick="setCodigo('${item.codigo}'); setLink('${baseURL}area-restrita/treinamento/excluir?codigo=');">
+                                                    <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
+                                            </td>
                                     </tr>
-                                    <tr class="segunda-cor">
-
-                                            
-                                            <td>Configuração de Servidor DNS</td>
-                                            <td class="text-center">23/09/2016</td>
-                                            <td class="text-center">24/09/2016</td>
-                                            <td class="text-center">8:00 às 10:00</td>
-                                            <td class="text-center">Claudio Marques</td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                                            <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-
-                                    </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div><!-- /TABELA-->

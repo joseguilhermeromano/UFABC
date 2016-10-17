@@ -208,11 +208,7 @@ h3{
     border-top: 1px solid #00CD66; 
 }
 
-#tabela1 > tbody > tr.primeira-cor{
-    background-color: white; 
-}
-
-#tabela1 > tbody > tr.segunda-cor{
+#tabela1 > tbody > tr:nth-child(even){
     background-color: #E8E8E8; 
 }
 

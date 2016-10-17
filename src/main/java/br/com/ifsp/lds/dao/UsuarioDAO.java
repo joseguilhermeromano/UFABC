@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -32,15 +34,22 @@ public class UsuarioDAO implements DAO<Usuario> {
     }
 
     @Override
-    public void Cadastrar(Usuario obj) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(obj);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+    public void Cadastrar(Usuario obj,HttpServletRequest req, HttpServletResponse resp) {
+        try { 
+            entityManager.getTransaction().begin();
+            entityManager.persist(obj);
+            entityManager.getTransaction().commit();
+            entityManager.close();
+            req.setAttribute("sucesso", "Usuário cadastrado com sucesso!");
+        }catch(Exception ex){
+             ex.printStackTrace(); 
+            entityManager.getTransaction().rollback();
+            req.setAttribute("erro", "Não foi possível cadastrar o Usuário!");
+        }
     }
 
     @Override
-    public ArrayList<Usuario> ConsultarTudo(String string) {
+    public ArrayList<Usuario> ConsultarTudo(String string,HttpServletRequest req, HttpServletResponse resp) {
         try { 
             if(string.equals("")){
                 entityManager.getTransaction().begin(); 
@@ -49,7 +58,7 @@ public class UsuarioDAO implements DAO<Usuario> {
                 entityManager.getTransaction().commit();
                 return consulta;
             }else{
-                Query query = entityManager.createQuery("select u from Usuario u where u.nome'" +string+"'");
+                Query query = entityManager.createQuery("select u from Usuario u where u.nome='" +string+"'");
                 ArrayList<Usuario> consulta = (ArrayList<Usuario>) query.getResultList();
                 return consulta;
             }
@@ -64,35 +73,38 @@ public class UsuarioDAO implements DAO<Usuario> {
     }
 
     @Override
-    public Usuario Consultar(int codigo) {
+    public Usuario Consultar(int codigo,HttpServletRequest req, HttpServletResponse resp) {
         Usuario consulta = entityManager.find(Usuario.class, codigo);
         return consulta;
     }
 
     @Override
-    public void Alterar(Usuario obj) {
+    public void Alterar(Usuario obj,HttpServletRequest req, HttpServletResponse resp) {
         try { 
             entityManager.getTransaction().begin();
             entityManager.merge(obj);
             entityManager.getTransaction().commit();
+            req.setAttribute("sucesso", "Usuário atualizado com sucesso!");
         } catch (Exception ex) { 
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
+            req.setAttribute("erro", "Não foi possível atualizar o Usuário!");
         }
     }
 
     @Override
-    public void Deletar(int codigo) {
+    public void Deletar(int codigo,HttpServletRequest req, HttpServletResponse resp) {
         try { 
             entityManager.getTransaction().begin(); 
-            Query query = entityManager.createQuery("select u from Usuario u where u.codigo" + codigo);
+            Query query = entityManager.createQuery("select u from Usuario u where u.codigo=" + codigo);
             Usuario consulta = (Usuario) query.getResultList().get(0); 
             entityManager.remove(consulta); 
             entityManager.getTransaction().commit();
+            req.setAttribute("sucesso", "Usuário excluído com sucesso!");
         } catch (Exception ex) { 
             ex.printStackTrace(); 
             entityManager.getTransaction().rollback();
+            req.setAttribute("erro", "Não foi possível excluir o Usuário!");
         }
-        entityManager.close();
     }
 }
