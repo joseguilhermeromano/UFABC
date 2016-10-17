@@ -57,7 +57,7 @@
                                </div><!-- /input-group -->
                              </div><!-- /.col-lg-6 -->
                             <div class="col-md-6 col-sm-6">
-                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/usuario/novousuario" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
+                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/usuario/cadastrar" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
                             </div>
                         </div><!-- /row -->
                         <br><br>
