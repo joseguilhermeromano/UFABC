@@ -61,7 +61,8 @@ public class Usuario {
     @Column(name = "usua_isAdmin")
     private int administrador;
     
-    @Column(name = "usua_login")
+    
+    @Column(name = "usua_login",unique = true)
     private String login;
     
     @Column(name = "usua_senha")
