@@ -20,14 +20,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TreinamentoDAO implements DAO<Treinamento> {
     
-    EntityManager entityManager = new JPAUtil().getEntityManager();
+    private EntityManager entityManager = new JPAUtil().getEntityManager();
     
     
     //Método cadastra treinamento
     @Override
     public void Cadastrar(Treinamento treina,HttpServletRequest req, HttpServletResponse resp) {
         try{
-            EntityManager entityManager = new JPAUtil().getEntityManager();
             entityManager.getTransaction().begin();
             entityManager.persist(treina);
             entityManager.getTransaction().commit();
@@ -82,7 +81,6 @@ public class TreinamentoDAO implements DAO<Treinamento> {
     //Método consulta treinamento específico 
     @Override
     public Treinamento Consultar(int codigo,HttpServletRequest req, HttpServletResponse resp) {
-        EntityManager entityManager = new JPAUtil().getEntityManager();
         Treinamento treina = entityManager.find(Treinamento.class, codigo);
         return treina;
     } 
