@@ -1,0 +1,13 @@
+@startuml
+class FormValidation {
+   
+    - erros:ArrayList<String>
+    
+    #isInteger(campo:String, stri:String):Boolean
+    #isValidEmail(campo:String, stri:String):Boolean
+    #isValidDate(campo:String, dataV:String):Boolean
+    +required(campo:String,dado:String ):Boolean
+    +isValidHour(campo:String,dataV:String):Boolean
+    #getErros():List<String>
+	}
+@enduml

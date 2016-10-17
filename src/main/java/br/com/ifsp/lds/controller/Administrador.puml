@@ -2,7 +2,7 @@
 
 class Administrador<? extends HttpServlet> {
 
-    #service(req:HttpServletRequest ,  resp:HttpServletResponse):void
+    #service(req:HttpServletRequest ,  resp:HttpServletResponse)
 
 }
 

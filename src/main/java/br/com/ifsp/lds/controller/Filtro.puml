@@ -1,9 +1,12 @@
 @startuml
 
 class Filtro<? implements Filter>{
-   +destroy():void
-   +init( filterConfig:FilterConfig):void
-   +doFilter(request:ServletRequest , response:ServletResponse , chain:FilterChain ) :void
+   +destroy()
+   +init( filterConfig:FilterConfig)
+   +doFilter(request:ServletRequest , response:ServletResponse , chain:FilterChain ) 
+   - entityManager:EntityManager
+   
+   
    +usuarioLogado(req:HttpServletRequest ):boolean
    +isAdmin(req:HttpServletRequest ):boolean
 }
