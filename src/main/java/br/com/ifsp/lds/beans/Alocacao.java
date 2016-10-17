@@ -6,11 +6,15 @@
 package br.com.ifsp.lds.beans;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,6 +24,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "alocacao")
 public class Alocacao {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "aloc_cd") 
@@ -55,10 +60,12 @@ public class Alocacao {
     @Column(name = "aloc_sabado")
     private boolean sabado;
     
-    @Column(name = "aloc_usua_cd")
+    @ManyToOne()
+    @JoinColumn(name = "aloc_usua_cd")
     private Usuario usuario;
     
-    @Column(name = "aloc_trei_cd")
+    @ManyToOne
+    @JoinColumn(name = "aloc_trei_cd")
     private Treinamento treinamento;
 
     /**
@@ -225,14 +232,14 @@ public class Alocacao {
     /**
      * @param usuario the usuario to set
      */
-    public void setUsuario(Usuario usuario) {
+    public void setUsuarios(Usuario usuario) {
         this.usuario = usuario;
     }
 
     /**
-     * @return the treinamento
+     * @return the treinamentos
      */
-    public Treinamento getTreinamento() {
+    public Treinamento getTreinamentos() {
         return treinamento;
     }
 
