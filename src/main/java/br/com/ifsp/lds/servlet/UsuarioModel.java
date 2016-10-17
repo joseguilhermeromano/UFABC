@@ -55,8 +55,8 @@ public class UsuarioModel implements Tarefa {
         /*Código temporário para desativar login*/
         String senha = "teste";
         String login = "teste";
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Usuario usuario = usuarioDAO.buscaUsuario(login);
+
+        Usuario usuario = userdao.buscaUsuario(login);
         if (usuario != null && usuario.getSenha().equals(senha)) {
             HttpSession session = req.getSession();
             session.setAttribute("usuarioLogado", usuario);
@@ -69,7 +69,6 @@ public class UsuarioModel implements Tarefa {
 
             return "/WEB-INF/views/" + segmento + "/index.jsp";
         }
-        if(usuario == null) System.out.println("null");
         return "/index.jsp";
     }
 
@@ -80,54 +79,56 @@ public class UsuarioModel implements Tarefa {
 
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
-        
-        
-        
+
+        String pagina = "/WEB-INF/views/administrador/novo-usuario.jsp";
         try {
-            validation.addRule("required", "nome", req.getParameter("nome"));
-            validation.addRule("required", "cpf", req.getParameter("cpf"));
-            validation.addRule("required", "rg", req.getParameter("rg"));
-            validation.addRule("required", "email", req.getParameter("email"));
-            validation.addRule("email", "email", req.getParameter("email"));
-            validation.addRule("required", "telefone", req.getParameter("telefone"));
-            validation.addRule("required", "endereco", req.getParameter("endereco"));
-            validation.addRule("required", "numero", req.getParameter("numero"));
-            validation.addRule("required", "bairro", req.getParameter("bairro"));
-            validation.addRule("required", "cidade", req.getParameter("cidade"));
-            validation.addRule("required", "especialidade", req.getParameter("especialidades"));
-            validation.addRule("required", "permissao", req.getParameter("permissao"));
-            validation.addRule("required", "login", req.getParameter("login"));
-            validation.addRule("required", "senha", req.getParameter("senha"));
-            if (validation.executaRegras()) {
-                Usuario usuario = new Usuario();
-                usuario.setNome(req.getParameter("nome"));
-                usuario.setCpf(req.getParameter("cpf"));
-                usuario.setRg(req.getParameter("rg"));
-                usuario.setEmail(req.getParameter("email"));
-                usuario.setTelefone(req.getParameter("telefone"));
-                usuario.setEndereco(req.getParameter("endereco"));
-                usuario.setNumero(req.getParameter("numero"));
-                usuario.setBairro(req.getParameter("bairro"));
-                usuario.setCidade(req.getParameter("cidade"));
-                usuario.setComplemento(req.getParameter("complemento"));
-                usuario.setEspecialidade(req.getParameter("especialidade"));
-                usuario.setAdministrador(Integer.parseInt(req.getParameter("permissao")));
-                usuario.setLogin(req.getParameter("login"));
-                usuario.setSenha(req.getParameter("senha"));
-                userdao.Cadastrar(usuario, req, resp);
-            } else {
-                return "/WEB-INF/views/administrador/novo-usuario.jsp";
+            if (req.getParameter("cadastrar") != null) {
+                validation.addRule("required", "nome", req.getParameter("nome"));
+                validation.addRule("required", "cpf", req.getParameter("cpf"));
+                validation.addRule("required", "rg", req.getParameter("rg"));
+                validation.addRule("required", "email", req.getParameter("email"));
+                validation.addRule("isValidEmail", "email", req.getParameter("email"));
+                validation.addRule("required", "telefone", req.getParameter("telefone"));
+                validation.addRule("required", "endereco", req.getParameter("endereco"));
+                validation.addRule("required", "numero", req.getParameter("numero"));
+                validation.addRule("required", "bairro", req.getParameter("bairro"));
+                validation.addRule("required", "cidade", req.getParameter("cidade"));
+                validation.addRule("required", "especialidade", req.getParameter("especialidade"));
+                validation.addRule("required", "permissao", req.getParameter("permissao"));
+                validation.addRule("required", "login", req.getParameter("login"));
+                validation.addRule("required", "senha", req.getParameter("senha"));
+                if (validation.executaRegras() && validation.isUnique("login", req.getParameter("login"), "Usuario")) {
+                    Usuario usuario = new Usuario();
+                    usuario.setNome(req.getParameter("nome"));
+                    usuario.setCpf(req.getParameter("cpf"));
+                    usuario.setRg(req.getParameter("rg"));
+                    usuario.setEmail(req.getParameter("email"));
+                    usuario.setTelefone(req.getParameter("telefone"));
+                    usuario.setEndereco(req.getParameter("endereco"));
+                    usuario.setNumero(req.getParameter("numero"));
+                    usuario.setBairro(req.getParameter("bairro"));
+                    usuario.setCidade(req.getParameter("cidade"));
+                    usuario.setComplemento(req.getParameter("complemento"));
+                    usuario.setEspecialidade(req.getParameter("especialidade"));
+                    usuario.setAdministrador(Integer.parseInt(req.getParameter("permissao")));
+                    usuario.setLogin(req.getParameter("login"));
+                    usuario.setSenha(req.getParameter("senha"));
+                    userdao.Cadastrar(usuario, req, resp);
+                    pagina = this.listartudo(req, resp);
+                }
+                else {
+                    for(String er :validation.getTodosErros())
+                        System.out.println(er);
+                } 
+                    
             }
-            
-        } catch (ClassNotFoundException | InstantiationException 
-                | IllegalAccessException | IllegalArgumentException 
-                | InvocationTargetException | NoSuchMethodException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
             Logger.getLogger(UsuarioModel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return "/WEB-INF/views/administrador/usuarios.jsp";
+        return pagina;
     }
- 
+
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
