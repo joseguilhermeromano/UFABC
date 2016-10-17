@@ -167,9 +167,8 @@
 
                             <!-- BOTÃO DO FORMULÁRIO -->
                             <center><input type="submit" value="Cadastrar"  class="btn btn-success button" /></center>
-                            
+                            <input type="hidden" name="cadastrar" value="1">
                         </form><!-- /FORMULÁRIO -->
-                            
                     </div>
                 </div>
             </div>
