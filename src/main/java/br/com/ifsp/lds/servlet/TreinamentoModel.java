@@ -76,6 +76,10 @@ public class TreinamentoModel implements Tarefa {
         return "/WEB-INF/views/administrador/novo-treinamento.jsp";
     }
     
+    public String alocacao(HttpServletRequest req, HttpServletResponse resp){
+        return "/WEB-INF/views/administrador/edita-alocacao.jsp";
+    }
+    
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
         if(req.getParameter("codigo")!=null&&req.getParameterMap().size()==1){
