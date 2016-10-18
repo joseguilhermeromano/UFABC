@@ -111,8 +111,26 @@ public class FormValidation {
         }
         
     }
-    protected List<String> getErros(){
+    protected List<String> getErros() {
        return erros;
+    }
+    
+    /**
+     * Verifica se o valor já existe no banco de dados
+     * @param campo 
+     * @param dado
+     * @param tabela 
+     * @return boolean
+     */
+    public boolean isUnique(String campo, String dado, String tabela) {
+        boolean resultado = false;
+        if(this.required(campo, dado)) {
+            resultado =  new JPAUtil().getEntityManager()
+                .createQuery("From " + tabela +" t where t."+campo+"=:dado")
+                .setParameter("dado", dado).getSingleResult() == null;
+            if(!resultado) this.erros.add(campo + " já esta registrado!");
+        }
+        return resultado;
     }
    
 }

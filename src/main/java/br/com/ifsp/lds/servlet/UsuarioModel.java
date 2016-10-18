@@ -55,8 +55,8 @@ public class UsuarioModel implements Tarefa {
         /*Código temporário para desativar login*/
         String senha = "teste";
         String login = "teste";
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Usuario usuario = usuarioDAO.buscaUsuario(login);
+
+        Usuario usuario = userdao.buscaUsuario(login);
         if (usuario != null && usuario.getSenha().equals(senha)) {
             HttpSession session = req.getSession();
             session.setAttribute("usuarioLogado", usuario);
@@ -69,7 +69,6 @@ public class UsuarioModel implements Tarefa {
 
             return "/WEB-INF/views/" + segmento + "/index.jsp";
         }
-        if(usuario == null) System.out.println("null");
         return "/index.jsp";
     }
 
@@ -80,6 +79,7 @@ public class UsuarioModel implements Tarefa {
 
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
+
         try {
             validation.addRule("required", "nome", req.getParameter("nome"));
             validation.addRule("required", "cpf", req.getParameter("cpf"));
@@ -114,17 +114,15 @@ public class UsuarioModel implements Tarefa {
                 userdao.Cadastrar(usuario, req, resp);
             } else {
                 return "/WEB-INF/views/administrador/novo-usuario.jsp";
+
             }
-            
-        } catch (ClassNotFoundException | InstantiationException 
-                | IllegalAccessException | IllegalArgumentException 
-                | InvocationTargetException | NoSuchMethodException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
             Logger.getLogger(UsuarioModel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return "/WEB-INF/views/administrador/usuarios.jsp";
+        return pagina;
     }
- 
+
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
