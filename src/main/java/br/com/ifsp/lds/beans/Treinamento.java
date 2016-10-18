@@ -5,8 +5,8 @@
  */
 package br.com.ifsp.lds.beans;
 
-
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,30 +14,23 @@ import org.hibernate.annotations.GenericGenerator;
  *
  * @author eddie
  */
-
 @Entity
 @Table(name = "treinamanto")
 public class Treinamento {
- 
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "trei_cd") 
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "trei_cd")
     private int codigo;
-    
-    @Column(name = "trei_nm") 
+
+    @Column(name = "trei_nm")
     private String nome;
-    
-    @Column(name = "trei_descr") 
+
+    @Column(name = "trei_descr")
     private String descricao;
-    
-    //@ManyToOne(targetEntity = Treinamento.class, cascade=CascadeType.MERGE)
-    //@JoinColumn(name = "trei_usua_cd")
-    
-    //codico acima não funciona
-//    @ManyToOne
-//    @JoinColumn(name = "trei_usua_cd", referencedColumnName = "usua_cd")
-//    private Usuario usuario;
+
+    @OneToMany(mappedBy = "treinamento")
+    private List<Alocacao> alocacoes;
 
     /**
      * @return the codigo
@@ -80,6 +73,18 @@ public class Treinamento {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
-    
+
+    /**
+     * @return the alocacoes
+     */
+    public List<Alocacao> getAlocacao() {
+        return alocacoes;
+    }
+
+    /**
+     * @param alocacoes the alocacoes to set
+     */
+    public void setAlocacao(List<Alocacao> alocacoes) {
+        this.alocacoes = alocacoes;
+    }
 }

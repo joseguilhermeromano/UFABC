@@ -58,12 +58,16 @@ public class Usuario {
     @Column(name = "usua_isAdmin")
     private int administrador;
     
-    @Column(name = "usua_login")
+    
+    @Column(name = "usua_login",unique = true)
     private String login;
     
     @Column(name = "usua_senha")
     private String senha;
-
+    
+    @OneToMany(mappedBy = "usuario")
+    private List<Alocacao> alocacoes;
+    
     /**
      * @return the cola_cd
      */
@@ -259,5 +263,18 @@ public class Usuario {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-      
+
+    /**
+     * @return the alocacoes
+     */
+    public List<Alocacao> getAlocacoes() {
+        return alocacoes;
+    }
+
+    /**
+     * @param alocacoes the alocacoes to set
+     */
+    public void setAlocacoes(List<Alocacao> alocacoes) {
+        this.alocacoes = alocacoes;
+    }
 }

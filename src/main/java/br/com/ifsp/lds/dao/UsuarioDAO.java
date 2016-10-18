@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UsuarioDAO implements DAO<Usuario> {
     
-    EntityManager entityManager = new JPAUtil().getEntityManager();
+    private EntityManager entityManager = new JPAUtil().getEntityManager();
     
     public Usuario buscaUsuario(String login) {
         try {
