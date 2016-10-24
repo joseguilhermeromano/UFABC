@@ -55,9 +55,6 @@ public class Usuario {
     @Column(name = "usua_complemento")
     private String complemento;
     
-    @Column(name = "usua_espe")
-    private String especialidade;
-    
     @Column(name = "usua_isAdmin")
     private int administrador;
     
@@ -209,20 +206,6 @@ public class Usuario {
      */
     public void setComplemento(String complemento) {
         this.complemento = complemento;
-    }
-
-    /**
-     * @return the especialidade
-     */
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    /**
-     * @param especialidade the especialidade to set
-     */
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
     }
 
     /**

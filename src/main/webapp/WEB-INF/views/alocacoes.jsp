@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : 19/09/2016, 22:01:00
-    Author     : José Guilherme
+    Document   : alocacoes
+    Created on : 17/10/2016, 20:01:23
+    Author     : Luiz Felipe
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,11 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Usuários</title>
-        <c:import url="../layout/importes.jsp"></c:import>
+        <c:import url="layout/importes.jsp"></c:import>
     </head>
     <body>
         <div id="wrapper"><!-- Corpo da Página --> 
-            <c:import url="../layout/menu.jsp"></c:import>
+            <c:import url="layout/menu.jsp"></c:import>
             
         <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -44,7 +44,7 @@
                         
                         <div class="row">
                             <div class="col-sm-6">
-                                <a class="btn btn-default visible-xs" href="${baseURL}area-restrita/usuario/novousuario"><span class="glyphicon glyphicon-plus" ></span> Novo Usuário</a><br>
+                                <a class="btn btn-default visible-xs" href="${baseURL}area-restrita/alocacao/novousuario"><span class="glyphicon glyphicon-plus" ></span> Nova Alocação</a><br>
                             </div>
                         </div>
                         <div class="row">
@@ -57,7 +57,7 @@
                                </div><!-- /input-group -->
                              </div><!-- /.col-lg-6 -->
                             <div class="col-md-6 col-sm-6">
-                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/usuario/cadastrar" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
+                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/usuario/novousuario" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
                             </div>
                         </div><!-- /row -->
                         <br><br>
@@ -65,10 +65,11 @@
                             <table class="table ls-table" id="tabela1">
                                 <thead>
                                     <tr>
-                                            <th >Nome</th>
-                                            <th class="text-center">Permissão</th>                                           
-                                            <th class="text-center">E-mail</th>
-                                            <th class="text-center">Telefone</th>
+                                            <th >Treinamento</th>
+                                            <th class="text-center">Usuário</th>
+                                            <th class="text-center">Data Início</th>
+                                            <th class="text-center">Data Fim</th>
+                                            <th class="text-center">Dias da Semana</th>
                                             <th class="text-center">Detalhar/Alterar</th>
                                             <th class="text-center">Excluir</th>
                                     </tr>
@@ -76,21 +77,26 @@
                                 <tbody>
                                     <c:forEach items="${usuarios}" var="usuario" varStatus="loop">
                                     <tr>    
-
-                                            <td>${usuario.nome}</td>
-                                            <td class="text-center"><c:if test="${usuario.administrador == 1}">Administrador(a)</c:if>
-                                                                    <c:if test="${usuario.administrador == 0}">Colaborador</c:if></td>                                           
-                                            <td class="text-center">${usuario.email}</td>
-                                            <td class="text-center">${usuario.telefone}</td>
+                                            <td>${alocacao.treinamento.nome}</td>
+                                            <td class="text-center">${alocacao.usuario.nome}</td>
+                                            <td class="text-center"><fmt:formatDate pattern="dd/MM/yyy" value="${alocacao.datainicio}"/></td>
+                                            <td class="text-center"><fmt:formatDate pattern="dd/MM/yyy" value="${alocacao.datafinal}"/></td>
                                             <td class="text-center">
-                                                <a href="<c:url value="${baseURL}area-restrita/usuario/alterar">
-                                                <c:param name="codigo" value="${usuario.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
+                                                <c:if test="${alocacao.segunda}"> Segunda </c:if>
+                                                <c:if test="${alocacao.terca}"> Terça </c:if>
+                                                <c:if test="${alocacao.quarta}"> Quarta </c:if>
+                                                <c:if test="${alocacao.quinta}"> Quinta </c:if>
+                                                <c:if test="${alocacao.sexta}"> Sexta </c:if>
+                                                <c:if test="${alocacao.sabado}"> Sábado </c:if>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="<c:url value="${baseURL}area-restrita/alocacao/alterar">
+                                                <c:param name="codigo" value="${alocacao.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
                                             </td> 
                                             <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
-                                                onclick="setCodigo('${usuario.codigo}'); setLink('${baseURL}area-restrita/usuario/excluir?codigo=');">
+                                                onclick="setCodigo('${alocao.codigo}'); setLink('${baseURL}area-restrita/alocacao/excluir?codigo=');">
                                                     <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
                                             </td>
-
                                     </tr>
                                     </c:forEach>
                                 </tbody>
@@ -122,6 +128,6 @@
         <!-- /#page-content-wrapper -->
             
         </div><!-- /Corpo da Página --> 
-        <c:import url="../layout/footer.jsp"></c:import>
+        <c:import url="layout/footer.jsp"></c:import>
     </body>
 </html>

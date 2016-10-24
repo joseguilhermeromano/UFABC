@@ -126,7 +126,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <!--<div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="nome">Especialidade</label></b>
@@ -136,7 +136,7 @@
                                         <option value="valor3">Valor 3</option>
                                       </select>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <b><label for="permissao">Permissão de Acesso</label></b><br>
@@ -167,9 +167,8 @@
 
                             <!-- BOTÃO DO FORMULÁRIO -->
                             <center><input type="submit" value="Cadastrar"  class="btn btn-success button" /></center>
-                            
+                            <input type="hidden" name="cadastrar" value="1">
                         </form><!-- /FORMULÁRIO -->
-                            
                     </div>
                 </div>
             </div>

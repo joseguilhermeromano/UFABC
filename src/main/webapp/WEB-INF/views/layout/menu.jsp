@@ -28,12 +28,15 @@
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}administrador/faltas"><span class="glyphicon glyphicon-copy"></span> Faltas</a>
+                    <a href="${baseURL}area-restrita/alocacao/cadastrar"><span class="glyphicon glyphicon-list"></span> Alocação</a>
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}area-restrita/usuario/logoff"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
-                    
+                    <a href="${baseURL}area-restrita/falta/listartudo"><span class="glyphicon glyphicon-copy"></span> Faltas</a>
+                </li>              
+                <hr>
+                <li>
+                    <a href="${baseURL}area-restrita/usuario/logoff"><span class="glyphicon glyphicon-log-out"></span> Sair</a>                    
                 </li>
                 <hr>
             </ul>
