@@ -82,7 +82,7 @@ public class TreinamentoModel implements Tarefa {
     
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
-        if(req.getParameter("codigo")!=null&&req.getParameterMap().size()==1){
+        if(req.getParameter("codigo")!=null && req.getParameterMap().size()==1){
             int codigo = Integer.parseInt(req.getParameter("codigo"));
             req.setAttribute("treinamento",daoTreino.Consultar(codigo,req,resp));
             return "/WEB-INF/views/administrador/edita-treinamento.jsp";
