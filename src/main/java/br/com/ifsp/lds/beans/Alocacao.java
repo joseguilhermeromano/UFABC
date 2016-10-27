@@ -239,7 +239,7 @@ public class Alocacao {
     /**
      * @return the treinamentos
      */
-    public Treinamento getTreinamentos() {
+    public Treinamento getTreinamento() {
         return treinamento;
     }
 

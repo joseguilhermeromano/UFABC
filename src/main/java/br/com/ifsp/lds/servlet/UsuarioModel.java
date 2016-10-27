@@ -79,7 +79,7 @@ public class UsuarioModel implements Tarefa {
 
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
-
+        String pagina = "/WEB-INF/views/administrador/novo-usuario.jsp";
         try {
             validation.addRule("required", "nome", req.getParameter("nome"));
             validation.addRule("required", "cpf", req.getParameter("cpf"));
@@ -95,7 +95,7 @@ public class UsuarioModel implements Tarefa {
             validation.addRule("required", "permissao", req.getParameter("permissao"));
             validation.addRule("required", "login", req.getParameter("login"));
             validation.addRule("required", "senha", req.getParameter("senha"));
-            if (validation.executaRegras()) {
+            if (validation.executaRegras() && validation.isUnique("login", req.getParameter("login"), "Usuario")) {
                 Usuario usuario = new Usuario();
                 usuario.setNome(req.getParameter("nome"));
                 usuario.setCpf(req.getParameter("cpf"));
@@ -112,6 +112,7 @@ public class UsuarioModel implements Tarefa {
                 usuario.setLogin(req.getParameter("login"));
                 usuario.setSenha(req.getParameter("senha"));
                 userdao.Cadastrar(usuario, req, resp);
+                return this.listartudo(req, resp);
             } else {
                 return "/WEB-INF/views/administrador/novo-usuario.jsp";
 
@@ -119,7 +120,6 @@ public class UsuarioModel implements Tarefa {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
             Logger.getLogger(UsuarioModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return pagina;
     }
 
