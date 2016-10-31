@@ -87,7 +87,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="codCol">Código Colaborador</label></b>
-                                    <input type="text" name="codCol" value="" placeholder="Código do Colaborador" class="form-control estilo-input"  />
+                                    <input type="text" name="codCol" value="href=${baseURL}area-restrita/usuario/consultartudo" placeholder="Código do Colaborador" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -95,11 +95,35 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <b><label for="codTreinamento">Código Treinamento</label></b>
-                                    <input type="text" name="codTreina" placeholder="Código do Treinamento" class="form-control estilo-input"  />
+                                    <input type="text" name="codTreina" value="href=${baseURL}area-restrita/treinamento/consultartudo" placeholder="Código do Treinamento" class="form-control estilo-input"  />
                                     </div>
                                 </div>
-                            </div>                                                        
-                            <div class="col-md-6">
+                            </div>  
+                             <div class="col-md-6">
+                                    "${baseURL}area-restrita/treinamento/consultartudo" 
+                                    <div class="form-group">
+                                        <b><label for="diaSemana">Dias da Semana</label></b><br>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="seg" value="1">Segunda-Feira
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="ter" value="2">Terça-Feira<br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="qua" value="3">Quarta-Feira<br>
+                                    </div>   
+                                    <div class="col-md-6">
+                                        <input type="radio" name="quin" value="4">Quinta-Feira<br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="sex" value="5">Sexta-Feira<br>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="sab" value="6">Sábado<br>
+                                    </div>    
+                                    </div>
+                                </div>        
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <b><label for="diaSemana">Dias da Semana</label></b><br>
                                     <div class="col-md-6">
