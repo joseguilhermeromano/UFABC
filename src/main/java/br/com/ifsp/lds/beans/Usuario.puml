@@ -1,6 +1,6 @@
 /' Para exibir os diagramas é necessário obter o graphviz e o plugin plantuml para o netbeans
-http://plugins.netbeans.org/plugin/49069/plantuml
-http://www.graphviz.org/Download_windows.php
+http:'plugins.netbeans.org/plugin/49069/plantuml
+http:'www.graphviz.org/Download_windows.php
  '/
 @startuml
 class Usuario {
@@ -18,42 +18,42 @@ class Usuario {
     -complemento:String
     -especialidade:String
     -administrador:Integer
-    -treinamentos:ArrayList
     -login:String
     -senha:String
+    -alocacoes:ArrayList
 
     +getCodigo():Integer
-    +setCodigo(codigo:Integer):void
+    +setCodigo(codigo:Integer)
     +getNome():String
-    +setNome(nome:String):void
+    +setNome(nome:String)
     +getCpf():String
-    +setCpf(cpf:String):void
+    +setCpf(cpf:String)
     +getRg():String
-    +setRg(rg:String):void
+    +setRg(rg:String)
     +getEmail():String
-    +setEmail(email:String):void
+    +setEmail(email:String)
     +getEndereco():String
-    +setEndereco(endereco:String):void
+    +setEndereco(endereco:String)
     +getNumero():String
-    +setNumero(numero:String):void
+    +setNumero(numero:String)
     +getBairro():String
-    +setBairro(bairro:String):void
+    +setBairro(bairro:String)
     +getCidade():String
-    +setCidade(cidade:String):void
+    +setCidade(cidade:String)
     +getComplemento():String
-    +setComplemento(complemento:String):void
+    +setComplemento(complemento:String)
     +getEspecialidade():String
-    +setEspecialidade(especialidade:String):void
+    +setEspecialidade(especialidade:String)
     +getAdministrador():Integer
-    +setAdministrador(iadministrador:Integer):void
+    +setAdministrador(iadministrador:Integer)
     +getLogin():String
-    +setLogin(login:String):void
+    +setLogin(login:String)
     +getSenha():String
-    +setSenha(senha:String):void
+    +setSenha(senha:String)
     +getTreinamentos():ArrayList
-    +setTreinamentos(treinamentos:ArrayList) :void
+    +setTreinamentos(treinamentos:ArrayList) 
     +getTelefone():String
-    +setTelefone(telefone:String) :void
+    +setTelefone(telefone:String) 
 }
 
 @enduml

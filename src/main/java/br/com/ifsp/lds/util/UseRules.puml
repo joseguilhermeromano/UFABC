@@ -1,0 +1,10 @@
+@startuml
+class UseRules <? extends FormValidation >{
+    - regras: ArrayList<Metodo>
+    - todosErros: ArrayList<String>
+    + addRule(regra:String, campo:String, dado:String)
+    + boolean executaRegras():Boolean
+    + getTodosErros():List<String>
+}
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+class Metodo {
+    - metodo:String
+    - campo:String
+    - dado:String
+
+    + getMetodo():String
+    + setMetodo(String metodo)
+    + getCampo():String
+    + setCampo(campo:String)
+    + getDado():String
+    + setDado(dado:String)
+}
+
+@enduml

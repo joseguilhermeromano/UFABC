@@ -1,10 +1,10 @@
 @startuml
 
 interface DAO <T> {
-    + Cadastrar(obj:T):void
+    + Cadastrar(obj:T)
     + ConsultarTudo(string:String):ArrayList
     + Consultar(codigo:Integer):T
-    + Alterar(obj:T):void
-    + Deletar(codigo:Integer):void
+    + Alterar(obj:T)
+    + Deletar(codigo:Integer)
 }
 @enduml

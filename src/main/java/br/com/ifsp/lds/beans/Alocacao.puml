@@ -1,0 +1,45 @@
+@startuml
+class Alocacao {
+
+    - codigo:Integer
+    - datainicio:Date
+    - datafinal:Date
+    - horainicio:Date
+    - horafim:Date
+    - segunda:Boolean
+    - terca:Boolean
+    - quarta:Boolean
+    - quinta:Boolean
+    - sexta:Boolean
+    - sabado:Boolean
+    - usuario:Usuario 
+    - treinamento:Treinamento
+    + getCodigo():Integer
+    + setCodigo(icodigo:Integer)
+    + getDatainicio():Date 
+    + setDatainicio(datainicio:Date)
+    + getDatafinal():Date 
+    + setDatafinal(datafinal:Date)
+    + getHorainicio():Date 
+    + setHorainicio(horainicio:Date)
+    + getHorafim()Date 
+    + setHorafim(horafim:Date)
+    + isSegunda():Boolean 
+    + setSegunda(segunda:Boolean)
+    + isTerca():Boolean 
+    + setTerca(terca:Boolean)
+    + isQuarta():Boolean 
+    + setQuarta(quarta:Boolean)
+    + isQuinta():Boolean 
+    + setQuinta(quinta:Boolean)
+    + isSexta():Boolean 
+    + setSexta(sexta:Boolean)
+    + isSabado():Boolean 
+    + setSabado(sabado:Boolean)
+    + getUsuario():Usuario 
+    + setUsuario(usuario:Usuario)
+    + getTreinamento():Treinamento 
+    + setTreinamento(treinamento:Treinamento)
+}
+
+@enduml
