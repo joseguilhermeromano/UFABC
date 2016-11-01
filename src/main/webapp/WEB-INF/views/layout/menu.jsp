@@ -36,6 +36,10 @@
                 </li>              
                 <hr>
                 <li>
+                    <a href="${baseURL}area-restrita/justificativa/cadastrar"><span class="glyphicon glyphicon-copy"></span> Justificativas</a>
+                </li> 
+                <hr>
+                <li>
                     <a href="${baseURL}area-restrita/usuario/logoff"><span class="glyphicon glyphicon-log-out"></span> Sair</a>                    
                 </li>
                 <hr>

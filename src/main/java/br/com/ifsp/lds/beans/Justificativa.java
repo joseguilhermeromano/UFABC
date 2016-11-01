@@ -18,8 +18,8 @@ import javax.persistence.Table;
  * @author eddie
  */
 @Entity
-@Table(name = "falta")
-public class Falta {
+@Table(name = "justificativa")
+public class Justificativa {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -35,13 +35,10 @@ public class Falta {
     @Column(name = "just_motivo_dec") 
     private String motivodesc;
     
-    @Column(name = "just_comprovante")    
+    @Column(name = "just_comprovante") 
     private byte[] comprovante;
     
-    @Column(name = "just_status") 
-    private  int status;
-    
-    public Falta(){
+    public Justificativa(){
         
     }
 
@@ -114,19 +111,6 @@ public class Falta {
     public void setComprovante(byte[] comprovante) {
         this.comprovante = comprovante;
     }
-
-    /**
-     * @return the status
-     */
-    public int getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(int status) {
-        this.status = status;
-    }
+    
     
 }
