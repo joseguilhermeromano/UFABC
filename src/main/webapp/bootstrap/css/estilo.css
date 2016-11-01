@@ -254,3 +254,12 @@ h3{
 .pagination > li > a{
     color: green;
 }
+
+
+.top-buffer {
+    margin-top: 20px;
+}
+
+.my_font_size {
+    font-size: 20px;
+}
