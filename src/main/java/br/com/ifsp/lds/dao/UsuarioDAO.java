@@ -34,21 +34,21 @@ public class UsuarioDAO implements DAO<Usuario> {
     }
 
     @Override
-    public void Cadastrar(Usuario obj,HttpServletRequest req, HttpServletResponse resp) {
+    public boolean Cadastrar(Usuario obj) {
         try { 
             entityManager.getTransaction().begin();
             entityManager.persist(obj);
-            entityManager.getTransaction().commit();
-            req.setAttribute("sucesso", "Usuário cadastrado com sucesso!");
+            entityManager.getTransaction().commit();           
+            return true;
         }catch(Exception ex){
              ex.printStackTrace(); 
-            entityManager.getTransaction().rollback();
-            req.setAttribute("erro", "Não foi possível cadastrar o Usuário!");
+            entityManager.getTransaction().rollback();          
+            return false;
         }
     }
 
     @Override
-    public ArrayList<Usuario> ConsultarTudo(String string,HttpServletRequest req, HttpServletResponse resp) {
+    public ArrayList<Usuario> ConsultarTudo(String string) {
         try { 
             if(string.equals("")){
                 entityManager.getTransaction().begin(); 
@@ -72,38 +72,40 @@ public class UsuarioDAO implements DAO<Usuario> {
     }
 
     @Override
-    public Usuario Consultar(int codigo,HttpServletRequest req, HttpServletResponse resp) {
+    public Usuario Consultar(int codigo) {
         Usuario consulta = entityManager.find(Usuario.class, codigo);
         return consulta;
     }
 
     @Override
-    public void Alterar(Usuario obj,HttpServletRequest req, HttpServletResponse resp) {
+    public boolean Alterar(Usuario obj) {
         try { 
             entityManager.getTransaction().begin();
             entityManager.merge(obj);
             entityManager.getTransaction().commit();
-            req.setAttribute("sucesso", "Usuário atualizado com sucesso!");
+//            req.setAttribute("sucesso", "Usuário atualizado com sucesso!");
+            return true;
         } catch (Exception ex) { 
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
-            req.setAttribute("erro", "Não foi possível atualizar o Usuário!");
+//            req.setAttribute("erro", "Não foi possível atualizar o Usuário!");
+            return false;
         }
     }
 
     @Override
-    public void Deletar(int codigo,HttpServletRequest req, HttpServletResponse resp) {
+    public boolean Deletar(int codigo) {
         try { 
             entityManager.getTransaction().begin(); 
             Query query = entityManager.createQuery("select u from Usuario u where u.codigo=" + codigo);
             Usuario consulta = (Usuario) query.getResultList().get(0); 
             entityManager.remove(consulta); 
-            entityManager.getTransaction().commit();
-            req.setAttribute("sucesso", "Usuário excluído com sucesso!");
+            entityManager.getTransaction().commit();          
+            return true;
         } catch (Exception ex) { 
             ex.printStackTrace(); 
             entityManager.getTransaction().rollback();
-            req.setAttribute("erro", "Não foi possível excluir o Usuário!");
+            return false;
         }
     }
 }

@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /*Interface necessária para padronizar métodos das classes DAO*/
 public interface DAO <T> {
-    public void Cadastrar(T obj,HttpServletRequest req, HttpServletResponse resp);
-    public ArrayList<T> ConsultarTudo(String string,HttpServletRequest req, HttpServletResponse resp);
-    public T Consultar(int codigo,HttpServletRequest req, HttpServletResponse resp);
-    public void Alterar(T obj,HttpServletRequest req, HttpServletResponse resp);
-    public void Deletar(int codigo,HttpServletRequest req, HttpServletResponse resp);
+    public boolean Cadastrar(T obj);
+    public ArrayList<T> ConsultarTudo(String string);
+    public T Consultar(int codigo);
+    public boolean Alterar(T obj);
+    public boolean Deletar(int codigo);
 }

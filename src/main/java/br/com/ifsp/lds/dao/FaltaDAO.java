@@ -24,12 +24,12 @@ public class FaltaDAO implements DAO<Falta>{
     EntityManager entityManager = new JPAUtil().getEntityManager();
     
     @Override
-    public void Cadastrar(Falta obj, HttpServletRequest req, HttpServletResponse resp) {
+    public boolean Cadastrar(Falta obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<Falta> ConsultarTudo(String string, HttpServletRequest req, HttpServletResponse resp) {
+    public ArrayList<Falta> ConsultarTudo(String string) {
         try {  
             entityManager.getTransaction().begin();
             TypedQuery<Falta> query = null;            
@@ -47,17 +47,17 @@ public class FaltaDAO implements DAO<Falta>{
     }
 
     @Override
-    public Falta Consultar(int codigo, HttpServletRequest req, HttpServletResponse resp) {
+    public Falta Consultar(int codigo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Alterar(Falta obj, HttpServletRequest req, HttpServletResponse resp) {
+    public boolean Alterar(Falta obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Deletar(int codigo, HttpServletRequest req, HttpServletResponse resp) {
+    public boolean Deletar(int codigo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

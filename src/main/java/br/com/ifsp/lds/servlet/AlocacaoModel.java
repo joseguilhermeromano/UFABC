@@ -54,8 +54,8 @@ public class AlocacaoModel implements Tarefa {
                Alocacao aloca = new Alocacao();
                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                DateFormat tm = new SimpleDateFormat("HH:mm");
-               aloca.setTreinamento(new TreinamentoDAO().Consultar(Integer.parseInt(req.getParameter("codTreina")), req, resp));
-               aloca.setUsuarios(new UsuarioDAO().Consultar(Integer.parseInt(req.getParameter("codCol")), req, resp));
+               aloca.setTreinamento(new TreinamentoDAO().Consultar(Integer.parseInt(req.getParameter("codTreina"))));
+               aloca.setUsuarios(new UsuarioDAO().Consultar(Integer.parseInt(req.getParameter("codCol"))));
                aloca.setDatainicio(df.parse(req.getParameter("dataIni")));
                aloca.setDatafinal(df.parse(req.getParameter("dataFin")));
                aloca.setHorainicio(new Time(tm.parse(req.getParameter("horaIni")).getTime()));
@@ -66,7 +66,11 @@ public class AlocacaoModel implements Tarefa {
                aloca.setQuinta(Boolean.parseBoolean(req.getParameter("qui")));
                aloca.setSexta(Boolean.parseBoolean(req.getParameter("sex")));
                aloca.setSabado(Boolean.parseBoolean(req.getParameter("sab")));
-               alocaDAO.Cadastrar(aloca, req, resp);
+               if(alocaDAO.Cadastrar(aloca)==true){
+                   req.setAttribute("sucesso", "A Alocação foi realizada com sucesso!");
+               }else{
+                   req.setAttribute("erro", "Não foi possível realizar a Alocação!");
+               }
                return "/WEB-INF/views/alocacoes.jsp";
             }else {
                 List<String> erros = validation.getTodosErros();

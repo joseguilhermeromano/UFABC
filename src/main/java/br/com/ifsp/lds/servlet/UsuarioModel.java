@@ -109,7 +109,11 @@ public class UsuarioModel implements Tarefa {
                 usuario.setAdministrador(Integer.parseInt(req.getParameter("permissao")));
                 usuario.setLogin(req.getParameter("login"));
                 usuario.setSenha(req.getParameter("senha"));
-                userdao.Cadastrar(usuario, req, resp);
+                if(userdao.Cadastrar(usuario)==true){
+                    req.setAttribute("sucesso", "Usuário cadastrado com sucesso!");
+                }else{
+                    req.setAttribute("erro", "Não foi possível cadastrar o Usuário!");
+                }
                 return this.listartudo(req, resp);
             } else {
                 
@@ -134,7 +138,7 @@ public class UsuarioModel implements Tarefa {
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
         String nome = req.getParameter("nome") == null ? "" : req.getParameter("nome");
-        List<Usuario> usuarios = userdao.ConsultarTudo(nome, req, resp);
+        List<Usuario> usuarios = userdao.ConsultarTudo(nome);
         req.setAttribute("usuarios", usuarios);
         for (Usuario u : usuarios) {
             System.out.println(u.getNome());
@@ -150,7 +154,11 @@ public class UsuarioModel implements Tarefa {
     @Override
     public String excluir(HttpServletRequest req, HttpServletResponse resp) {
         int codigo = Integer.parseInt(req.getParameter("codigo"));
-        userdao.Deletar(codigo, req, resp);
+        if(userdao.Deletar(codigo)==true){
+            req.setAttribute("sucesso", "Usuário excluído com sucesso!");
+        }else{
+            req.setAttribute("erro", "Não foi possível excluir o Usuário!");
+        }
         return this.listartudo(req, resp);
     }
 
