@@ -39,6 +39,9 @@ public class AlocacaoModel implements Tarefa {
 
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
+        if(req.getParameterMap().isEmpty()){
+            return "/WEB-INF/views/administrador/alocacao.jsp";
+        }
         try {
             validation.addRule("required", "dataIni", req.getParameter("dataIni"));
             validation.addRule("required", "dataFin", req.getParameter("dataFin"));
@@ -89,7 +92,7 @@ public class AlocacaoModel implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "/WEB-INF/views/alocacoes.jsp";
     }
 
     @Override

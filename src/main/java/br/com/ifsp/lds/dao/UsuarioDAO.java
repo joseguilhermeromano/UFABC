@@ -39,7 +39,6 @@ public class UsuarioDAO implements DAO<Usuario> {
             entityManager.getTransaction().begin();
             entityManager.persist(obj);
             entityManager.getTransaction().commit();
-            entityManager.close();
             req.setAttribute("sucesso", "Usuário cadastrado com sucesso!");
         }catch(Exception ex){
              ex.printStackTrace(); 

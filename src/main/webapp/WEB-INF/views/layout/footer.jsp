@@ -45,7 +45,7 @@
 
 
     $(function() {
-        $("#datepicker-13,#datepicker-14" ).datepicker({
+        $(".datepicker").datepicker({
                 dateFormat: 'dd/mm/yy',
                 dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
                 dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
@@ -55,7 +55,7 @@
                 nextText: 'Próximo',
                 prevText: 'Anterior'
             });
-        $("#datepicker-13,#datepicker-14" ).datepicker("show");
+        $(".datepicker").datepicker("show");
         
     });
     

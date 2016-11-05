@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Usuários</title>
+        <title>Alocações</title>
         <c:import url="layout/importes.jsp"></c:import>
     </head>
     <body>
@@ -27,7 +27,7 @@
                             <span class="glyphicon glyphicon-menu-hamburger hidden-lg hidden-md hidden-sm"></span>
                         </a><!-- /#Botão de exibir/ocultar menu lateral -->
                     <div class="col-lg-12">
-                        <h3><span class="glyphicon glyphicon-list"></span> Usuários</h3><hr>
+                        <h3><span class="glyphicon glyphicon-list"></span> Alocações</h3><hr>
                         
                         <!-- Mensagens sucesso/erro -->
                         <c:if test="${not empty sucesso}">
@@ -44,20 +44,20 @@
                         
                         <div class="row">
                             <div class="col-sm-6">
-                                <a class="btn btn-default visible-xs" href="${baseURL}area-restrita/alocacao/novousuario"><span class="glyphicon glyphicon-plus" ></span> Nova Alocação</a><br>
+                                <a class="btn btn-default visible-xs" href="${baseURL}area-restrita/alocacao/cadastrar"><span class="glyphicon glyphicon-plus" ></span> Nova Alocação</a><br>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                <div class="input-group">
-                                    <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Nome do Usuário...">
+                                    <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Nome de treinamento...">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default estilo-botao-busca" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                     </span>
                                </div><!-- /input-group -->
                              </div><!-- /.col-lg-6 -->
                             <div class="col-md-6 col-sm-6">
-                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/usuario/novousuario" style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
+                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/alocacao/cadastrar" style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Alocação</a>
                             </div>
                         </div><!-- /row -->
                         <br><br>
