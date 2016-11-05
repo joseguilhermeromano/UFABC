@@ -40,7 +40,7 @@ public class AlocacaoModel implements Tarefa {
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
         if(req.getParameterMap().isEmpty()){
-            return "/WEB-INF/views/administrador/alocacao.jsp";
+            return "/WEB-INF/views/administrador/nova-alocacao.jsp";
         }
         try {
             validation.addRule("required", "dataIni", req.getParameter("dataIni"));
@@ -85,7 +85,7 @@ public class AlocacaoModel implements Tarefa {
              Logger.getLogger(AlocacaoModel.class.getName()).log(Level.SEVERE, null, ex);
          }
 
-        return "/WEB-INF/views/administrador/alocacao.jsp";
+        return "/WEB-INF/views/administrador/nova-alocacao.jsp";
         }
     
 

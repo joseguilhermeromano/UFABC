@@ -28,7 +28,7 @@
                 </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}area-restrita/alocacao/cadastrar"><span class="glyphicon glyphicon-list"></span> Alocação</a>
+                    <a href="${baseURL}area-restrita/alocacao/listartudo"><span class="glyphicon glyphicon-list"></span> Alocação</a>
                 </li>
                 <hr>
                 <li>
