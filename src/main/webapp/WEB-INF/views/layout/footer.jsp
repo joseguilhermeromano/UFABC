@@ -34,6 +34,9 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
+<!--select2-->
+<script src="${baseURL}bootstrap/js/select2.min.js"></script>
+
 <!-- Menu Toggle Script -->
 <script>
     
@@ -54,11 +57,32 @@
                 monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
                 nextText: 'Próximo',
                 prevText: 'Anterior'
+                
             });
-        $(".datepicker").datepicker("show");
-        
+        $(".datepicker").datepicker(); 
     });
-    
+    $(document).ready(function() {
+        $(".js-example-basic-single").select2({
+    minimumInputLength: 2,
+    tags: [],
+    ajax: {
+        url: "http://localhost:8080/UFABC/area-restrita/treinamento/teste",
+        dataType: 'json',
+        type: "GET",
+        quietMillis: 50,
+        data: function (term) {
+          return {                   
+           term: term
+          };
+        },
+        results: function (data) {
+          return { 
+           results: data  
+          };
+        }
+ }
+        });
+    });
 
 </script>
 <script text="javascript">

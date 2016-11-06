@@ -12,5 +12,10 @@
 <!-- ESTILO CSS PERSONALIZADO -->
 <link href="${baseURL}bootstrap/css/estilo.css" rel="stylesheet">
 
-<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<!-- DATEPICKER -->
+<link href="${baseURL}bootstrap/css/jquery-ui.css" rel="stylesheet">
+
+<!-- SELECT2 -->
+<link href="${baseURL}bootstrap/css/select2.min.css" rel="stylesheet" />
+
 

@@ -85,14 +85,24 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                    <b><label for="codCol">Código Colaborador</label></b>
-                                    <input type="text" name="codCol" placeholder="Código do Colaborador" class="form-control estilo-input"  />
+                                    <b><label for="codCol">Colaborador Responsável</label></b>
+                                    <br>
+                                        <select class="js-example-basic-single" style="width: 100%">
+                                            <option selected="selected">Selecione um Colaborador</option>
+                                          <option value="1">Igor Junior</option>
+                                          <option value="2">Matheus Vasconcelos</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                    <b><label for="codTreinamento">Código Treinamento</label></b>
-                                    <input type="text" name="codTreina" placeholder="Código do Treinamento" class="form-control estilo-input"  />
+                                    <b><label for="codTreinamento">Treinamento</label></b>
+                                    <br>
+                                        <select class="js-example-basic-single" style="width: 100%">
+                                            <option selected>Selecione um Treinamento</option>
+                                          <option value="1">Java Web</option>
+                                          <option value="2">Redes de Computadores</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

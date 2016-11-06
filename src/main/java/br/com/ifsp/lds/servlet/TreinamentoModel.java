@@ -11,14 +11,19 @@ import br.com.ifsp.lds.dao.TreinamentoDAO;
 import br.com.ifsp.lds.dao.UsuarioDAO;
 import br.com.ifsp.lds.util.FormValidation;
 import br.com.ifsp.lds.util.UseRules;
+import com.google.gson.Gson;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -41,6 +46,27 @@ public class TreinamentoModel implements Tarefa {
     @Override
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp) {
         return this.permAdmin;
+    }
+    
+    public String testando(HttpServletRequest req, HttpServletResponse resp){
+        return "/WEB-INF/views/teste.jsp";
+    }
+    
+    public String teste(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
+        
+
+            List<String> list = new ArrayList<>();
+            list.add("item1");
+            list.add("item2");
+            list.add("item3");
+            String json = new Gson().toJson(list);
+
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.getWriter().write(json);
+            System.out.println("json: "+json+req.getRequestURI());
+
+            return "/WEB-INF/views/teste.jsp";
     }
     
     @Override
