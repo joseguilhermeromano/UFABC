@@ -37,6 +37,7 @@ public class Falta {
     @Column(name = "just_dt") 
     private Date data;
     
+    
     @Column(name = "just_status") 
     private  int status;
     
