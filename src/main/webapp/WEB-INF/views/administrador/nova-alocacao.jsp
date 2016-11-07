@@ -56,13 +56,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="dataIni">Data Inicial</label></b>
-                                    <input type="text" name="dataIni" placeholder="Data Inicial" class="form-control estilo-input datepicker"  />
+                                    <input type="text" id="campoData" name="dataIni" placeholder="Data Inicial" class="form-control estilo-input datepicker"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="dataFin">Data Final</label></b>
-                                    <input type="text" name="dataFin" placeholder="Data Final" class="form-control estilo-input datepicker"  />
+                                    <input type="text" id="campoData" name="dataFin" placeholder="Data Final" class="form-control estilo-input datepicker"  />
                                     </div>
                                 </div>
                             </div>
@@ -71,13 +71,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="horaIni">Horário de Início</label></b>
-                                    <input type="text" name="horaIni" placeholder="Horário de Inicio" class="form-control estilo-input"  />
+                                    <input type="text" id="campoHora" name="horaIni" placeholder="Horário de Inicio" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="horaFin">Horário de Término</label></b>
-                                    <input type="text" name="horaTerm" placeholder="Horário de Término" class="form-control estilo-input"  />
+                                    <input type="text" id="campoHora" name="horaTerm" placeholder="Horário de Término" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>
@@ -87,10 +87,11 @@
                                     <div class="form-group">
                                     <b><label for="codCol">Colaborador Responsável</label></b>
                                     <br>
-                                        <select class="js-example-basic-single" style="width: 100%">
-                                            <option selected="selected">Selecione um Colaborador</option>
-                                          <option value="1">Igor Junior</option>
-                                          <option value="2">Matheus Vasconcelos</option>
+                                        <select class="select2" style="width: 100%"> 
+                                          <option selected disabled>Selecione um Colaborador</option>  
+                                          <c:forEach items="${usuarios}" var="usuario" varStatus="loop">
+                                                <option value="${usuario.codigo}">${usuario.nome}</option>
+                                          </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -98,10 +99,11 @@
                                     <div class="form-group">
                                     <b><label for="codTreinamento">Treinamento</label></b>
                                     <br>
-                                        <select class="js-example-basic-single" style="width: 100%">
-                                            <option selected>Selecione um Treinamento</option>
-                                          <option value="1">Java Web</option>
-                                          <option value="2">Redes de Computadores</option>
+                                        <select class="select2" style="width: 100%">
+                                            <option selected disabled>Selecione um Treinamento</option>
+                                            <c:forEach items="${treinamentos}" var="treinamento" varStatus="loop">
+                                                <option value="${treinamento.codigo}">${treinamento.nome}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>

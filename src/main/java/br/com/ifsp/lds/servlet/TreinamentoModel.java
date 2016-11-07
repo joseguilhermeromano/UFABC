@@ -48,27 +48,6 @@ public class TreinamentoModel implements Tarefa {
         return this.permAdmin;
     }
     
-    public String testando(HttpServletRequest req, HttpServletResponse resp){
-        return "/WEB-INF/views/teste.jsp";
-    }
-    
-    public String teste(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
-        
-
-            List<String> list = new ArrayList<>();
-            list.add("item1");
-            list.add("item2");
-            list.add("item3");
-            String json = new Gson().toJson(list);
-
-            resp.setContentType("application/json");
-            resp.setCharacterEncoding("UTF-8");
-            resp.getWriter().write(json);
-            System.out.println("json: "+json+req.getRequestURI());
-
-            return "/WEB-INF/views/teste.jsp";
-    }
-    
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
         if(req.getParameterMap().isEmpty()){

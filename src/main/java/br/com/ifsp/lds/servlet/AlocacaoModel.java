@@ -39,6 +39,7 @@ public class AlocacaoModel implements Tarefa {
 
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
+        buscacolabtreino(req,resp);
         if(req.getParameterMap().isEmpty()){
             return "/WEB-INF/views/administrador/nova-alocacao.jsp";
         }
@@ -102,6 +103,13 @@ public class AlocacaoModel implements Tarefa {
     @Override
     public String buscar(HttpServletRequest req, HttpServletResponse resp) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void buscacolabtreino(HttpServletRequest req, HttpServletResponse resp){
+        UsuarioDAO userdao = new UsuarioDAO();
+        TreinamentoDAO treinodao= new TreinamentoDAO();
+        req.setAttribute("usuarios", userdao.ConsultarTudo(""));
+        req.setAttribute("treinamentos", treinodao.ConsultarTudo(""));
     }
 
     @Override

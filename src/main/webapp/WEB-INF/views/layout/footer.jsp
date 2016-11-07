@@ -27,6 +27,9 @@
 <!-- jQuery -->
 <script src="${baseURL}bootstrap/js/jquery.min.js"></script>
 
+<!-- jQuery Mask -->
+<script src="${baseURL}bootstrap/js/jquery.maskedinput.js" type="text/javascript"></script>
+
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="${baseURL}bootstrap/js/bootstrap.min.js"></script>
 
@@ -62,26 +65,13 @@
         $(".datepicker").datepicker(); 
     });
     $(document).ready(function() {
-        $(".js-example-basic-single").select2({
-    minimumInputLength: 2,
-    tags: [],
-    ajax: {
-        url: "http://localhost:8080/UFABC/area-restrita/treinamento/teste",
-        dataType: 'json',
-        type: "GET",
-        quietMillis: 50,
-        data: function (term) {
-          return {                   
-           term: term
-          };
-        },
-        results: function (data) {
-          return { 
-           results: data  
-          };
-        }
- }
-        });
+        $(".select2").select2();
+    });
+    
+    jQuery(function($){
+        $("#campoData").mask("99/99/9999");
+        $("#campoTelefone").mask("(999) 999-9999");
+        $("#campoHora").mask("99:99");
     });
 
 </script>
