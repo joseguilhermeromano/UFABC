@@ -9,9 +9,9 @@ class App {
     
     
     +App(req:HttpServletRequest)
-    -setClasse():void
-    -formataNomeClasse():void
-    -setMetodo():void
+    -setClasse()
+    -formataNomeClasse()
+    -setMetodo()
     +getMetodo():String
     +getClasse():String 
 

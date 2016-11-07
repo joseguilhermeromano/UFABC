@@ -1,0 +1,59 @@
+/' Para exibir os diagramas é necessário obter o graphviz e o plugin plantuml para o netbeans
+http:'plugins.netbeans.org/plugin/49069/plantuml
+http:'www.graphviz.org/Download_windows.php
+ '/
+@startuml
+class Usuario {
+ 
+    -codigo:Integer
+    -nome:String
+    -cpf:String
+    -rg:String
+    -email:String
+    -telefone:String
+    -endereco:String
+    -numero:String
+    -bairro:String
+    -cidade:String
+    -complemento:String
+    -especialidade:String
+    -administrador:Integer
+    -login:String
+    -senha:String
+    -alocacoes:ArrayList
+
+    +getCodigo():Integer
+    +setCodigo(codigo:Integer)
+    +getNome():String
+    +setNome(nome:String)
+    +getCpf():String
+    +setCpf(cpf:String)
+    +getRg():String
+    +setRg(rg:String)
+    +getEmail():String
+    +setEmail(email:String)
+    +getEndereco():String
+    +setEndereco(endereco:String)
+    +getNumero():String
+    +setNumero(numero:String)
+    +getBairro():String
+    +setBairro(bairro:String)
+    +getCidade():String
+    +setCidade(cidade:String)
+    +getComplemento():String
+    +setComplemento(complemento:String)
+    +getEspecialidade():String
+    +setEspecialidade(especialidade:String)
+    +getAdministrador():Integer
+    +setAdministrador(iadministrador:Integer)
+    +getLogin():String
+    +setLogin(login:String)
+    +getSenha():String
+    +setSenha(senha:String)
+    +getTreinamentos():ArrayList
+    +setTreinamentos(treinamentos:ArrayList) 
+    +getTelefone():String
+    +setTelefone(telefone:String) 
+}
+
+@enduml

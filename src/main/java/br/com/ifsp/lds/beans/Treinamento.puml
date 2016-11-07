@@ -1,0 +1,23 @@
+/' Para exibir os diagramas é necessário obter o graphviz e o plugin plantuml para o netbeans
+http:'plugins.netbeans.org/plugin/49069/plantuml
+http:'www.graphviz.org/Download_windows.php
+ '/
+@startuml
+class Treinamento {
+    -codigo:Integer
+    -nome: String 
+    -descricao:String 
+    -alocacoes:List<Alocacao>
+    +getCodigo():Integer
+    +setCodigo(codigo:Integer)
+    +getNome()
+    +setNome(nome:String)
+    +getDescricao():String
+    +setDescricao(descricao:String)
+    +getAlocacao():List<Alocacao>
+    +setAlocacao(alocacoes:List<Alocacao>)
+
+
+}
+
+@enduml

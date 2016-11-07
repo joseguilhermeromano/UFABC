@@ -1,0 +1,13 @@
+@startuml
+class FaltaDAO <?implements DAO<Falta>>{
+
+    +entityManager:EntityManager 
+ 
+    + Cadastrar(obj: Falta, req:HttpServletRequest, resp: HttpServletResponse)
+    + ConsultarTudo( string:String, req:HttpServletRequest, resp: HttpServletResponse):ArrayList<Falta> 
+    + Consultar(codigo:Integer, req:HttpServletRequest, resp: HttpServletResponse):Falta
+    + Alterar(obj: Falta, req:HttpServletRequest, resp: HttpServletResponse)
+    + Deletar(codigo:Integer, req:HttpServletRequest, resp: HttpServletResponse)
+}
+
+@enduml

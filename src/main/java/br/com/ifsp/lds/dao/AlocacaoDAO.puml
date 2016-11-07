@@ -1,0 +1,14 @@
+@startuml
+class AlocacaoDAO <? implements DAO > {
+    -  entityManager:EntityManager
+
+   + Cadastrar( obj:Object ,  req:HttpServletRequest,  resp:HttpServletResponse)
+   + ArrayList ConsultarTudo(string:String,  req:HttpServletRequest,  resp:HttpServletResponse)
+   + Object Consultar(int codigo,  req:HttpServletRequest,  resp:HttpServletResponse)
+   + Alterar( obj:Object ,  req:HttpServletRequest,  resp:HttpServletResponse)
+   + Deletar(int codigo,  req:HttpServletRequest,  resp:HttpServletResponse)
+
+    
+}
+
+@enduml
