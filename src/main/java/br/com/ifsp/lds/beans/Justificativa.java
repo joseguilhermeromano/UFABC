@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -29,6 +30,12 @@ public class Justificativa {
     @Column(name = "just_nm") 
     private String nome;
     
+    @Column(name = "just_tm") 
+    private String tamanho;
+    
+     @Column(name = "just_tp") 
+    private String tipo;
+     
     @Column(name = "just_dt") 
     private Date data;
     
@@ -37,6 +44,9 @@ public class Justificativa {
     
     @Column(name = "just_comprovante") 
     private byte[] comprovante;
+    
+    @OneToOne
+    private Falta falta;
     
     public Justificativa(){
         
@@ -110,6 +120,48 @@ public class Justificativa {
      */
     public void setComprovante(byte[] comprovante) {
         this.comprovante = comprovante;
+    }
+
+    /**
+     * @return the tamanho
+     */
+    public String getTamanho() {
+        return tamanho;
+    }
+
+    /**
+     * @param tamanho the tamanho to set
+     */
+    public void setTamanho(String tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    /**
+     * @return the falta
+     */
+    public Falta getFalta() {
+        return falta;
+    }
+
+    /**
+     * @param falta the falta to set
+     */
+    public void setFalta(Falta falta) {
+        this.falta = falta;
     }
     
     

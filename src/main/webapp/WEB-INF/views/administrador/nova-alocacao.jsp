@@ -56,13 +56,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="dataIni">Data Inicial</label></b>
-                                    <input type="text" id="campoData" name="dataIni" placeholder="Data Inicial" class="form-control estilo-input datepicker"  />
+                                    <input type="text" name="dataIni" placeholder="Data Inicial" class="form-control estilo-input datepicker"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="dataFin">Data Final</label></b>
-                                    <input type="text" id="campoData" name="dataFin" placeholder="Data Final" class="form-control estilo-input datepicker"  />
+                                    <input type="text" name="dataFin" placeholder="Data Final" class="form-control estilo-input datepicker"  />
                                     </div>
                                 </div>
                             </div>

@@ -27,9 +27,6 @@
 <!-- jQuery -->
 <script src="${baseURL}bootstrap/js/jquery.min.js"></script>
 
-<!-- jQuery Mask -->
-<script src="${baseURL}bootstrap/js/jquery.maskedinput.js" type="text/javascript"></script>
-
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="${baseURL}bootstrap/js/bootstrap.min.js"></script>
 
@@ -66,12 +63,6 @@
     });
     $(document).ready(function() {
         $(".select2").select2();
-    });
-    
-    jQuery(function($){
-        $("#campoData").mask("99/99/9999");
-        $("#campoTelefone").mask("(999) 999-9999");
-        $("#campoHora").mask("99:99");
     });
 
 </script>
