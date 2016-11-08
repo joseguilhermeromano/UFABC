@@ -8,9 +8,11 @@ package br.com.ifsp.lds.beans;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,17 +28,15 @@ public class Falta {
     @Column(name = "just_cd") 
     private int codigo;
     
+    @OneToOne(fetch = FetchType.LAZY, mappedBy="falta", optional = true)
+    private Justificativa justificativa;
+    
     @Column(name = "just_nm") 
     private String nome;
     
     @Column(name = "just_dt") 
     private Date data;
     
-    @Column(name = "just_motivo_dec") 
-    private String motivodesc;
-    
-    @Column(name = "just_comprovante")    
-    private byte[] comprovante;
     
     @Column(name = "just_status") 
     private  int status;
@@ -86,35 +86,7 @@ public class Falta {
     public void setData(Date data) {
         this.data = data;
     }
-
-    /**
-     * @return the motivodesc
-     */
-    public String getMotivodesc() {
-        return motivodesc;
-    }
-
-    /**
-     * @param motivodesc the motivodesc to set
-     */
-    public void setMotivodesc(String motivodesc) {
-        this.motivodesc = motivodesc;
-    }
-
-    /**
-     * @return the comprovante
-     */
-    public byte[] getComprovante() {
-        return comprovante;
-    }
-
-    /**
-     * @param comprovante the comprovante to set
-     */
-    public void setComprovante(byte[] comprovante) {
-        this.comprovante = comprovante;
-    }
-
+    
     /**
      * @return the status
      */
@@ -127,6 +99,20 @@ public class Falta {
      */
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    /**
+     * @return the justificativa
+     */
+    public Justificativa getJustificativa() {
+        return justificativa;
+    }
+
+    /**
+     * @param justificativa the justificativa to set
+     */
+    public void setJustificativa(Justificativa justificativa) {
+        this.justificativa = justificativa;
     }
     
 }
