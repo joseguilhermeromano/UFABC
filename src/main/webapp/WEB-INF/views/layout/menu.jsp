@@ -36,7 +36,7 @@
                 </li>              
                 <hr>
                 <li>
-                    <a href="${baseURL}area-restrita/justificativa/cadastrar"><span class="glyphicon glyphicon-copy"></span> Justificativas</a>
+                    <a href="${baseURL}area-restrita/justificativa/buscar"><span class="glyphicon glyphicon-copy"></span> Justificativas</a>
                 </li> 
                 <hr>
                 <li>

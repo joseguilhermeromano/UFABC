@@ -18,10 +18,14 @@ import java.util.logging.Logger;
  *
  * @author rafin
  */
-public class UseRules extends FormValidation{
+public class UseRules{
     private List<Metodo> regras = new ArrayList<Metodo>();
     private List<String> todosErros = new ArrayList<String>();
     public void addRule(String regra, String campo, String dado) throws ClassNotFoundException {
+        FormValidation fmv = new FormValidation();
+        
+        fmv.required("dsfd", "dcfds");
+        
         try {
             String classname = "br.com.ifsp.lds.util.FormValidation";
             Class<?> tipo = Class.forName(classname);

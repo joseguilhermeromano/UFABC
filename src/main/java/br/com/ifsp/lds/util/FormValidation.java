@@ -5,20 +5,42 @@
  */
 package br.com.ifsp.lds.util;
 
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
+import sun.font.EAttribute;
 
 /**
  *
  * @author rafin
  */
 public class FormValidation {
-   
+    private static final int fileLimit = 15000;
+    private static final String types[] = {"pdf", "png", "jpg", "jpeg", "doc","docx"};
     private List<String> erros = new ArrayList<String>();
+    
+    protected boolean validaArquivo(String ext, String size){
+        if(isInteger("arquivo", size)){
+            if((Integer.parseInt(size) / 1024) > fileLimit){
+                      System.out.println("O tamanho do arquivo excede o limit de "+fileLimit+" kbytes...  {"+(Integer.parseInt(size) / 1024)+"}");
+                this.erros.add("O tamanho do arquivo excede o limit de "+fileLimit+" kbytes...");
+                return false;
+            }
+        }
+        for(int i = 0; i < types.length; i++){
+            if(ext.equals(types[i])){
+                return true;
+            }
+        }
+        System.out.println("A extensão{"+ ext+"} não é permitida");
+        this.erros.add("A extensão{"+ ext+"} não é permitida");
+        return false;
+    }
+    
     /**
      * @param str Como String que recebera um provável INT como conteudo
      * @param campo Será o nome do campo no formulário
@@ -63,7 +85,8 @@ public class FormValidation {
             return false;
         }
     }
-
+    
+    
     protected boolean isValidDate(String campo, String dataV) {
         if (campo.isEmpty()) {
             campo = "Campo sem nome :";
@@ -84,7 +107,7 @@ public class FormValidation {
 
     }
     
-    public boolean required(String campo,String dado ){
+    protected boolean required(String campo,String dado ){
         if (campo.isEmpty()) {
             campo = "Campo sem nome :";
         }
@@ -94,7 +117,7 @@ public class FormValidation {
         }
         return true;
     }
-    public boolean isValidHour(String campo, String dataV){
+    protected boolean isValidHour(String campo, String dataV){
         if (campo.isEmpty()) {
             campo = "Campo sem nome :";
         }
@@ -132,5 +155,7 @@ public class FormValidation {
         }
         return resultado;
     }
+    
+    
    
 }
