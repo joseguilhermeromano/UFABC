@@ -45,7 +45,9 @@ public class FaltaModel implements Tarefa{
 
     @Override
     public String buscar(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       int codigo = Integer.parseInt(req.getParameter("codigo"));
+       return "/WEB-INF/views/colaborador/faltas-colaborador.jsp";
+    
     }
 
     @Override
