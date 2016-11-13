@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -48,15 +49,36 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-11 col-sm-11">
                                <div class="input-group">
-                                    <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Nome de treinamento...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default estilo-botao-busca" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                                    </span>
+                                   <form method="POST" action="${baseURL}area-restrita/alocacao/buscar">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                                <select class="select2" name="codCol" style="width: 100%"> 
+                                                  <option  value="" selected>Selecione um Colaborador</option>  
+                                                  <c:forEach items="${usuarios}" var="usuario" varStatus="loop">
+                                                        <option value="${usuario.codigo}">${usuario.nome}</option>
+                                                  </c:forEach>
+                                                </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <br class="visible-xs visible-sm">
+                                                <select class="select2" name="codTreina" style="width: 100%">
+                                                    <option value="" selected>Selecione um Treinamento</option>
+                                                    <c:forEach items="${treinamentos}" var="treinamento" varStatus="loop">
+                                                        <option value="${treinamento.codigo}">${treinamento.nome}</option>
+                                                    </c:forEach>
+                                                </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <br class="visible-xs visible-sm">
+                                            <button class="btn btn-default" type="submit" style="float:left"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                                        </div>
+                                    </div>
+                                   </form>
                                </div><!-- /input-group -->
-                             </div><!-- /.col-lg-6 -->
-                            <div class="col-md-6 col-sm-6">
+                             </div><!-- /.col-lg-3 -->
+                            <div class="col-md-1 col-sm-1">
                                  <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/alocacao/cadastrar" style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Alocação</a>
                             </div>
                         </div><!-- /row -->
@@ -66,21 +88,25 @@
                                 <thead>
                                     <tr>
                                             <th >Treinamento</th>
-                                            <th class="text-center">Usuário</th>
+                                            <th class="text-center">Colaborador</th>
                                             <th class="text-center">Data Início</th>
                                             <th class="text-center">Data Fim</th>
+                                            <th class="text-center">Hora de Início</th>
+                                            <th class="text-center">Hora de Término</th>
                                             <th class="text-center">Dias da Semana</th>
                                             <th class="text-center">Detalhar/Alterar</th>
                                             <th class="text-center">Excluir</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${usuarios}" var="usuario" varStatus="loop">
+                                    <c:forEach items="${alocacoes}" var="alocacao" varStatus="loop">
                                     <tr>    
                                             <td>${alocacao.treinamento.nome}</td>
                                             <td class="text-center">${alocacao.usuario.nome}</td>
-                                            <td class="text-center"><fmt:formatDate pattern="dd/MM/yyy" value="${alocacao.datainicio}"/></td>
-                                            <td class="text-center"><fmt:formatDate pattern="dd/MM/yyy" value="${alocacao.datafinal}"/></td>
+                                            <td class="text-center"><fmt:formatDate pattern="dd/MM/yyyy" value="${alocacao.datainicio}"/></td>
+                                            <td class="text-center"><fmt:formatDate pattern="dd/MM/yyyy" value="${alocacao.datafinal}"/></td>
+                                            <td class="text-center"><fmt:formatDate pattern="HH:mm" value="${alocacao.horainicio}"/></td>
+                                            <td class="text-center"><fmt:formatDate pattern="HH:mm" value="${alocacao.horafim}"/></td>
                                             <td class="text-center">
                                                 <c:if test="${alocacao.segunda}"> Segunda </c:if>
                                                 <c:if test="${alocacao.terca}"> Terça </c:if>
@@ -94,7 +120,7 @@
                                                 <c:param name="codigo" value="${alocacao.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
                                             </td> 
                                             <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
-                                                onclick="setCodigo('${alocao.codigo}'); setLink('${baseURL}area-restrita/alocacao/excluir?codigo=');">
+                                                onclick="setCodigo('${alocacao.codigo}'); setLink('${baseURL}area-restrita/alocacao/excluir?codigo=');">
                                                     <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
                                             </td>
                                     </tr>

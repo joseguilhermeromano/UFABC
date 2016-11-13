@@ -50,11 +50,11 @@ public class UsuarioModel implements Tarefa {
     }
 
     public String login(HttpServletRequest req, HttpServletResponse resp) {
-        String senha = req.getParameter("senha");
-        String login = req.getParameter("username");
+//        String senha = req.getParameter("senha");
+//        String login = req.getParameter("username");
         /*Código temporário para desativar login*/
-        //String senha = "teste";
-        //String login = "teste";
+        String senha = "teste";
+        String login = "teste";
 
         Usuario usuario = userdao.buscaUsuario(login);
         if (usuario != null && usuario.getSenha().equals(senha)) {

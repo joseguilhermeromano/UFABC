@@ -5,6 +5,7 @@
  */
 package br.com.ifsp.lds.beans;
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -37,10 +38,10 @@ public class Alocacao {
     private Date datafinal;
     
     @Column(name = "aloc_inico_hr")
-    private Date horainicio;
+    private Time horainicio;
     
     @Column(name = "aloc_fim_hr")
-    private Date horafim;
+    private Time horafim;
     
     @Column(name = "aloc_segunda")
     private boolean segunda;
@@ -120,7 +121,7 @@ public class Alocacao {
     /**
      * @param horainicio the horainicio to set
      */
-    public void setHorainicio(Date horainicio) {
+    public void setHorainicio(Time horainicio) {
         this.horainicio = horainicio;
     }
 
@@ -134,7 +135,7 @@ public class Alocacao {
     /**
      * @param horafim the horafim to set
      */
-    public void setHorafim(Date horafim) {
+    public void setHorafim(Time horafim) {
         this.horafim = horafim;
     }
 

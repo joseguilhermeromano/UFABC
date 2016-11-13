@@ -38,20 +38,35 @@
                                 </div>
                             </c:forEach>
                         </c:if>
-                        <c:if test="${not empty sucesso}">
-                            <div class="alert alert-success" role="alert">
-                                  ${sucesso}
-                            </div>
-                        </c:if>
-                        <c:if test="${not empty erro}">
-                            <div class="alert alert-danger" role="alert">
-                                  ${erro}
-                            </div>
-                        </c:if>
                         <!-- / Mensagens sucesso/erro -->
                         
                         <form action="${baseURL}area-restrita/alocacao/cadastrar" method="POST"><!--FORM -->
-
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    <b><label for="codCol">Colaborador Responsável</label></b>
+                                    <br>
+                                        <select class="select2" name="codCol" style="width: 100%"> 
+                                          <option selected disabled>Selecione um Colaborador</option>  
+                                          <c:forEach items="${usuarios}" var="usuario" varStatus="loop">
+                                                <option value="${usuario.codigo}">${usuario.nome}</option>
+                                          </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    <b><label for="codTreinamento">Treinamento</label></b>
+                                    <br>
+                                        <select class="select2" name="codTreina" style="width: 100%">
+                                            <option selected disabled>Selecione um Treinamento</option>
+                                            <c:forEach items="${treinamentos}" var="treinamento" varStatus="loop">
+                                                <option value="${treinamento.codigo}">${treinamento.nome}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -82,32 +97,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                    <b><label for="codCol">Colaborador Responsável</label></b>
-                                    <br>
-                                        <select class="select2" style="width: 100%"> 
-                                          <option selected disabled>Selecione um Colaborador</option>  
-                                          <c:forEach items="${usuarios}" var="usuario" varStatus="loop">
-                                                <option value="${usuario.codigo}">${usuario.nome}</option>
-                                          </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                    <b><label for="codTreinamento">Treinamento</label></b>
-                                    <br>
-                                        <select class="select2" style="width: 100%">
-                                            <option selected disabled>Selecione um Treinamento</option>
-                                            <c:forEach items="${treinamentos}" var="treinamento" varStatus="loop">
-                                                <option value="${treinamento.codigo}">${treinamento.nome}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="row">
                                 <div class="col-md-6">
                                    <div class="form-group">
