@@ -58,7 +58,7 @@ public class AlocacaoDAO implements DAO {
     }
 
     @Override
-    public Object Consultar(int codigo) {
+    public Alocacao Consultar(int codigo) {
         Alocacao alocacao = entityManager.find(Alocacao.class, codigo);
         return alocacao;
     }
