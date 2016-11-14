@@ -95,7 +95,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <b><label for="nome">Endereço</label></b>
-                                    <input type="text" name="endereco" placeholder="ex: exemplo@exemplo.com.br" class="form-control estilo-input"  />
+                                    <input type="text" name="endereco" placeholder="Endereço" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>

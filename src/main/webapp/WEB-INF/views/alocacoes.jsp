@@ -95,6 +95,7 @@
                                             <th class="text-center">Hora de Término</th>
                                             <th class="text-center">Dias da Semana</th>
                                             <th class="text-center">Detalhar/Alterar</th>
+                                            <th class="text-center">Cadastrar Falta</th>
                                             <th class="text-center">Excluir</th>
                                     </tr>
                                 </thead>

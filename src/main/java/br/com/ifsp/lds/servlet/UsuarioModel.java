@@ -80,51 +80,50 @@ public class UsuarioModel implements Tarefa {
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
         String pagina = "/WEB-INF/views/administrador/novo-usuario.jsp";
-        try {
-            validation.addRule("required", "nome", req.getParameter("nome"));
-            validation.addRule("required", "cpf", req.getParameter("cpf"));
-            validation.addRule("required", "rg", req.getParameter("rg"));
-            validation.addRule("required", "email", req.getParameter("email"));
-            validation.addRule("isValidEmail", "email", req.getParameter("email"));
-            validation.addRule("required", "telefone", req.getParameter("telefone"));
-            validation.addRule("required", "endereco", req.getParameter("endereco"));
-            validation.addRule("required", "numero", req.getParameter("numero"));
-            validation.addRule("required", "bairro", req.getParameter("bairro"));
-            validation.addRule("required", "cidade", req.getParameter("cidade"));
-            validation.addRule("required", "permissao", req.getParameter("permissao"));
-            validation.addRule("required", "login", req.getParameter("login"));
-            validation.addRule("required", "senha", req.getParameter("senha"));
-            if (validation.executaRegras()) {
-                Usuario usuario = new Usuario();
-                usuario.setNome(req.getParameter("nome"));
-                usuario.setCpf(req.getParameter("cpf"));
-                usuario.setRg(req.getParameter("rg"));
-                usuario.setEmail(req.getParameter("email"));
-                usuario.setTelefone(req.getParameter("telefone"));
-                usuario.setEndereco(req.getParameter("endereco"));
-                usuario.setNumero(req.getParameter("numero"));
-                usuario.setBairro(req.getParameter("bairro"));
-                usuario.setCidade(req.getParameter("cidade"));
-                usuario.setComplemento(req.getParameter("complemento"));
-                usuario.setAdministrador(Integer.parseInt(req.getParameter("permissao")));
-                usuario.setLogin(req.getParameter("login"));
-                usuario.setSenha(req.getParameter("senha"));
-                if (userdao.Cadastrar(usuario) == true) {
-                    req.setAttribute("sucesso", "Usuário cadastrado com sucesso!");
+
+        if (!req.getParameterMap().isEmpty()) {
+            try {
+                validation.addRule("required", "nome", req.getParameter("nome"));
+                validation.addRule("required", "cpf", req.getParameter("cpf"));
+                validation.addRule("required", "rg", req.getParameter("rg"));
+                validation.addRule("required", "email", req.getParameter("email"));
+                validation.addRule("isValidEmail", "email", req.getParameter("email"));
+                validation.addRule("required", "telefone", req.getParameter("telefone"));
+                validation.addRule("required", "endereco", req.getParameter("endereco"));
+                validation.addRule("required", "numero", req.getParameter("numero"));
+                validation.addRule("required", "bairro", req.getParameter("bairro"));
+                validation.addRule("required", "cidade", req.getParameter("cidade"));
+                validation.addRule("required", "permissao", req.getParameter("permissao"));
+                validation.addRule("required", "login", req.getParameter("login"));
+                validation.addRule("required", "senha", req.getParameter("senha"));
+                if (validation.executaRegras()) {
+                    Usuario usuario = new Usuario();
+                    usuario.setNome(req.getParameter("nome"));
+                    usuario.setCpf(req.getParameter("cpf"));
+                    usuario.setRg(req.getParameter("rg"));
+                    usuario.setEmail(req.getParameter("email"));
+                    usuario.setTelefone(req.getParameter("telefone"));
+                    usuario.setEndereco(req.getParameter("endereco"));
+                    usuario.setNumero(req.getParameter("numero"));
+                    usuario.setBairro(req.getParameter("bairro"));
+                    usuario.setCidade(req.getParameter("cidade"));
+                    usuario.setComplemento(req.getParameter("complemento"));
+                    usuario.setAdministrador(Integer.parseInt(req.getParameter("permissao")));
+                    usuario.setLogin(req.getParameter("login"));
+                    usuario.setSenha(req.getParameter("senha"));
+                    if (userdao.Cadastrar(usuario) == true) {
+                        req.setAttribute("sucesso", "Usuário cadastrado com sucesso!");
+                    } else {
+                        req.setAttribute("erro", "Não foi possível cadastrar o Usuário!");
+                    }
+                    return this.listartudo(req, resp);
                 } else {
-                    req.setAttribute("erro", "Não foi possível cadastrar o Usuário!");
+                    req.setAttribute("erros", validation.getTodosErros());
+                    return "/WEB-INF/views/administrador/novo-usuario.jsp";
                 }
-                return this.listartudo(req, resp);
-            } else {
-
-                for (String c : validation.getTodosErros()) {
-                    System.out.println(c);
-                }
-
-                return "/WEB-INF/views/administrador/novo-usuario.jsp";
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
+                Logger.getLogger(UsuarioModel.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
-            Logger.getLogger(UsuarioModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return pagina;
     }
@@ -133,7 +132,7 @@ public class UsuarioModel implements Tarefa {
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
         int codigo = Integer.parseInt(req.getParameter("codigo"));
         Usuario usuario = userdao.Consultar(codigo);
-
+        
         if (req.getParameter("alterar") != null) {
             try {
                 validation.addRule("required", "nome", req.getParameter("nome"));
@@ -163,7 +162,7 @@ public class UsuarioModel implements Tarefa {
                     usuario = userdao.Consultar(codigo);
                     req.setAttribute("sucesso", "Usuário alterado com sucesso!");
                 } else {
-                    req.setAttribute("erro","Não foi possível alterar o usuário");
+                    req.setAttribute("erro", "Não foi possível alterar o usuário");
                     req.setAttribute("erros", validation.getTodosErros());
                 }
             } catch (Exception e) {
