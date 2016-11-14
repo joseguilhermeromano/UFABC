@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,10 +38,15 @@ public class Falta {
     
     @Column(name = "just_dt") 
     private Date data;
-    
-    
+        
     @Column(name = "just_status") 
     private  int status;
+    
+    @ManyToOne
+    @JoinColumn(name = "aloc_cd")
+    private Alocacao alocacao;
+    
+    
     
     public Falta(){
         
@@ -113,6 +120,20 @@ public class Falta {
      */
     public void setJustificativa(Justificativa justificativa) {
         this.justificativa = justificativa;
+    }
+
+    /**
+     * @return the alocacao
+     */
+    public Alocacao getAlocacao() {
+        return alocacao;
+    }
+
+    /**
+     * @param alocacao the alocacao to set
+     */
+    public void setAlocacao(Alocacao alocacao) {
+        this.alocacao = alocacao;
     }
     
 }
