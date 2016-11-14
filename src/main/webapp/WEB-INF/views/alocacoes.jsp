@@ -119,7 +119,13 @@
                                             <td class="text-center">
                                                 <a href="<c:url value="${baseURL}area-restrita/alocacao/alterar">
                                                 <c:param name="codigo" value="${alocacao.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
-                                            </td> 
+                                            </td>
+                                            
+                                            <td class="text-center">
+                                                <a href="<c:url value="${baseURL}area-restrita/falta/cadastrar">
+                                                <c:param name="codigoAlocacao" value="${alocacao.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-plus estilo-botao-edicao"></span></a>
+                                            </td>
+                                            
                                             <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
                                                 onclick="setCodigo('${alocacao.codigo}'); setLink('${baseURL}area-restrita/alocacao/excluir?codigo=');">
                                                     <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>

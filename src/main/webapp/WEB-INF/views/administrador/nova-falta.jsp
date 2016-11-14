@@ -10,12 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Edição de Registro do Colaborador</title>
-        <c:import url="WEB-INF/views/layout/importes.jsp"></c:import>
+        <title>Nova Falta</title>
+        <c:import url="../layout/importes.jsp"></c:import>
     </head>
     <body>
         <div id="wrapper"><!-- Corpo da Página --> 
-            <c:import url="WEB-INF/views/layout/menu.jsp"></c:import>
+            <c:import url="../layout/menu.jsp"></c:import>
             
         <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -28,7 +28,7 @@
                     <div class="col-lg-12">
 
                         <!-- AQUI COMEÇA O CONTEÚDO DA PÁGINA -->
-                        <h3><span class="glyphicon glyphicon-pencil"></span> Alteração de Registro</h3><hr>
+                        <h3><span class="glyphicon glyphicon-plus"></span> Nova Falta</h3><hr>
                         
                         <!-- Mensagens sucesso/erro -->
                         <c:if test="${not empty erros}">
@@ -50,7 +50,7 @@
                         </c:if>
                         <!-- / Mensagens sucesso/erro -->
                         
-                        <form action="" method=""><!--FORM -->
+                        <form action="${baseURL}area-restrita/falta/cadastrar" method="post"><!--FORM -->
 
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
@@ -64,17 +64,15 @@
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
                                     <div class="form-group">
-                                    <b><label for="cpf">Data: </label></b>
-                                    <input type="date" name="data" value="${alocacao.data}" class="form-control estilo-input"  />
+                                    <b><label for="cpf">Data da falta: </label></b>
+                                    <input type="text" name="data" value="${alocacao.data}" class="form-control estilo-input datepicker"  />
                                     </div>
                                 </div>
-                                
-
                             </div>
 
                             
                             <!-- BOTÃO DO FORMULÁRIO -->
-                            <center><input type="submit" value="Cadastrar"  class="btn btn-success button" /></center>
+                            <center><input type="submit" value="Cadastrar" name="cadastrar"  class="btn btn-success button" /></center>
                             
                         </form><!-- /FORMULÁRIO -->
                             
@@ -85,7 +83,7 @@
         <!-- /#page-content-wrapper -->
             
         </div><!-- /Corpo da Página --> 
-        <c:import url="WEB-INF/views/layout/footer.jsp"></c:import>
+        <c:import url="../layout/footer.jsp"></c:import>
     </body>
 </html>
 
