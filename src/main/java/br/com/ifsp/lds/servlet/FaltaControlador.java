@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author eddie
  */
-public class FaltaModel implements Tarefa {
+public class FaltaControlador implements Tarefa {
 
     private static final String[] permAdmin = {"listartudo"};
 
@@ -57,7 +57,7 @@ public class FaltaModel implements Tarefa {
                     return "/WEB-INF/views/administrador/nova-falta.jsp";
                 } 
             } catch (Exception e) {
-                Logger.getLogger(FaltaModel.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(FaltaControlador.class.getName()).log(Level.SEVERE, null, e);
             }
         }
 

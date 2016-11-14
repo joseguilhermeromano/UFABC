@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Luiz Felipe
  */
-public class UsuarioModel implements Tarefa {
+public class UsuarioControlador implements Tarefa {
 
     /*
     * @permAdmin É um Map estático utilizado para especificar 
@@ -116,13 +116,14 @@ public class UsuarioModel implements Tarefa {
                     } else {
                         req.setAttribute("erro", "Não foi possível cadastrar o Usuário!");
                     }
+                    req.setAttribute("nome", "");
                     return this.listartudo(req, resp);
                 } else {
                     req.setAttribute("erros", validation.getTodosErros());
                     return "/WEB-INF/views/administrador/novo-usuario.jsp";
                 }
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
-                Logger.getLogger(UsuarioModel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return pagina;
@@ -166,7 +167,7 @@ public class UsuarioModel implements Tarefa {
                     req.setAttribute("erros", validation.getTodosErros());
                 }
             } catch (Exception e) {
-                Logger.getLogger(UsuarioModel.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UsuarioControlador.class.getName()).log(Level.SEVERE, null, e);
             }
         }
         req.setAttribute("usuario", usuario);
@@ -178,9 +179,6 @@ public class UsuarioModel implements Tarefa {
         String nome = req.getParameter("nome") == null ? "" : req.getParameter("nome");
         List<Usuario> usuarios = userdao.ConsultarTudo(nome);
         req.setAttribute("usuarios", usuarios);
-        for (Usuario u : usuarios) {
-            System.out.println(u.getNome());
-        }
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }
 

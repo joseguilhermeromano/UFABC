@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author eddie
  */
-public class AlocacaoModel implements Tarefa {
+public class AlocacaoControlador implements Tarefa {
      private static final String[] permAdmin = {"cadastrar"};
      private UseRules validation = new UseRules();
      private AlocacaoDAO alocaDAO = new AlocacaoDAO();
@@ -87,9 +87,9 @@ public class AlocacaoModel implements Tarefa {
                 }
             }        
         } catch (NoSuchMethodException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TreinamentoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }         catch (ParseException ex) {
-             Logger.getLogger(AlocacaoModel.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(AlocacaoControlador.class.getName()).log(Level.SEVERE, null, ex);
          }
 
         return "/WEB-INF/views/administrador/nova-alocacao.jsp";
@@ -148,9 +148,9 @@ public class AlocacaoModel implements Tarefa {
                 }
             }        
         } catch (NoSuchMethodException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TreinamentoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }         catch (ParseException ex) {
-             Logger.getLogger(AlocacaoModel.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(AlocacaoControlador.class.getName()).log(Level.SEVERE, null, ex);
          }
 
         return "/WEB-INF/views/administrador/edita-alocacao.jsp";

@@ -7,7 +7,7 @@ package br.com.ifsp.lds.controller;
 
 
 import br.com.ifsp.lds.servlet.Tarefa;
-import br.com.ifsp.lds.servlet.UsuarioModel;
+import br.com.ifsp.lds.servlet.UsuarioControlador;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -36,7 +36,7 @@ public class Controller extends HttpServlet {
         
         try {
             App app = new App(req);
-            String classe = app.getClasse()+"Model";
+            String classe = app.getClasse()+"Controlador";
             String metodo = app.getMetodo();
             String classname = "br.com.ifsp.lds.servlet." + classe;
             

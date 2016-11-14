@@ -22,7 +22,7 @@ import javax.servlet.http.Part;
  *
  * @author Aluno
  */
-public class JustificativaModel implements Tarefa {
+public class JustificativaControlador implements Tarefa {
 
     private static final String[] permAdmin = {""};
     private UseRules validation = new UseRules();
@@ -52,11 +52,11 @@ public class JustificativaModel implements Tarefa {
                   System.out.println("You should not pass !!");
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
-            Logger.getLogger(JustificativaModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(JustificativaModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServletException ex) {
-            Logger.getLogger(JustificativaModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "fdsssssssssssssssssssssssssssssssss";
         //return "/WEB-INF/views/administrador/justificativa.jsp";
@@ -82,7 +82,7 @@ public class JustificativaModel implements Tarefa {
                 req.setAttribute("justificativa", justificadao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
-            Logger.getLogger(JustificativaModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return "/WEB-INF/views/administrador/justificativa.jsp";

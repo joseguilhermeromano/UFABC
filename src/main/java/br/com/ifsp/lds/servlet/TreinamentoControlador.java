@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luiz Felipe
  */
-public class TreinamentoModel implements Tarefa {
+public class TreinamentoControlador implements Tarefa {
     /*
      * @permAdmin É um Map estático utilizado para especificar 
      * os nomes dos métodos de classes de models que são permitidos 
@@ -79,7 +79,7 @@ public class TreinamentoModel implements Tarefa {
             }
         
         } catch (NoSuchMethodException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TreinamentoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return "/WEB-INF/views/administrador/novo-treinamento.jsp";
@@ -123,7 +123,7 @@ public class TreinamentoModel implements Tarefa {
             }
         
         } catch (NoSuchMethodException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(TreinamentoModel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TreinamentoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return "/WEB-INF/views/administrador/edita-treinamento.jsp";
