@@ -58,14 +58,12 @@ public class AlocacaoModel implements Tarefa {
                Alocacao aloca = new Alocacao();
                SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
                SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
-               Date pegahoraini = tm.parse(req.getParameter("horaIni"));
-               Date pegahorafin = tm.parse(req.getParameter("horaTerm"));
+               Time timeini = new Time(tm.parse(req.getParameter("horaIni")).getTime());
+               Time timefin = new Time(tm.parse(req.getParameter("horaTerm")).getTime());
                aloca.setTreinamento(new TreinamentoDAO().Consultar(Integer.parseInt(req.getParameter("codTreina"))));
                aloca.setUsuarios(new UsuarioDAO().Consultar(Integer.parseInt(req.getParameter("codCol"))));
                aloca.setDatainicio(data.parse(req.getParameter("dataIni")));
                aloca.setDatafinal(data.parse(req.getParameter("dataFin")));
-               Time timeini = new Time(pegahoraini.getTime());
-               Time timefin = new Time(pegahorafin.getTime());
                aloca.setHorainicio(timeini);
                aloca.setHorafim(timefin);
                aloca.setSegunda(req.getParameter("seg")!= null ? true : false);
