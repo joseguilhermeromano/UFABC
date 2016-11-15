@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,25 +57,30 @@
                             <table class="table ls-table" id="tabela1">
                                 <thead>
                                     <tr>
-                                            <th class="text-center col-md-1">Código</th>
-                                            <th class="text-center col-md-3">Data</th>
-                                            <th class="text-center col-md-6">Descrição</th>
-                                            <th class="text-center col-md-6">Justificativa</th>
-                                            <th class="text-center col-md-6">Status</th>                                                
-                                            <th class="text-center col-md-1">Excluir</th>
+                                        <th class="text-center col-md-1">Código</th>
+                                        <th class="text-center col-md-1">Treinamento</th>
+                                        <th class="text-center col-md-1">Usuário</th>
+                                        <th class="text-center col-md-3">Data</th>
+                                        <th class="text-center col-md-3">Status</th>
+                                        <th class="text-center col-md-3">Justificativa</th>
+                                        <th class="text-center col-md-1">Excluir</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach var="item" items="${listaFaltas}">
-                                    <tr>
+                                    <tr class="text-center">
                                             <td class="text-center">${item.codigo}</td>
-                                            <td>${item.nome}</td>
-                                            <td>${item.data}</td>
-                                            <td>${item.descricao}</td>
-                                            <td>${item.justifica}</td>
-                                            <td>${item.status}</td>                                            
+                                            <td class="text-center">${item.alocacao.treinamento.nome}</td>
+                                            <td class="text-center">${item.alocacao.usuario.nome}</td>
+                                            <td><fmt:formatDate pattern="dd/MM/yyyy" value="${item.data}"/></td>
+                                            <td>${item.status}</td>                
+                                            <td><a href="<c:url value="${baseURL}area-restrita/justificativa/buscar">
+                                                <c:param name="codigo" value="${falta.justificativa.codigo}"></c:param></c:url>">
+                                                    <span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a>
+                                            </td>
+                                                    
                                             <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
-                                                onclick="setCodigo('${item.codigo}'); setLink('${baseURL}area-restrita/treinamento/excluir?codigo=');">
+                                                onclick="setCodigo('${item.codigo}'); setLink('${baseURL}area-restrita/falta/excluir?codigo=');">
                                                     <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
                                             </td>
                                     </tr>
