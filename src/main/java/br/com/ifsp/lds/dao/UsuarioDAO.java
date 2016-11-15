@@ -22,6 +22,11 @@ public class UsuarioDAO implements DAO<Usuario> {
     
     private EntityManager entityManager = new JPAUtil().getEntityManager();
     
+    /**
+     * Consulta o usuario de acordo com o valor de login
+     * @param login
+     * @return Usuario ou null
+     */
     public Usuario buscaUsuario(String login) {
         try {
             Query query = entityManager.createQuery("SELECT u FROM "

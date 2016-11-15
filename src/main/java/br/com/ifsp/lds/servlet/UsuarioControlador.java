@@ -36,20 +36,47 @@ public class UsuarioControlador implements Tarefa {
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp) {
         return this.permAdmin;
     }
-
+    
+    /**
+     * Exibe a pagina inicial do usuario
+     * @param req
+     * @param resp
+     * @return pagina para redirecinamento
+     */
     public String inicio(HttpServletRequest req, HttpServletResponse resp) {
         return "/WEB-INF/views/administrador/index.jsp";
     }
-
+    
+    /**
+     * Exibe a pagina de perfil do usuario
+     * @param req
+     * @param resp
+     * @return pagina para redirecinamento
+     */
     public String perfil(HttpServletRequest req, HttpServletResponse resp) {
         
         return "/WEB-INF/views/administrador/perfil.jsp";
     }
-
+    
+    /**
+     * Acessa pagina de novo usuario
+     * @param req
+     * @param resp
+     * @return pagina para redirecinamento
+     */
     public String novousuario(HttpServletRequest req, HttpServletResponse resp) {
         return "/WEB-INF/views/administrador/novo-usuario.jsp";
     }
-
+    
+    /**
+     * Efetua o processedimento para realização de login. 
+     * Abre uma sessão caso o login e a senha do usuário estejam
+     * corretos
+     * @param req
+     * @param resp
+     * @return pagina inicial caso o login seja efetuado com sucesso ou 
+     * pagina de login novamente caso ocorra um erro durante o login
+     */
     public String login(HttpServletRequest req, HttpServletResponse resp) {
 //        String senha = req.getParameter("senha");
 //        String login = req.getParameter("username");
@@ -72,7 +99,14 @@ public class UsuarioControlador implements Tarefa {
         }
         return "/index.jsp";
     }
-
+    
+    /**
+     * Procedimento para realizar logoff, finalização de 
+     * de sessão e redirecionamento para a pagina inicial
+     * @param req
+     * @param resp
+     * @return pagina inicial apos realizar o logoff
+     */
     public String logoff(HttpServletRequest req, HttpServletResponse resp) {
         req.getSession().removeAttribute("usuarioLogado");
         return "/index.jsp";
@@ -198,5 +232,4 @@ public class UsuarioControlador implements Tarefa {
         }
         return this.listartudo(req, resp);
     }
-
 }

@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class App {
     
+    /**
+     * Array que guarda todos os elemetos da URL
+     */
     private String segments[];
     private String classe;
     private String metodo = "index";
@@ -26,6 +29,11 @@ public class App {
         this.setMetodo();
     }
     
+    
+    /**
+     * Define qual elemento dentro do array segments 
+     * deve ser considerado como nome de uma classe
+     */
     private void setClasse() {
         this.classe = this.segments[1].toLowerCase();
         if(this.segments.length <= 3)
@@ -37,11 +45,19 @@ public class App {
         this.formataNomeClasse();
     }
     
+    /**
+     * Formata o nome da classe deixando o 
+     * primeiro caracter da string classe em maiúsculo 
+     */
     private void formataNomeClasse() {
         this.classe = this.classe.substring(0,1).toUpperCase() 
                 + this.classe.substring(1);
     }
     
+    /**
+     * Define qual elemento presente em segments deve ser considerado como
+     * o nome do método 
+     */
     private void setMetodo() {
         if(this.segments.length > 3)
             this.metodo = this.segments[3];
@@ -50,10 +66,17 @@ public class App {
         }
     }
     
+    /**
+     * @return nome do método
+     */
     public String getMetodo() {
         return this.metodo;
     }
     
+    /**
+     * 
+     * @return nome da classe 
+     */
     public String getClasse() {
         return this.classe;
     }

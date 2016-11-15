@@ -85,6 +85,12 @@ public class TreinamentoControlador implements Tarefa {
         return "/WEB-INF/views/administrador/novo-treinamento.jsp";
     }
     
+    /**
+     * Acessa a pagina de alocacao
+     * @param req
+     * @param resp
+     * @return pagina para redirecionamento 
+     */
     public String alocacao(HttpServletRequest req, HttpServletResponse resp){
         return "/WEB-INF/views/administrador/edita-alocacao.jsp";
     }

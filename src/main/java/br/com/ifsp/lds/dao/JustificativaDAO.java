@@ -34,6 +34,7 @@ public class JustificativaDAO implements DAO{
         }
     }
     
+    @Override
     public Object Consultar(int codigo) {
         Justificativa justificativa = entityManager.find(Justificativa.class, codigo);
         return justificativa;

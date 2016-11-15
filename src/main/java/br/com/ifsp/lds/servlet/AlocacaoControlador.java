@@ -208,6 +208,12 @@ public class AlocacaoControlador implements Tarefa {
         return "/WEB-INF/views/alocacoes.jsp";
     }
     
+    /**
+     * Efetua o procedimento para consultar todos os treinamentos e usuarios
+     * e os registram na requisição
+     * @param req
+     * @param resp 
+     */
     public void buscacolabtreino(HttpServletRequest req, HttpServletResponse resp){
         UsuarioDAO userdao = new UsuarioDAO();
         TreinamentoDAO treinodao= new TreinamentoDAO();
