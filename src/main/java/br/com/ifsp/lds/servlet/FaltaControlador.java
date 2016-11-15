@@ -37,7 +37,7 @@ public class FaltaControlador implements Tarefa {
 
     @Override
     public String cadastrar(HttpServletRequest req, HttpServletResponse resp) {
-        int codigoAlocacao = Integer.parseInt(req.getParameter("codigo"));
+        int codigoAlocacao = Integer.parseInt(req.getParameter("codigoAlocacao"));
         Alocacao alocacao = new AlocacaoDAO().Consultar(codigoAlocacao);
         req.setAttribute("alocacao", alocacao);
         
@@ -45,11 +45,19 @@ public class FaltaControlador implements Tarefa {
             try {
                 validation.addRule("required", "data", req.getParameter("data"));
                 if(validation.executaRegras()) {
-                    SimpleDateFormat dtFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat dtFormat = new SimpleDateFormat("dd/MM/yyyy");
                     Falta falta = new Falta();
+                    falta.setStatus(0);
                     falta.setData(dtFormat.parse(req.getParameter("data")));
                     falta.setAlocacao(alocacao);
-                    faltaDAO.Cadastrar(falta);
+                    if(faltaDAO.Cadastrar(falta)) {
+                        req.setAttribute("sucesso", "Falta cadastrada com sucesso!");
+                        return listartudo(req, resp);
+                    } 
+                    else {
+                        req.setAttribute("erro", "Não foi possível cadastrar a falta");
+                        return "/WEB-INF/views/administrador/nova-falta.jsp";
+                    }
                 } 
                 else {
                     req.setAttribute("erro", "Não foi possível cadastrar a falta");
@@ -60,7 +68,6 @@ public class FaltaControlador implements Tarefa {
                 Logger.getLogger(FaltaControlador.class.getName()).log(Level.SEVERE, null, e);
             }
         }
-
         return "/WEB-INF/views/administrador/nova-falta.jsp";
     }
 
@@ -71,8 +78,8 @@ public class FaltaControlador implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
-        /*faltas = faltaDAO.ConsultarTudo("",req,resp);
-        req.setAttribute("listaFaltas", faltas);*/
+        faltas = faltaDAO.ConsultarTudo("");
+        req.setAttribute("listaFaltas", faltas);
         return "/WEB-INF/views/administrador/faltas.jsp";
     }
 
