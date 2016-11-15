@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -37,6 +38,7 @@ public class Falta {
     private String nome;
     
     @Column(name = "just_dt") 
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date data;
         
     @Column(name = "just_status") 

@@ -77,6 +77,8 @@
                                             <td><a href="<c:url value="${baseURL}area-restrita/justificativa/buscar">
                                                 <c:param name="codigo" value="${falta.justificativa.codigo}"></c:param></c:url>">
                                                     <span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a>
+                                                    <a href="<c:url value="${baseURL}area-restrita/justificativa/cadastrar">
+                                                 <c:param name="codigo" value="${item.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-plus estilo-botao-edicao"></span></a>
                                             </td>
                                                     
                                             <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 

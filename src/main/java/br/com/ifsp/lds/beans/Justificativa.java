@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -37,6 +38,7 @@ public class Justificativa {
     private String tipo;
      
     @Column(name = "just_dt") 
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date data;
     
     @Column(name = "just_motivo_dec") 
@@ -119,7 +121,7 @@ public class Justificativa {
      * @param comprovante the comprovante to set
      */
     public void setComprovante(byte[] comprovante) {
-        this.comprovante = comprovante;
+        //this.comprovante = comprovante;
     }
 
     /**
