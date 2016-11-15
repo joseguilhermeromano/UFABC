@@ -42,6 +42,7 @@ public class UsuarioControlador implements Tarefa {
     }
 
     public String perfil(HttpServletRequest req, HttpServletResponse resp) {
+        
         return "/WEB-INF/views/administrador/perfil.jsp";
     }
 

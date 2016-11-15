@@ -126,3 +126,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 /nbproject/
+
+#Persistence
+persistence.xml
