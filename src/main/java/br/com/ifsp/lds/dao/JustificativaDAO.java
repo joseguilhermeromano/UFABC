@@ -35,8 +35,8 @@ public class JustificativaDAO implements DAO{
     }
     
     public Object Consultar(int codigo) {
-        Justificativa alocacao = entityManager.find(Justificativa.class, codigo);
-        return alocacao;
+        Justificativa justificativa = entityManager.find(Justificativa.class, codigo);
+        return justificativa;
     }
 
     @Override
@@ -52,7 +52,6 @@ public class JustificativaDAO implements DAO{
             entityManager.getTransaction().begin();
             entityManager.merge(obj);
             entityManager.getTransaction().commit();
-
             return true;
         } catch (Exception ex){ 
             ex.printStackTrace();

@@ -25,7 +25,16 @@ public class FaltaDAO implements DAO<Falta>{
     
     @Override
     public boolean Cadastrar(Falta obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(obj);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+            return false;
+        }
     }
 
     @Override
@@ -33,7 +42,7 @@ public class FaltaDAO implements DAO<Falta>{
         try {  
             entityManager.getTransaction().begin();
             TypedQuery<Falta> query = null;            
-                query = entityManager.createQuery("select f from falta f",Falta.class);
+                query = entityManager.createQuery("select f from Falta f",Falta.class);
                 ArrayList<Falta> faltaResult = (ArrayList<Falta>) query.getResultList();
             entityManager.getTransaction().commit();
             return faltaResult;
