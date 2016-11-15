@@ -78,11 +78,11 @@ public class UsuarioControlador implements Tarefa {
      * pagina de login novamente caso ocorra um erro durante o login
      */
     public String login(HttpServletRequest req, HttpServletResponse resp) {
-//        String senha = req.getParameter("senha");
-//        String login = req.getParameter("username");
-        /*Código temporário para desativar login*/
-        String senha = "teste";
-        String login = "teste";
+         String senha = req.getParameter("senha");
+         String login = req.getParameter("username");
+       /* Quando forem fixar usuário e senha no login, 
+          usar o gitignore pra não fixar para todos que puxarem o projeto do git
+         */
 
         Usuario usuario = userdao.buscaUsuario(login);
         if (usuario != null && usuario.getSenha().equals(senha)) {

@@ -83,7 +83,8 @@
                                     <textarea class="form-control" id="editor" name="motivo" rows="10" cols='10'></textarea>
                                 </div>
                             </div>
-                            </div>                                                        
+                            </div>      
+                            <input type="hidden" value="<%= request.getParameter("codigo") %>" name="codigo" id="codigo">
                             <!-- BOTÃO DO FORMULÁRIO -->
                             <center><input type="submit" value="Cadastrar"  class="btn btn-success button" /></center>
                             
