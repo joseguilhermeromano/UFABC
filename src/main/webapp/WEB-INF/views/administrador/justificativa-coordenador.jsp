@@ -11,11 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Justificativa</title>
-        <c:import url="WEB-INF/views/layout/importes.jsp"></c:import>
+        <c:import url="../layout/importes.jsp"></c:import>
     </head>
     <body>
         <div id="wrapper"><!-- Corpo da Página --> 
-            <c:import url="WEB-INF/views/layout/menu.jsp"></c:import>
+            <c:import url="../layout/menu.jsp"></c:import>
             
         <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -30,16 +30,20 @@
                         <!-- AQUI COMEÇA O CONTEÚDO DA PÁGINA -->
                         <h3><span class="glyphicon glyphicon-pencil"></span>Justificativa</h3><hr>
                         
+                    <c:if test="${empty justificativa}">
+                        <p class="alert alert-info">Ainda não há justificativa cadastrada para essa falta</p>
+                    </c:if>
+                    <c:if test="${not empty justificativa}">    
                         <div class="my_font_size">
-                            <div class="col-md-4"><b>Colaborador:</b> usuario 1 </div>
-                            <div class="col-md-5"><b>Treinamento:</b> Treinamento 1 </div>
-                            <div class="col-md-4"><b>Data da falta:</b> 01/04/2016  </b></div>
+                            <div class="col-md-4"><b>Colaborador:</b> ${justificativa.falta.alocacao.usuario.nome} </div>
+                            <div class="col-md-5"><b>Treinamento:</b> ${justificativa.falta.alocacao.treinamento.nome} </div>
+                            <div class="col-md-4"><b>Data da falta:</b> ${justificativa.falta.data}  </b></div>
                         </div>
                         
                         <h3 class="col-md-12">Conteudo da Justificativa: </h3>
                         <div>
                         <p class="my_font_size col-md-8 text-justify row">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt mollis dolor quis efficitur. Pellentesque sed justo ullamcorper, hendrerit massa sit amet, fermentum neque. Aenean eu pulvinar lorem, sed sagittis est. Fusce pulvinar mollis neque, sit amet pharetra mi vehicula eget. In lobortis orci in turpis interdum
+                            ${justificativa.motivodesc}
                         </p></div>
                         
                         <div class="row col-md-12">
@@ -58,7 +62,7 @@
                             <!-- BOTÃO DO FORMULÁRIO -->
                             
                         </form><!-- /FORMULÁRIO -->
-                            
+                    </c:if>        
                     </div>
                 </div>
             </div>
@@ -66,7 +70,7 @@
         <!-- /#page-content-wrapper -->
             
         </div><!-- /Corpo da Página --> 
-        <c:import url="WEB-INF/views/layout/footer.jsp"></c:import>
+        <c:import url="../layout/footer.jsp"></c:import>
     </body>
 </html>
 
