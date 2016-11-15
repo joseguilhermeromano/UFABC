@@ -85,7 +85,7 @@ public class JustificativaControlador implements Tarefa {
             Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return "/WEB-INF/views/administrador/justificativa.jsp";
+        return "/WEB-INF/views/administrador/justificativa-coordenador.jsp";
     }
 
     @Override
