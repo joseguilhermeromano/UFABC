@@ -5,6 +5,7 @@
  */
 package br.com.ifsp.lds.servlet;
 
+import br.com.ifsp.lds.beans.Alocacao;
 import br.com.ifsp.lds.beans.Falta;
 import br.com.ifsp.lds.beans.Justificativa;
 import br.com.ifsp.lds.beans.Usuario;
@@ -15,11 +16,14 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -37,7 +41,9 @@ public class JustificativaControlador implements Tarefa {
 
     private static final String[] permAdmin = {""};
     private UseRules validation = new UseRules();
-
+    private JustificativaDAO justificaDao = new JustificativaDAO();
+    
+    
     @Override
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp) {
         return this.permAdmin;
@@ -63,19 +69,25 @@ public class JustificativaControlador implements Tarefa {
                 HttpSession session = req.getSession();
                 Justificativa justificador= new Justificativa();
                 Usuario user = (Usuario) session.getAttribute("usuarioLogado");
-                JustificativaDAO justificaDao = new JustificativaDAO();
                 SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
                 justificador.setComprovante(this.readFully(filePart.getInputStream()));
+                justificador.setStatus(-1);
                 justificador.setData(data.parse(req.getParameter("data")));
                 justificador.setMotivodesc(req.getParameter("motivo"));
                 justificador.setTamanho(Integer.toString((int) filePart.getSize()));
                 justificador.setNome(fileName);
                 justificador.setTipo(this.getExt(fileName));
                 justificador.setFalta(faltadao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
-                justificaDao.Cadastrar(justificador);
-                return "/WEB-INF/views/colaborador/faltas-colaborador.jsp";
+                
+                if(justificaDao.Cadastrar(justificador)) {
+                    return "/WEB-INF/views/colaborador/faltas-colaborador.jsp";
+                } else {
+                    req.setAttribute("erro", "Não foi possível cadastrar a justificativa");
+                    return "/WEB-INF/views/administrador/justificativa.jsp";
+                }
             } else {
                 req.setAttribute("erros", validation.getTodosErros());
+                req.setAttribute("erro", "Não foi possível cadastrar a justificativa");
                 return "/WEB-INF/views/administrador/justificativa.jsp";
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
@@ -87,8 +99,6 @@ public class JustificativaControlador implements Tarefa {
         } catch (ParseException ex) {
             return "/WEB-INF/views/administrador/justificativa.jsp";
         }
-        //return "/WEB-INF/views/colaborador/justificativa.jsp";
-        //return "/WEB-INF/views/administrador/justificativa.jsp";
     }
 
     private String getExt(String ext) {
@@ -117,12 +127,37 @@ public class JustificativaControlador implements Tarefa {
 
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Justificativa justificativa = justificaDao.
+                Consultar(Integer.parseInt(req.getParameter("codigo")));
+        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
+        req.setAttribute("usuario", usuario);
+        if(req.getParameter("escolha") != null) {
+            justificativa.setStatus(Integer.parseInt(req.getParameter("escolha")));
+            justificaDao.Alterar(justificativa);
+        }
+        
+        
+        req.setAttribute("justificativa", justificaDao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
+        return "/WEB-INF/views/visualizar-justificativa.jsp";
     }
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
+        req.setAttribute("usuario", usuario);
+        
+        List<Justificativa> justificativas = new ArrayList<Justificativa>();
+        if(usuario.getAdministrador() != 1) {
+            for(Alocacao u : usuario.getAlocacoes()) {
+                for(Falta f : u.getFaltas()) {
+                    if(f.getJustificativa() != null) {
+                       justificativas.add(f.getJustificativa());  
+                    }
+                }
+            }
+        }
+        req.setAttribute("justificativas", justificativas);
+        return "";
     }
 
     @Override
@@ -132,18 +167,37 @@ public class JustificativaControlador implements Tarefa {
             validation.addRule("required", "Id da justificativa", req.getParameter("codigo"));
             validation.addRule("isInteger", "Id da justificativa", req.getParameter("codigo"));
             if (validation.executaRegras()) {
-                req.setAttribute("justificativa", justificadao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
+                
+                Justificativa justificativa = justificadao.Consultar(Integer.parseInt(req.getParameter("codigo")));
+                req.setAttribute("justificativa", justificativa);
+                
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
             Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return "/WEB-INF/views/administrador/justificativa-coordenador.jsp";
+        
+        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
+        req.setAttribute("usuario", usuario);
+        return "/WEB-INF/views/visualizar-justificativa.jsp";
     }
 
     @Override
     public String excluir(HttpServletRequest req, HttpServletResponse resp) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    /**
+     * Efetua o procedimento para exibir o pdf
+     * @param req
+     * @param resp
+     * @throws IOException 
+     */
+    public void showPdf(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Justificativa justificativa = justificaDao.Consultar(Integer.parseInt(req.getParameter("codigo")));
+        byte[] justificativaPdf = justificativa.getComprovante();
+        resp.setContentType("application/pdf");
+        resp.setContentLength(justificativaPdf.length);
+        resp.getOutputStream().write(justificativaPdf);
+    }
+    
 }
