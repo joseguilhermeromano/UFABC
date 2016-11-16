@@ -57,7 +57,8 @@ public class FaltaDAO implements DAO<Falta>{
 
     @Override
     public Falta Consultar(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Falta falta = entityManager.find(Falta.class, codigo);
+        return falta;
     }
 
     @Override

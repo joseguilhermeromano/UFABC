@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import sun.misc.IOUtils;
 
 /**
  *
@@ -58,15 +59,16 @@ public class JustificativaControlador implements Tarefa {
             validation.addRule("required", "motivo", req.getParameter("motivo"));
             if (validation.executaRegras()) {
                 //req.setAttribute("justificativa", justificadao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
-                FaltaDAO faltadao = null;
+                FaltaDAO faltadao = new FaltaDAO();
                 HttpSession session = req.getSession();
-                Justificativa justificador = null;
+                Justificativa justificador= new Justificativa();
                 Usuario user = (Usuario) session.getAttribute("usuarioLogado");
                 JustificativaDAO justificaDao = new JustificativaDAO();
                 SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
                 justificador.setComprovante(this.readFully(filePart.getInputStream()));
-                justificador.setData(data.parse(req.getParameter("dataIni")));
+                justificador.setData(data.parse(req.getParameter("data")));
                 justificador.setMotivodesc(req.getParameter("motivo"));
+                justificador.setTamanho(Integer.toString((int) filePart.getSize()));
                 justificador.setNome(fileName);
                 justificador.setTipo(this.getExt(fileName));
                 justificador.setFalta(faltadao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
@@ -98,22 +100,19 @@ public class JustificativaControlador implements Tarefa {
     }
 
     private byte[] readFully(InputStream is) throws IOException {
-        int len;
-        int size = 1024;
-        byte[] buf;
-        if (is instanceof ByteArrayInputStream) {
-            size = is.available();
-            buf = new byte[size];
-            len = is.read(buf, 0, size);
-        } else {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            buf = new byte[size];
-            while ((len = is.read(buf, 0, size)) != -1) {
-                bos.write(buf, 0, len);
-            }
-            buf = bos.toByteArray();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+        int nRead;
+        byte[] data = new byte[16384];
+
+        while ((nRead = is.read(data, 0, data.length)) != -1) {
+            buffer.write(data, 0, nRead);
         }
-        return buf;
+
+        buffer.flush();
+
+        return buffer.toByteArray();
+
     }
 
     @Override
