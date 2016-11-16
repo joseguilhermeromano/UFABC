@@ -73,12 +73,13 @@
                                             <td class="text-center">${item.alocacao.treinamento.nome}</td>
                                             <td class="text-center">${item.alocacao.usuario.nome}</td>
                                             <td><fmt:formatDate pattern="dd/MM/yyyy" value="${item.data}"/></td>
-                                            <td>${item.status}</td>                
+                                            <td class="text-center"><c:if test="${item.status == 1}">Reposição realizada</c:if>
+                                                            <c:if test="${item.status == 0}">Sem reposição</c:if>
+                                            </td>
                                             <td><a href="<c:url value="${baseURL}area-restrita/justificativa/buscar">
-                                                <c:param name="codigo" value="${falta.justificativa.codigo}"></c:param></c:url>">
+                                                <c:param name="codigo" value="${item.justificativa.codigo}"></c:param></c:url>">
                                                     <span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a>
-                                                    <a href="<c:url value="${baseURL}area-restrita/justificativa/cadastrar">
-                                                 <c:param name="codigo" value="${item.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-plus estilo-botao-edicao"></span></a>
+                                                    
                                             </td>
                                                     
                                             <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
