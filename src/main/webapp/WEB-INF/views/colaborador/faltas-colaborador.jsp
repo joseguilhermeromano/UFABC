@@ -11,11 +11,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Faltas</title>
-        <c:import url="WEB-INF/views/layout/importes.jsp"></c:import>
+        <c:import url="../layout/importes.jsp"></c:import>
     </head>
     <body>
         <div id="wrapper"><!-- Corpo da Página --> 
-            <c:import url="WEB-INF/views/layout/menu.jsp"></c:import>
+            <c:import url="../layout/menu.jsp"></c:import>
             
         <!-- Page Content -->
         <div id="page-content-wrapper">
@@ -59,10 +59,11 @@
                                         <th class="text-center col-md-1">Código </th>
                                         <th class="text-center col-md-1">Treinamento</th>
                                         <th class="text-center col-md-3">Data</th>
-                                        <th class="text-center col-md-6">Descrição</th>
-                                        <th class="text-center col-md-6">Justificativa</th>
+                                        
+                                        
                                         <th class="text-center col-md-6">Status</th>
-                                        <th class="text-center col-md-6">Visualizar</th>
+                                        <th class="text-center col-md-6">Justificativa</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -70,15 +71,24 @@
                                     <c:forEach var="item" items="${listaFaltas}">
                                     <tr>
                                             <td class="text-center">${item.codigo}</td>
-                                            <td>${item.treinamento.nome}</td>
-                                            <td>${item.data}</td>
-                                            <td>${item.descricao}</td>
-                                            <td>${item.justifica}</td>
-                                            <td>${item.status}</td>
-                                            <td><a href='<c:url value="">
-                                                       <c:param name="codigo" value="${item.codigo}"/>
-                                                   </c:url>' >
-                                                    <span class="col-md-6 glyphicon glyphicon-eye-open"></span></a></td>
+                                            <td class="text-center">${item.alocacao.treinamento.nome}</td>
+                                            <td class="text-center">${item.data}</td>
+                                            
+                                            <td class="text-center"><c:if test="${item.status == 1}">Reposição realizada</c:if>
+                                                            <c:if test="${item.status == 0}">Sem reposição</c:if>
+                                            </td>
+                                            
+                                            <td class="text-center">
+                                                <c:if test="${item.justificativa.codigo != '' || item.justificativa.codigo != 0}">
+                                                    <a href="<c:url value="${baseURL}area-restrita/justificativa/buscar">
+                                                <c:param name="codigo" value="${item.justificativa.codigo}"></c:param></c:url>">
+                                                    <span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a>
+                                                </c:if>
+                                                <c:if test="${item.justificativa.codigo == 0 || item.justificativa.codigo == ''}">
+                                                    <a href="<c:url value="${baseURL}area-restrita/justificativa/cadastrar">
+                                                    <c:param name="codigo" value="${item.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-plus estilo-botao-edicao"></span></a>
+                                                </c:if>
+                                            </td>
                                     </tr>
                                     </c:forEach>
                                 </tbody>
@@ -110,6 +120,6 @@
         <!-- /#page-content-wrapper -->
             
         </div><!-- /Corpo da Página --> 
-        <c:import url="WEB-INF/views/layout/footer.jsp"></c:import>
+        <c:import url="../layout/footer.jsp"></c:import>
     </body>
 </html>
