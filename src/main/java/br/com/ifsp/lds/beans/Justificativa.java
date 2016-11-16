@@ -35,7 +35,7 @@ public class Justificativa {
     @Column(name = "just_tm") 
     private String tamanho;
     
-     @Column(name = "just_tp") 
+    @Column(name = "just_tp") 
     private String tipo;
      
     @Column(name = "just_dt") 
@@ -46,8 +46,17 @@ public class Justificativa {
     private String motivodesc;
     
     @Lob
-    @Column(name = "just_comprovante",columnDefinition="LONGBLOB") 
+    @Column(name = "just_comprovante",columnDefinition = "LONGBLOB") 
     private byte[] comprovante;
+    
+    
+    @Column(name = "just_status")
+    /**
+     * -1: pendente
+     * 1: aceito
+     * 0: recusado
+     */
+    private int status;
     
     @OneToOne
     private Falta falta;
@@ -166,6 +175,20 @@ public class Justificativa {
      */
     public void setFalta(Falta falta) {
         this.falta = falta;
+    }
+
+    /**
+     * @return the status
+     */
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
+        this.status = status;
     }
     
     

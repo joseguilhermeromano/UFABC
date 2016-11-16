@@ -8,8 +8,11 @@ package br.com.ifsp.lds.dao;
 
 
 import br.com.ifsp.lds.beans.Justificativa;
+import br.com.ifsp.lds.controller.Controller;
 import br.com.ifsp.lds.util.JPAUtil;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -28,14 +31,15 @@ public class JustificativaDAO implements DAO{
             entityManager.getTransaction().commit();
             return true;
         }catch(Exception ex){
-            ex.printStackTrace();
+            System.err.println(ex);
+            //Logger.getLogger(JustificativaDAO.class.getName()).log(Level.SEVERE, null, ex);
             entityManager.getTransaction().rollback();
             return false;
         }
     }
     
     @Override
-    public Object Consultar(int codigo) {
+    public Justificativa Consultar(int codigo) {
         Justificativa justificativa = entityManager.find(Justificativa.class, codigo);
         return justificativa;
     }

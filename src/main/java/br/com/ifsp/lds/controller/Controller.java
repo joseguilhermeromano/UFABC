@@ -75,6 +75,8 @@ public class Controller extends HttpServlet {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        req.getRequestDispatcher(pagina).forward(req, resp);
+        if(pagina != null) {
+            req.getRequestDispatcher(pagina).forward(req, resp);
+        }
     }
 }

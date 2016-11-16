@@ -63,8 +63,16 @@ public class FaltaDAO implements DAO<Falta>{
 
     @Override
     public boolean Alterar(Falta obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+     try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(obj);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch(Exception ex) {
+            System.err.println(ex);
+            return false;
+        }
+     }
 
     @Override
     public boolean Deletar(int codigo) {
