@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
-    Created on : Oct 31, 2016, 12:18:03 PM
-    Author     : eddie
+    Created on : 19/09/2016, 22:01:00
+    Author     : José Guilherme
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,7 +27,37 @@
                         </a><!-- /#Botão de exibir/ocultar menu lateral -->
                     <div class="col-lg-12">
                         <h3><span class="glyphicon glyphicon-home"></span> Início</h3><hr>
-                        
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="totaltreinosmes">
+                                    <center><span>6</span></center>
+                                    <center><p style="font-family: Arial Black; font-size: 11pt; color:#ffffff;">Total de treinos por mês!</p></center>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="treinospendentes">
+                                    <center><span style="font-family: Arial Black; font-size: 45pt; color:#ffffff;">4</span></center>
+                                    <center><p>Treinamentos pendentes!</p></center>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="faltas">
+                                    <center><span style="font-family: Arial Black; font-size: 45pt; color:#ffffff;">4</span></center>
+                                    <center><p>Quantidade de Faltas!</p></center>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <h4><span class="glyphicon glyphicon-alert"></span><b> Notificações</b></h4>
+                        <br>
+                        <div class="alert alert-info" role="alert">
+                            <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                        </div>
+
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                        </div>
+
                     </div>
                 </div>
             </div>

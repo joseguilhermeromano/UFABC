@@ -327,6 +327,26 @@ h3{
     color:#ffffff;
 }
 
+.faltas{
+    width: 100%; 
+    height: 125px;
+    background-color: red;
+    padding: 5px;
+    margin: 10px;
+}
+
+.faltas span{
+    font-family: Arial Black; 
+    font-size: 45pt; 
+    color:#ffffff;
+}
+
+.faltas p{
+    font-family: Arial Black; 
+    font-size: 11pt; 
+    color:#ffffff;
+}
+
 @media(min-width:600px){
     .totaltreinosmes span{
         font-family: Arial Black; 

@@ -30,24 +30,20 @@ public class Falta {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "just_cd") 
     private int codigo;
-    
-    @OneToOne(fetch = FetchType.LAZY, mappedBy="falta", optional = true)
-    private Justificativa justificativa;
-    
-    @Column(name = "just_nm") 
-    private String nome;
-    
+  
     @Column(name = "just_dt") 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date data;
         
-    @Column(name = "just_status") 
+    @Column(name = "falta_status") 
     private  int status;
     
     @ManyToOne
-    @JoinColumn(name = "aloc_cd")
+    @JoinColumn(name = "falta_aloc_cd")
     private Alocacao alocacao;
     
+    @OneToOne(fetch = FetchType.LAZY, mappedBy="falta", optional = true)
+    private Justificativa justificativa;
     
     
     public Falta(){
@@ -66,20 +62,6 @@ public class Falta {
      */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
-    }
-
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     /**
