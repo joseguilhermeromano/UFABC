@@ -7,22 +7,24 @@ package br.com.ifsp.lds.servlet;
 
 import br.com.ifsp.lds.beans.Usuario;
 import br.com.ifsp.lds.dao.UsuarioDAO;
+import br.com.ifsp.lds.util.JPAUtil;
 import br.com.ifsp.lds.util.UseRules;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 /**
  *
  * @author Luiz Felipe
  */
 public class UsuarioControlador implements Tarefa {
-
     /*
     * @permAdmin É um Map estático utilizado para especificar 
     * os nomes dos métodos de classes de models que são permitidos 
@@ -56,7 +58,7 @@ public class UsuarioControlador implements Tarefa {
        /* Quando forem fixar usuário e senha no login, 
           usar o gitignore pra não fixar para todos que puxarem o projeto do git
          */
-
+         
         Usuario usuario = userdao.buscaUsuario(login);
         if (usuario != null && usuario.getSenha().equals(senha)) {
             HttpSession session = req.getSession();

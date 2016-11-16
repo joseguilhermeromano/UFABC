@@ -73,7 +73,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="data">Data</label></b>
-                                    <input type="text" name="data" placeholder="Data" class="form-control estilo-input"  />
+                                    <input type="text" name="data" placeholder="Data" class="form-control estilo-input datepicker"  />
                                     </div>
                                 </div>                                
                             </div>

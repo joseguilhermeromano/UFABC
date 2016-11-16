@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -44,7 +45,8 @@ public class Justificativa {
     @Column(name = "just_motivo_dec") 
     private String motivodesc;
     
-    @Column(name = "just_comprovante") 
+    @Lob
+    @Column(name = "just_comprovante",columnDefinition="LONGBLOB") 
     private byte[] comprovante;
     
     @OneToOne
@@ -121,7 +123,7 @@ public class Justificativa {
      * @param comprovante the comprovante to set
      */
     public void setComprovante(byte[] comprovante) {
-        //this.comprovante = comprovante;
+        this.comprovante = comprovante;
     }
 
     /**
