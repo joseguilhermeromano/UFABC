@@ -11,6 +11,7 @@ import br.com.ifsp.lds.beans.Justificativa;
 import br.com.ifsp.lds.beans.Usuario;
 import br.com.ifsp.lds.dao.AlocacaoDAO;
 import br.com.ifsp.lds.dao.FaltaDAO;
+import br.com.ifsp.lds.dao.UsuarioDAO;
 import br.com.ifsp.lds.util.UseRules;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,6 +82,7 @@ public class FaltaControlador implements Tarefa {
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
 
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
+        usuario = new UsuarioDAO().Consultar(usuario.getCodigo());
         req.setAttribute("usuario", usuario);
         faltas = new ArrayList<>();
         

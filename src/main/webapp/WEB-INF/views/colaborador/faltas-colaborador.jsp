@@ -79,12 +79,12 @@
                                             </td>
                                             
                                             <td class="text-center">
-                                                <c:if test="${item.justificativa.codigo != '' || item.justificativa.codigo != 0}">
+                                                <c:if test="${not empty item.justificativa}">
                                                     <a href="<c:url value="${baseURL}area-restrita/justificativa/buscar">
                                                 <c:param name="codigo" value="${item.justificativa.codigo}"></c:param></c:url>">
                                                     <span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a>
                                                 </c:if>
-                                                <c:if test="${item.justificativa.codigo == 0 || item.justificativa.codigo == ''}">
+                                                <c:if test="${ empty item.justificativa}">
                                                     <a href="<c:url value="${baseURL}area-restrita/justificativa/cadastrar">
                                                     <c:param name="codigo" value="${item.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-plus estilo-botao-edicao"></span></a>
                                                 </c:if>

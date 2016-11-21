@@ -80,6 +80,9 @@ public class JustificativaControlador implements Tarefa {
                 justificador.setFalta(faltadao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
                 
                 if(justificaDao.Cadastrar(justificador)) {
+                    Falta falta = faltadao.Consultar(Integer.parseInt(req.getParameter("codigo")));
+                    falta.setJustificativa(justificador);
+                    faltadao.Alterar(falta);
                     return "/WEB-INF/views/colaborador/faltas-colaborador.jsp";
                 } else {
                     req.setAttribute("erro", "Não foi possível cadastrar a justificativa");
