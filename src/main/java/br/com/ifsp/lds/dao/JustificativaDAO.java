@@ -11,6 +11,7 @@ import br.com.ifsp.lds.beans.Justificativa;
 import br.com.ifsp.lds.controller.Controller;
 import br.com.ifsp.lds.util.JPAUtil;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -64,7 +65,14 @@ public class JustificativaDAO implements DAO{
             return false;
         }
     }
-
+    
+    public ArrayList consultarUltimas() {
+        Query query = entityManager.createQuery("SELECT j FROM Justificativa j ORDER BY j.codigo DESC");
+        ArrayList<Justificativa> justificativas = (ArrayList<Justificativa>) query.setMaxResults(5).getResultList();
+        return justificativas;
+    }
+    
+    
     @Override
     public boolean Deletar(int codigo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

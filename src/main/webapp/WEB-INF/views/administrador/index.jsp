@@ -50,14 +50,47 @@
                         <br>
                         <h4><span class="glyphicon glyphicon-alert"></span><b> Notificações</b></h4>
                         <br>
-                        <div class="alert alert-info" role="alert">
-                            <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                        <div class="col-md-5">
+                            <table class="table ls-table" id="tabela1">
+                                <caption class="text-center text-success"><h4><b>Últimas Justificativas</b></h4> </caption>
+                                <thead>
+                                    <tr>
+                                        <th class="text text-center">Usuario</th>
+                                        <th class="text text-center">Treinameto</th>
+                                        <th class="text text-center">Data Justificativa</th>
+                                    </tr>
+                                </thead>
+                                <c:forEach var="j" items="${utltimasJustificativas}" >
+                                    <tr>
+                                        <td class="text text-center">${j.falta.alocacao.usuario.nome}</td>
+                                        <td class="text text-center">${j.falta.alocacao.treinamento.nome}</td>
+                                        <td class="text text-center">${j.data}</td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                            <button class="col-lg-12 col-sm-12 col-xs-12 col-md-12 btn btn-success">Visualisar todas as justificativas</button>
                         </div>
-
-                        <div class="alert alert-danger" role="alert">
-                            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                        
+                        <div class="col-md-5 col-md-offset-2">
+                            <table id="tabela1" class="table ls-table">
+                                <caption class="text-center text-success"><h4><b>Últimas Reposições</b></h4> </caption>
+                                <thead>
+                                    <tr>
+                                        <th class="text text-center">Usuario</th>
+                                        <th class="text text-center">Treinameto</th>
+                                        <th class="text text-center">Data Justificativa</th>
+                                    </tr>
+                                </thead>
+                                <c:forEach var="j" items="${utltimasJustificativas}" >
+                                    <tr>
+                                        <td class="text text-center">${j.falta.alocacao.usuario.nome}</td>
+                                        <td class="text text-center">${j.falta.alocacao.treinamento.nome}</td>
+                                        <td class="text text-center">${j.data}</td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                            <button class="col-lg-12 col-sm-12 col-xs-12 col-md-12 btn btn-success">Visualisar todas as reposições</button>
                         </div>
-
                     </div>
                 </div>
             </div>

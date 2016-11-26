@@ -5,7 +5,9 @@
  */
 package br.com.ifsp.lds.servlet;
 
+import br.com.ifsp.lds.beans.Justificativa;
 import br.com.ifsp.lds.beans.Usuario;
+import br.com.ifsp.lds.dao.JustificativaDAO;
 import br.com.ifsp.lds.dao.UsuarioDAO;
 import br.com.ifsp.lds.util.JPAUtil;
 import br.com.ifsp.lds.util.UseRules;
@@ -46,7 +48,21 @@ public class UsuarioControlador implements Tarefa {
      * @return pagina para redirecinamento
      */
     public String inicio(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/index.jsp";
+        
+        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
+        req.setAttribute("usuario", usuario);
+
+        String segmento;
+        if (usuario.getAdministrador() != 1) {
+            segmento = "colaborador";
+        } else {
+            segmento = "administrador";
+        }
+                    
+        List<Justificativa> justificativas = new JustificativaDAO().consultarUltimas();
+        req.setAttribute("utltimasJustificativas", justificativas);
+
+        return "/WEB-INF/views/" + segmento + "/index.jsp";
     }
     
     /**
@@ -82,7 +98,7 @@ public class UsuarioControlador implements Tarefa {
     public String login(HttpServletRequest req, HttpServletResponse resp) {
          String senha = req.getParameter("senha");
          String login = req.getParameter("username");
-       /* Quando forem fixar usuário e senha no login, 
+         /* Quando forem fixar usuário e senha no login, 
           usar o gitignore pra não fixar para todos que puxarem o projeto do git
          */
          
@@ -90,14 +106,8 @@ public class UsuarioControlador implements Tarefa {
         if (usuario != null && usuario.getSenha().equals(senha)) {
             HttpSession session = req.getSession();
             session.setAttribute("usuarioLogado", usuario);
-            String segmento;
-            if (usuario.getAdministrador() == 1) {
-                segmento = "administrador";
-            } else {
-                segmento = "colaborador";
-            }
-
-            return "/WEB-INF/views/" + segmento + "/index.jsp";
+            
+            return this.inicio(req, resp);
         }
         return "/index.jsp";
     }

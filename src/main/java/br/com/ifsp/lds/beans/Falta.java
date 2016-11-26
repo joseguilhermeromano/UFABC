@@ -45,6 +45,8 @@ public class Falta {
     @OneToOne(fetch = FetchType.LAZY, mappedBy="falta", optional = true)
     private Justificativa justificativa;
     
+    @OneToOne(fetch = FetchType.LAZY, mappedBy="falta", optional = true)
+    private Reposicao reposicao;
     
     public Falta(){
         
@@ -118,6 +120,20 @@ public class Falta {
      */
     public void setAlocacao(Alocacao alocacao) {
         this.alocacao = alocacao;
+    }
+
+    /**
+     * @return the reposicao
+     */
+    public Reposicao getReposicao() {
+        return reposicao;
+    }
+
+    /**
+     * @param reposicao the reposicao to set
+     */
+    public void setReposicao(Reposicao reposicao) {
+        this.reposicao = reposicao;
     }
     
 }
