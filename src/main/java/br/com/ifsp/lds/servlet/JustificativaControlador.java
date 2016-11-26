@@ -136,11 +136,47 @@ public class JustificativaControlador implements Tarefa {
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
         req.setAttribute("usuario", usuario);
         if(req.getParameter("escolha") != null) {
-            justificativa.setMotivorecusa(req.getParameter("recusa"));
             justificativa.setStatus(Integer.parseInt(req.getParameter("escolha")));
-            justificaDao.Alterar(justificativa);
+            if(Integer.parseInt(req.getParameter("escolha"))==0){
+                try {
+                    validation.addRule("required", "recusa", req.getParameter("recusa"));
+                    if (validation.executaRegras()) {
+                        justificativa.setMotivorecusa(req.getParameter("recusa"));
+                        if(justificaDao.Alterar(justificativa)==true){
+                            req.setAttribute("sucesso", "A Justificativa foi recusada com sucesso!");
+                        }else{
+                            req.setAttribute("erro", "Não foi possível recusar a justificativa!");
+                        }
+                    }else{
+                        req.setAttribute("erro", "Não foi possível recusar a justificativa! Por favor, escreva o motivo da recusa!");
+                        req.setAttribute("erros", validation.getTodosErros());
+                    }
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvocationTargetException ex) {
+                    Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchMethodException ex) {
+                    Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+            }else if(Integer.parseInt(req.getParameter("escolha"))==1){
+                justificativa.setMotivorecusa("");
+                if(justificaDao.Alterar(justificativa)==true){
+                    req.setAttribute("sucesso", "A Justificativa foi aceita com sucesso!");
+                }else{
+                    req.setAttribute("erro", "Não foi possível aceitar a justificativa!");
+                }
+            }
+            
+            
         }
-        
         
         req.setAttribute("justificativa", justificaDao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
         return "/WEB-INF/views/visualizar-justificativa.jsp";

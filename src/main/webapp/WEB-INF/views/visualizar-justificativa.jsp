@@ -31,6 +31,26 @@
                         <!-- AQUI COMEÇA O CONTEÚDO DA PÁGINA -->
                         <h3><span class="glyphicon glyphicon-pencil"></span>Justificativa</h3><hr>
                         
+                    <!-- Mensagens sucesso/erro -->
+                        <c:if test="${not empty erros}">
+                            <c:forEach var="erro" items="${erros}}">
+                                <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                                </div>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${not empty sucesso}">
+                            <div class="alert alert-success" role="alert">
+                                  ${sucesso}
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty erro}">
+                            <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                            </div>
+                        </c:if>
+                        <!-- / Mensagens sucesso/erro -->
+                        
                     <c:if test="${empty justificativa}">
                         <p class="alert alert-info">Ainda não há justificativa cadastrada para essa falta</p>
                     </c:if>
@@ -73,9 +93,14 @@
                                 ${justificativa.motivodesc}
                         </div>
                         <br>
-                        
-                        <c:if test="${usuario.administrador == 1}">
-<!--                            <form action="${baseURL}area-restrita/justificativa/alterar" method="post" >FORM -->
+                        <c:if test="${!empty justificativa.motivorecusa}">
+                        <h3><span class="glyphicon glyphicon-warning-sign"></span> Motivo da Recusa </h3><hr>
+                        <div class="alert alert-info my_font_size col-md-12 text-justify">
+                                ${justificativa.motivorecusa}
+                        </div>
+                        <br>
+                        </c:if>
+                        <c:if test="${(usuario.administrador == 1) && (justificativa.status < 0)}">
                                 <div class="col-md-6 col-md-offset-4 top-buffer">
                                     <span class="form-group col-md-4">
                                         <button type="button" data-toggle="modal" data-target="#modalAceitar" class="btn btn-success">Aceitar</button>
@@ -85,8 +110,6 @@
                                         <button type="button" data-toggle="modal" data-target="#modalRecusar" class="btn btn-danger">Recusar</button>
                                     </span>
                                 </div>
-<!--                                <input type="hidden" name="codigo" value="">-->
-<!--                            </form> /FORMULÁRIO -->
                         </c:if>        
                             <!-- BOTÃO DO FORMULÁRIO -->
                             
