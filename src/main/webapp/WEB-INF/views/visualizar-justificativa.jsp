@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,41 +36,48 @@
                     </c:if>
                     <c:if test="${not empty justificativa}">    
                         <div class="my_font_size">
-                            <div class="col-md-4"><b>Colaborador:</b> ${justificativa.falta.alocacao.usuario.nome} </div>
-                            <div class="col-md-5"><b>Treinamento:</b> ${justificativa.falta.alocacao.treinamento.nome} </div>
-                            <div class="col-md-4"><b>Data da falta:</b> ${justificativa.falta.data}  </b></div>
-                            <div class="col-md-12"><b>Status da justificativa:
-                                    <c:if test="${justificativa.status == -1}"> <span class="text-warning">Pendente</span> </c:if>
-                                    <c:if test="${justificativa.status == 0}"> <span class="text-danger">Recusada</span></c:if>
-                                    <c:if test="${justificativa.status == 1}"> <span class="text-success">Aceita</span></c:if>
-                                </b>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <b>Colaborador:</b> ${justificativa.falta.alocacao.usuario.nome} 
+                                </div>
+                                <div class="col-md-6">
+                                    <b>Treinamento:</b> ${justificativa.falta.alocacao.treinamento.nome} 
+                                </div>
                             </div>
-                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <b>Data da falta:</b> <fmt:formatDate pattern="dd/MM/yyyy" value="${justificativa.falta.data}"/> 
+                                </div>
+                                <div class="col-md-6">
+                                    <b>Data da Justificativa:</b> <fmt:formatDate pattern="dd/MM/yyyy" value="${justificativa.data}"/> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <b>Status da justificativa:
+                                        <c:if test="${justificativa.status == -1}"> <span class="text-warning">Pendente</span> </c:if>
+                                        <c:if test="${justificativa.status == 0}"> <span class="text-danger">Recusada</span></c:if>
+                                        <c:if test="${justificativa.status == 1}"> <span class="text-success">Aceita</span></c:if>
+                                    </b>
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                        <span class='my_plyphicon glyphicon glyphicon-save-file exemplo'></span><b>Comprovante:</b>  
+                                        <a href="${baseURL}area-restrita/justificativa/showPdf/?codigo=${justificativa.codigo}">${justificativa.nome}</a>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <h3 class="col-md-12">Descrição: </h3>
-                        <div>
-                        <p class="my_font_size col-md-8 text-justify row">
-                            ${justificativa.motivodesc}
-                        </p></div>
-                        
-                        <div class="row col-md-12">
-                            <button class="btn btn-default  top-buffer" type="submit" form="file">
-                                <i class='my_plyphicon glyphicon glyphicon-file exemplo'>    
-                                </i>Arquivo em anexo 
-                            </button>
+                        <br>
+                        <h3><span class="glyphicon glyphicon-list"></span> Descrição </h3><hr>
+                        <div class="alert alert-info my_font_size col-md-12 text-justify">
+                                ${justificativa.motivodesc}
                         </div>
-                        
-                            <form target="_blank" method="post" action="${baseURL}area-restrita/justificativa/showPdf/" id="file">
-                                <input type="hidden" name="codigo" value="${justificativa.codigo}">
-                            </form>
-                        
                         <br>
                         
                         <c:if test="${usuario.administrador == 1}">
                             <form action="${baseURL}area-restrita/justificativa/alterar" method="post" ><!--FORM -->
-                                <div class="col-md-12 col-md-offset-2 top-buffer">
-                                    <span class="form-group col-md-2">
+                                <div class="col-md-6 col-md-offset-4 top-buffer">
+                                    <span class="form-group col-md-4">
                                         <button type="submit" name="escolha" value="1" class="btn btn-success">Aceitar</button>
                                     </span>
                                     <span class="form-group ">
