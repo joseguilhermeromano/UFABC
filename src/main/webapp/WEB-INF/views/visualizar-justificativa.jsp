@@ -75,17 +75,18 @@
                         <br>
                         
                         <c:if test="${usuario.administrador == 1}">
-                            <form action="${baseURL}area-restrita/justificativa/alterar" method="post" ><!--FORM -->
+<!--                            <form action="${baseURL}area-restrita/justificativa/alterar" method="post" >FORM -->
                                 <div class="col-md-6 col-md-offset-4 top-buffer">
                                     <span class="form-group col-md-4">
-                                        <button type="submit" name="escolha" value="1" class="btn btn-success">Aceitar</button>
+                                        <button type="button" data-toggle="modal" data-target="#modalAceitar" class="btn btn-success">Aceitar</button>
                                     </span>
                                     <span class="form-group ">
-                                        <button type="submit" name="escolha" value="0" class="btn btn-danger">Recusar</button>
+                                        
+                                        <button type="button" data-toggle="modal" data-target="#modalRecusar" class="btn btn-danger">Recusar</button>
                                     </span>
                                 </div>
-                                <input type="hidden" name="codigo" value="${justificativa.codigo}">
-                            </form><!-- /FORMULÁRIO -->
+<!--                                <input type="hidden" name="codigo" value="">-->
+<!--                            </form> /FORMULÁRIO -->
                         </c:if>        
                             <!-- BOTÃO DO FORMULÁRIO -->
                             
@@ -97,7 +98,55 @@
             </div>
         </div>
         <!-- /#page-content-wrapper -->
-            
+        
+        <!-- Modal de Recusa -->
+        <div id="modalRecusar" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="${baseURL}area-restrita/justificativa/alterar" method="POST">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Recusa de Justificativa</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <p>Deseja realmente recusar esta justificativa? </p>
+                        <p class="text-warning"><small>Por favor, escreva o motivo da recusa desta justificativa!</small></p>
+                        <textarea class="form-control" id="recusa" name="recusa" rows="5" cols='10'>${justificativa.motivorecusa}</textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        <button class="btn btn-danger" type="submit" name="escolha" value="0">Recusar a Justificativa</button>
+                    </div>
+                    <input type="hidden" name="codigo" value="${justificativa.codigo}">
+                    </form>
+                </div>
+            </div>
+        </div> 
+        <!-- Modal de Aceite -->
+        <div id="modalAceitar" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="${baseURL}area-restrita/justificativa/alterar" method="POST">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Aceite de Justificativa</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <p>Deseja realmente aceitar esta justificativa? </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        <button class="btn btn-success" type="submit" name="escolha" value="1">Aceitar</button>
+                    </div>
+                    <input type="hidden" name="codigo" value="${justificativa.codigo}">
+                    </form>
+                </div>
+            </div>
+        </div> 
+        
+        
         </div><!-- /Corpo da Página --> 
         <c:import url="layout/footer.jsp"></c:import>
     </body>

@@ -48,6 +48,9 @@ public class Justificativa {
     @Lob
     @Column(name = "just_comprovante",columnDefinition = "LONGBLOB") 
     private byte[] comprovante;
+            
+    @Column(name = "just_more") 
+    private String motivorecusa;
     
     
     @Column(name = "just_status")
@@ -189,6 +192,20 @@ public class Justificativa {
      */
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    /**
+     * @return the motivorecusa
+     */
+    public String getMotivorecusa() {
+        return motivorecusa;
+    }
+
+    /**
+     * @param motivorecusa the motivorecusa to set
+     */
+    public void setMotivorecusa(String motivorecusa) {
+        this.motivorecusa = motivorecusa;
     }
     
     

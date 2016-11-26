@@ -136,6 +136,7 @@ public class JustificativaControlador implements Tarefa {
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
         req.setAttribute("usuario", usuario);
         if(req.getParameter("escolha") != null) {
+            justificativa.setMotivorecusa(req.getParameter("recusa"));
             justificativa.setStatus(Integer.parseInt(req.getParameter("escolha")));
             justificaDao.Alterar(justificativa);
         }
