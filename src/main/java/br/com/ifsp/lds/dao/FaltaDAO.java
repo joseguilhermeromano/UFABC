@@ -42,8 +42,8 @@ public class FaltaDAO implements DAO<Falta>{
         try {  
             entityManager.getTransaction().begin();
             TypedQuery<Falta> query = null;            
-                query = entityManager.createQuery("select f from Falta f",Falta.class);
-                ArrayList<Falta> faltaResult = (ArrayList<Falta>) query.getResultList();
+            query = entityManager.createQuery("select f from Falta f",Falta.class);
+            ArrayList<Falta> faltaResult = (ArrayList<Falta>) query.getResultList();
             entityManager.getTransaction().commit();
             return faltaResult;
         } catch (Exception ex) { 
@@ -72,7 +72,7 @@ public class FaltaDAO implements DAO<Falta>{
             System.err.println(ex);
             return false;
         }
-     }
+    }
 
     @Override
     public boolean Deletar(int codigo) {

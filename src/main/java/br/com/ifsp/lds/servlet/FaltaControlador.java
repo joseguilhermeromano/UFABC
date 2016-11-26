@@ -86,16 +86,14 @@ public class FaltaControlador implements Tarefa {
         req.setAttribute("usuario", usuario);
         faltas = new ArrayList<>();
         
-        if (usuario != null) {
-            if (usuario.getAdministrador() != 1) {
-                for (Alocacao a : usuario.getAlocacoes()) {
-                    for (Falta f : a.getFaltas()) {
-                        faltas.add(f);
-                    }
+        if (usuario.getAdministrador() != 1) {
+            for (Alocacao a : usuario.getAlocacoes()) {
+                for (Falta f : a.getFaltas()) {
+                    faltas.add(f);
                 }
-                req.setAttribute("listaFaltas", faltas);
-                return "/WEB-INF/views/colaborador/faltas-colaborador.jsp";
             }
+            req.setAttribute("listaFaltas", faltas);
+            return "/WEB-INF/views/colaborador/faltas-colaborador.jsp";
         }
 
         faltas = faltaDAO.ConsultarTudo("");
