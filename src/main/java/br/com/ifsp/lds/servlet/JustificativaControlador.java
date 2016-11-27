@@ -39,7 +39,7 @@ import sun.misc.IOUtils;
  */
 public class JustificativaControlador implements Tarefa {
 
-    private static final String[] permAdmin = {""};
+    private static final String[] permAdmin = {"aceitarecusa"};
     private UseRules validation = new UseRules();
     private JustificativaDAO justificaDao = new JustificativaDAO();
     
@@ -131,6 +131,11 @@ public class JustificativaControlador implements Tarefa {
 
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
+        return "/WEB-INF/views/colaborador/edita-justificativa.jsp";
+    }
+    
+    
+    public String aceitarecusa(HttpServletRequest req, HttpServletResponse resp){
         Justificativa justificativa = justificaDao.
                 Consultar(Integer.parseInt(req.getParameter("codigo")));
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
@@ -181,7 +186,6 @@ public class JustificativaControlador implements Tarefa {
         req.setAttribute("justificativa", justificaDao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
         return "/WEB-INF/views/visualizar-justificativa.jsp";
     }
-
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");

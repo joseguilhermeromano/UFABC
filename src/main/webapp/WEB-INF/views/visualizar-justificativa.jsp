@@ -126,7 +126,7 @@
         <div id="modalRecusar" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="${baseURL}area-restrita/justificativa/alterar" method="POST">
+                    <form action="${baseURL}area-restrita/justificativa/aceitarecusa" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title">Recusa de Justificativa</h4>
@@ -150,7 +150,7 @@
         <div id="modalAceitar" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="${baseURL}area-restrita/justificativa/alterar" method="POST">
+                    <form action="${baseURL}area-restrita/justificativa/aceitarecusa" method="POST">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h4 class="modal-title">Aceite de Justificativa</h4>
