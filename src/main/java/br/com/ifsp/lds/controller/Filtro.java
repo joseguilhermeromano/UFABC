@@ -52,7 +52,7 @@ public class Filtro implements Filter  {
     }
     
     public boolean usuarioLogado(HttpServletRequest req){
-        Usuario usuario = (Usuario) req.getSession().getAttribute("sessaoUsuario");
+        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
         if(usuario == null) return false;
         return true;
     }

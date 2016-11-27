@@ -5,12 +5,15 @@
  */
 package br.com.ifsp.lds.servlet;
 
+import br.com.ifsp.lds.beans.Alocacao;
+import br.com.ifsp.lds.beans.Falta;
 import br.com.ifsp.lds.beans.Usuario;
 import br.com.ifsp.lds.dao.UsuarioDAO;
 import br.com.ifsp.lds.util.JPAUtil;
 import br.com.ifsp.lds.util.UseRules;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,7 +49,31 @@ public class UsuarioControlador implements Tarefa {
      * @return pagina para redirecinamento
      */
     public String inicio(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/index.jsp";
+        return iniciocolaborador(req,resp);
+//        return "/WEB-INF/views/administrador/index.jsp";
+    }
+    
+    private String iniciocolaborador(HttpServletRequest req, HttpServletResponse resp){
+        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
+        GregorianCalendar calendar = new GregorianCalendar();
+        int totaltreinos = 0;
+        int treinospendentes=0;
+        int faltas = 0;
+        int mes = calendar.get(GregorianCalendar.MONTH);
+        for(Alocacao a : usuario.getAlocacoes()){
+            if(a.getDatainicio().getMonth()==mes||a.getDatafinal().getMonth()==mes){
+                if(a.getStatus()==0){
+                    treinospendentes = treinospendentes + 1;
+                }
+                faltas = faltas + a.getFaltas().size();
+                totaltreinos = totaltreinos + 1;
+            }
+        }
+        req.setAttribute("treinosmes", totaltreinos);
+        req.setAttribute("totalfaltas", faltas);
+        req.setAttribute("pendentes",treinospendentes);
+        
+        return "/WEB-INF/views/colaborador/index.jsp";
     }
     
     /**
@@ -85,7 +112,7 @@ public class UsuarioControlador implements Tarefa {
                 if (usuario.getAdministrador() == 1) {
                     segmento = "administrador";
                 } else {
-                    segmento = "colaborador";
+                    return iniciocolaborador(req,resp);
                 }
                 
                 return "/WEB-INF/views/" + segmento + "/index.jsp";

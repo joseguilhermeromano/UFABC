@@ -74,6 +74,7 @@
         this.codigo=codigo;
     }
     
+    
     function setLink(link){
         this.link=link;
     }

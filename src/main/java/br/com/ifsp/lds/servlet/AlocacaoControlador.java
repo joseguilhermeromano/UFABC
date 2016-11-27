@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author eddie
  */
 public class AlocacaoControlador implements Tarefa {
-     private static final String[] permAdmin = {"cadastrar","excluir","alterar"};
+     private static final String[] permAdmin = {"cadastrar","excluir","alterar","concluir"};
      private UseRules validation = new UseRules();
      private AlocacaoDAO alocaDAO = new AlocacaoDAO();
      
@@ -154,6 +154,18 @@ public class AlocacaoControlador implements Tarefa {
          }
 
         return "/WEB-INF/views/administrador/edita-alocacao.jsp";
+    }
+    
+    public String concluir(HttpServletRequest req, HttpServletResponse resp){
+        int codigo = Integer.parseInt(req.getParameter("codigo"));
+        Alocacao aloc = alocaDAO.Consultar(codigo);
+        aloc.setStatus(1);
+        if(alocaDAO.Alterar(aloc)==true){
+            req.setAttribute("sucesso", "A Alocação foi concluída com sucesso!");
+        }else{
+            req.setAttribute("erro", "Não foi possível concluir a alocação!");
+        }
+        return listartudo(req,resp);
     }
 
     @Override
