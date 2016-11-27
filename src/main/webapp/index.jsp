@@ -34,6 +34,26 @@
  
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                           
+                        <!-- Mensagens sucesso/erro -->
+                        <c:if test="${not empty erros}">
+                            <c:forEach var="erro" items="${erros}}">
+                                <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                                </div>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${not empty sucesso}">
+                            <div class="alert alert-success" role="alert">
+                                  ${sucesso}
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty erro}">
+                            <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                            </div>
+                        </c:if>
+                        
+                        
                         <!-- FORM -->
                         <form id="loginform" class="form-horizontal" role="form" action="${baseURL}area-restrita/usuario/login" method="POST">
                                     

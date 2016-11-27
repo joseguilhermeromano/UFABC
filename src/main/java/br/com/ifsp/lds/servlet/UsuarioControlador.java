@@ -30,7 +30,7 @@ public class UsuarioControlador implements Tarefa {
     * os nomes dos métodos de classes de models que são permitidos 
     * apenas para usuários que são administradores do sistema.
      */
-    private static final String[] permAdmin = {""};
+    private static final String[] permAdmin = {"cadastrar","listartudo","excluir","alterar","buscar"};
     private UsuarioDAO userdao = new UsuarioDAO();
     private UseRules validation = new UseRules();
 
@@ -61,16 +61,6 @@ public class UsuarioControlador implements Tarefa {
     }
     
     /**
-     * Acessa pagina de novo usuario
-     * @param req
-     * @param resp
-     * @return pagina para redirecinamento
-     */
-    public String novousuario(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/novo-usuario.jsp";
-    }
-    
-    /**
      * Efetua o processedimento para realização de login. 
      * Abre uma sessão caso o login e a senha do usuário estejam
      * corretos
@@ -87,17 +77,24 @@ public class UsuarioControlador implements Tarefa {
          */
          
         Usuario usuario = userdao.buscaUsuario(login);
-        if (usuario != null && usuario.getSenha().equals(senha)) {
-            HttpSession session = req.getSession();
-            session.setAttribute("usuarioLogado", usuario);
-            String segmento;
-            if (usuario.getAdministrador() == 1) {
-                segmento = "administrador";
-            } else {
-                segmento = "colaborador";
+        if (usuario!=null){
+            if (usuario.getSenha().equals(senha)) {
+                HttpSession session = req.getSession();
+                session.setAttribute("usuarioLogado", usuario);
+                String segmento;
+                if (usuario.getAdministrador() == 1) {
+                    segmento = "administrador";
+                } else {
+                    segmento = "colaborador";
+                }
+                
+                return "/WEB-INF/views/" + segmento + "/index.jsp";
+            }else{
+                req.setAttribute("erro", "<b>Erro!</b> A Senha está incorreta!");
             }
-
-            return "/WEB-INF/views/" + segmento + "/index.jsp";
+        }else{
+            req.setAttribute("erro", "<b>Erro!</b> Login digitado incorretamente "
+                    + "ou o usuário não está cadastrado na base de dados!");
         }
         return "/index.jsp";
     }
@@ -111,6 +108,7 @@ public class UsuarioControlador implements Tarefa {
      */
     public String logoff(HttpServletRequest req, HttpServletResponse resp) {
         req.getSession().removeAttribute("usuarioLogado");
+        req.setAttribute("sucesso", "Você foi deslogado com sucesso!");
         return "/index.jsp";
     }
 

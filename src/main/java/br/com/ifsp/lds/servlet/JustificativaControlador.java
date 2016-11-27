@@ -224,7 +224,7 @@ public class JustificativaControlador implements Tarefa {
 
     @Override
     public String excluir(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "/erro404.jsp";
     }
     
     /**

@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author eddie
  */
 public class AlocacaoControlador implements Tarefa {
-     private static final String[] permAdmin = {"cadastrar"};
+     private static final String[] permAdmin = {"cadastrar","excluir","alterar"};
      private UseRules validation = new UseRules();
      private AlocacaoDAO alocaDAO = new AlocacaoDAO();
      

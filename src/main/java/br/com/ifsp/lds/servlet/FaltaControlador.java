@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FaltaControlador implements Tarefa {
 
-    private static final String[] permAdmin = {"listartudo"};
+    private static final String[] permAdmin = {"cadastrar","listartudo","excluir","alterar","buscar"};
 
     private FaltaDAO faltaDAO = new FaltaDAO();
     private ArrayList<Falta> faltas;
@@ -110,7 +110,7 @@ public class FaltaControlador implements Tarefa {
 
     @Override
     public String excluir(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "/erro404.jsp";
     }
 
 }

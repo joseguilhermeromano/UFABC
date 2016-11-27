@@ -55,9 +55,9 @@ public class Controller extends HttpServlet {
                 }
             }
             
-            if (EstaNoArray==true && filtro.isAdmin(req)==false){
+            if (EstaNoArray==true && filtro.isAdmin(req)==0){
                 //aqui deverá retornar uma página de erro.
-                pagina = "/index.jsp";
+                pagina = "/erroPermissao.jsp";
             }else{
                 pagina = (String) method.invoke(instancia, req,resp); 
             }
