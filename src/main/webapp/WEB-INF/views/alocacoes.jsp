@@ -200,3 +200,4 @@
         <c:import url="layout/footer.jsp"></c:import>
     </body>
 </html>
+<c:import url="../js/searchUser.jsp"></c:import>

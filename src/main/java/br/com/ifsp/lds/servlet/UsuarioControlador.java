@@ -256,7 +256,8 @@ public class UsuarioControlador implements Tarefa {
 
     public void buscarPeloNome(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session =  req.getSession();
-        String users = new UsuarioDAO().buscaPeloNome((String) req.getParameter("name"),(String) session.getAttribute("baseURL"));
+        ArrayList<Usuario> userList = new UsuarioDAO().buscaPeloNome((String) req.getParameter("name"));
+        String users =  new UsuarioDAO().preparaUsuarioTable(userList, (String)session.getAttribute("baseURL"));
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(users);

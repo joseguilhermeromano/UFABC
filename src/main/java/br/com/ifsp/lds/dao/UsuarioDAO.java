@@ -39,7 +39,7 @@ public class UsuarioDAO implements DAO<Usuario> {
         }
     }
 
-    public String buscaPeloNome(String nome, String url_base) {
+    public ArrayList<Usuario> buscaPeloNome(String nome) {
         try {
 
             entityManager.getTransaction().begin();
@@ -47,36 +47,45 @@ public class UsuarioDAO implements DAO<Usuario> {
             ArrayList<Usuario> consulta = (ArrayList<Usuario>) query.getResultList();
             entityManager.getTransaction().commit();
             entityManager.close();
-            String html=""
-                    + "<table class=\"table ls-table\" id=\"tabela1\"><tr>"
-                    + "<thead><tr><th >Nome</th><th class='text-center'>Permissão</th><th class='text-center'>E-mail</th><th class='text-center'>Telefone</th><th class='text-center'>Detalhar/Alterar</th><th class='text-center'>Excluir</th></tr></thead>";
-            for(int i = 0; i < consulta.size();i++){
-                html += this.preparaUsuario(consulta.get(i), url_base);
-            }
-             html += "</table>";
-            return html;
+            return consulta;
         } catch (Exception ex) {
             return null;
         }
     }
-
-    private String preparaUsuario(Usuario usuario, String url_base) {
-        String permissao = "Colaborador";
-        if (usuario.getAdministrador() == 1) {
-            permissao = "Administrador";
+    public String preparaUsuarioSelect(ArrayList<Usuario> consulta, String url_base) {
+        String options=" <select class=\'select2\' name=\'codCol\' style=\'width: 100%\'> ";
+        options+="<option  value=\'\' selected>Digite o nome do colaborador</option>";
+        for (int i = 0; i < consulta.size(); i++) {
+            options+= "<option value=\'"+consulta.get(i).getCodigo()+"\'>"+consulta.get(i).getNome()+"</option>";
         }
-        String usuarioHtml = "";
-        usuarioHtml += "<td>" + usuario.getNome() + "</td>";
-        usuarioHtml += "<td class='text-center'>" + permissao + "</td>";
-        usuarioHtml += "<td class='text-center'>" + usuario.getEmail() + "</td>";
-        usuarioHtml += "<td class='text-center'>" + usuario.getTelefone() + "</td>";
-        usuarioHtml += "<td class='text-center'>";
-        usuarioHtml += "<a href='alterar?codigo="+usuario.getCodigo()+"'>";
-        usuarioHtml += "<span class='glyphicon glyphicon-edit estilo-botao-edicao'></span></a></td>";
-        System.out.println("------------------TESTE FOR BUGS PURPOSE" +url_base+"----------------------");
-        usuarioHtml += "<td class='text-center'><a href='#' data-toggle='modal' data-target='#modalExcluir' "
-                + "onclick=\"setCodigo('"+usuario.getCodigo()+"'); setLink('"+url_base+"area-restrita/usuario/excluir?codigo=');"+'"'+">";
-        usuarioHtml += "<span class='glyphicon glyphicon-trash estilo-botao-exclusao'></span></a> </td></tr>";
+        options+="</select>";
+        return options;
+    }
+
+    public String preparaUsuarioTable(ArrayList<Usuario> consulta, String url_base) {
+
+        String usuarioHtml = ""
+                + "<table class=\"table ls-table\" id=\"tabela1\"><tr>"
+                + "<thead><tr><th >Nome</th><th class='text-center'>Permissão</th><th class='text-center'>E-mail</th><th class='text-center'>Telefone</th><th class='text-center'>Detalhar/Alterar</th><th class='text-center'>Excluir</th></tr></thead>";
+        for (int i = 0; i < consulta.size(); i++) {
+            String permissao = "Colaborador";
+            if (consulta.get(i).getAdministrador() == 1) {
+                permissao = "Administrador";
+            }
+            usuarioHtml += "<td>" + consulta.get(i).getNome() + "</td>";
+            usuarioHtml += "<td class='text-center'>" + permissao + "</td>";
+            usuarioHtml += "<td class='text-center'>" + consulta.get(i).getEmail() + "</td>";
+            usuarioHtml += "<td class='text-center'>" + consulta.get(i).getTelefone() + "</td>";
+            usuarioHtml += "<td class='text-center'>";
+            usuarioHtml += "<a href='alterar?codigo=" + consulta.get(i).getCodigo() + "'>";
+            usuarioHtml += "<span class='glyphicon glyphicon-edit estilo-botao-edicao'></span></a></td>";
+            System.out.println("------------------TESTE FOR BUGS PURPOSE" + url_base + "----------------------");
+            usuarioHtml += "<td class='text-center'><a href='#' data-toggle='modal' data-target='#modalExcluir' "
+                    + "onclick=\"setCodigo('" + consulta.get(i).getCodigo() + "'); setLink('" + url_base + "area-restrita/usuario/excluir?codigo=');" + '"' + ">";
+            usuarioHtml += "<span class='glyphicon glyphicon-trash estilo-botao-exclusao'></span></a> </td></tr>";
+        }
+        usuarioHtml += "</table>";
+
         return usuarioHtml;
 
     }

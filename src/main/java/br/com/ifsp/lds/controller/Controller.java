@@ -40,7 +40,7 @@ public class Controller extends HttpServlet {
             String classe = app.getClasse()+"Controlador";
             String metodo = app.getMetodo();
             String classname = "br.com.ifsp.lds.servlet." + classe;
-            
+            System.out.println("classe:"+classe+"|metodo:"+metodo);
             Class<?> tipo = Class.forName(classname);
             Tarefa instancia = (Tarefa) tipo.newInstance();
             
@@ -55,7 +55,7 @@ public class Controller extends HttpServlet {
                     break;
                 }
             }
-            
+            //check method here
             if (EstaNoArray==true && filtro.isAdmin(req)==0){
                 //aqui deverá retornar uma página de erro.
                 pagina = "/erroPermissao.jsp";
