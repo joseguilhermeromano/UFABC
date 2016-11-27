@@ -11,7 +11,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <c:import url="WEB-INF/views/layout/importes.jsp"></c:import>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <!-- Bootstrap -->
+            <link href="http://localhost:8080/UFABC/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+            <!-- ESTILO CSS PERSONALIZADO -->
+            <link href="http://localhost:8080/UFABC/bootstrap/css/estilo.css" rel="stylesheet"/>
         <title>Login</title>
     </head>
     <body>
@@ -27,6 +34,26 @@
  
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                           
+                        <!-- Mensagens sucesso/erro -->
+                        <c:if test="${not empty erros}">
+                            <c:forEach var="erro" items="${erros}}">
+                                <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                                </div>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${not empty sucesso}">
+                            <div class="alert alert-success" role="alert">
+                                  ${sucesso}
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty erro}">
+                            <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                            </div>
+                        </c:if>
+                        
+                        
                         <!-- FORM -->
                         <form id="loginform" class="form-horizontal" role="form" action="${baseURL}area-restrita/usuario/login" method="POST">
                                     
@@ -59,6 +86,5 @@
 		</div>
             </div>
 	</div>	
-        <c:import url="WEB-INF/views/layout/footer.jsp"></c:import>
     </body>
 </html>

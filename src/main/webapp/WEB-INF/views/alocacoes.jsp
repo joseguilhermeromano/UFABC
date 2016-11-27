@@ -94,9 +94,12 @@
                                             <th class="text-center">Hora de Início</th>
                                             <th class="text-center">Hora de Término</th>
                                             <th class="text-center">Dias da Semana</th>
-                                            <th class="text-center">Detalhar/Alterar</th>
-                                            <th class="text-center">Cadastrar Falta</th>
-                                            <th class="text-center">Excluir</th>
+                                            <th class="text-center">Status</th>
+                                            <c:if test="${usuarioLogado.administrador==1}">
+                                                <th class="text-center">Detalhar/Alterar</th>
+                                                <th class="text-center">Cadastrar Falta</th>
+                                                <th class="text-center">Excluir</th>
+                                            </c:if>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -117,6 +120,18 @@
                                                 <c:if test="${alocacao.sabado}"> Sábado </c:if>
                                             </td>
                                             <td class="text-center">
+                                            <c:if test="${(alocacao.status==0) && (usuarioLogado.administrador==1)}">
+                                                <a  href="#" data-toggle="modal" data-target="#modalConcluir" 
+                                                    onclick="setCodigo('${alocacao.codigo}'); setLink('${baseURL}area-restrita/alocacao/concluir?codigo=');">
+                                                    <span class="estilo-botao-edicao" style="color:orange"><b>Ok?</b></span>
+                                                </a>
+                                            </c:if>
+                                            <c:if test="${alocacao.status == 1}">
+                                                <span class="glyphicon glyphicon-ok estilo-botao-edicao"></span>
+                                            </c:if>
+                                            </td>
+                                            <c:if test="${usuarioLogado.administrador==1}">
+                                            <td class="text-center">
                                                 <a href="<c:url value="${baseURL}area-restrita/alocacao/alterar">
                                                 <c:param name="codigo" value="${alocacao.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
                                             </td>
@@ -130,6 +145,7 @@
                                                 onclick="setCodigo('${alocacao.codigo}'); setLink('${baseURL}area-restrita/alocacao/excluir?codigo=');">
                                                     <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
                                             </td>
+                                            </c:if>
                                     </tr>
                                     </c:forEach>
                                 </tbody>
@@ -159,6 +175,26 @@
             </div>
         </div>
         <!-- /#page-content-wrapper -->
+        
+        <!-- Modal de Conclusão de Treinamento -->
+        <div id="modalConcluir" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Conclusão de Treinamento</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <p>Deseja realmente concluir este treinamento?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        <button class="btn btn-success" onclick="Excluir();">Concluir Treinamento</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
             
         </div><!-- /Corpo da Página --> 
         <c:import url="layout/footer.jsp"></c:import>

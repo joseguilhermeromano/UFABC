@@ -30,20 +30,20 @@
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-xs-4">
                                 <div class="totaltreinosmes">
-                                    <center><span>6</span></center>
-                                    <center><p style="font-family: Arial Black; font-size: 11pt; color:#ffffff;">Total de treinos por mês!</p></center>
+                                    <center><span>${treinosmes}</span></center>
+                                    <center><p style="font-family: Arial Black; font-size: 11pt; color:#ffffff;">Total de treinos no mês!</p></center>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
                                 <div class="treinospendentes">
-                                    <center><span style="font-family: Arial Black; font-size: 45pt; color:#ffffff;">4</span></center>
+                                    <center><span style="font-family: Arial Black; font-size: 45pt; color:#ffffff;">${pendentes}</span></center>
                                     <center><p>Treinamentos pendentes!</p></center>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
                                 <div class="faltas">
-                                    <center><span style="font-family: Arial Black; font-size: 45pt; color:#ffffff;">4</span></center>
-                                    <center><p>Quantidade de Faltas!</p></center>
+                                    <center><span style="font-family: Arial Black; font-size: 45pt; color:#ffffff;">${totalfaltas}</span></center>
+                                    <center><p>Quantidade de Faltas no mês!</p></center>
                                 </div>
                             </div>
                         </div>

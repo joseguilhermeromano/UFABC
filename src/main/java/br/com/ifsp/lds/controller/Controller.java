@@ -10,6 +10,7 @@ import br.com.ifsp.lds.servlet.Tarefa;
 import br.com.ifsp.lds.servlet.UsuarioControlador;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -55,9 +56,9 @@ public class Controller extends HttpServlet {
                 }
             }
             
-            if (EstaNoArray==true && filtro.isAdmin(req)==false){
+            if (EstaNoArray==true && filtro.isAdmin(req)==0){
                 //aqui deverá retornar uma página de erro.
-                pagina = "/index.jsp";
+                pagina = "/erroPermissao.jsp";
             }else{
                 pagina = (String) method.invoke(instancia, req,resp); 
             }
@@ -71,10 +72,19 @@ public class Controller extends HttpServlet {
             
             //criar pagina para o erro 404
             
-        } catch (Exception ex) {
+            pagina="/erro404.jsp";
+            
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        System.out.print(pagina);
         if(pagina != null) {
             req.getRequestDispatcher(pagina).forward(req, resp);
         }

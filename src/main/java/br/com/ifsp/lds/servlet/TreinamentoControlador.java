@@ -38,7 +38,7 @@ public class TreinamentoControlador implements Tarefa {
      * apenas para usuários que são administradores do sistema.
      */
 
-    private static final String[] permAdmin = {""};
+    private static final String[] permAdmin = {"cadastrar","listartudo","excluir","alterar","buscar"};
     private TreinamentoDAO daoTreino = new TreinamentoDAO();
     private  ArrayList<Treinamento> treinamentos;
     private UseRules validation = new UseRules();
@@ -83,16 +83,6 @@ public class TreinamentoControlador implements Tarefa {
         }
 
         return "/WEB-INF/views/administrador/novo-treinamento.jsp";
-    }
-    
-    /**
-     * Acessa a pagina de alocacao
-     * @param req
-     * @param resp
-     * @return pagina para redirecionamento 
-     */
-    public String alocacao(HttpServletRequest req, HttpServletResponse resp){
-        return "/WEB-INF/views/administrador/edita-alocacao.jsp";
     }
     
     @Override

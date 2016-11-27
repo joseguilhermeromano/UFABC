@@ -5,14 +5,17 @@
  */
 package br.com.ifsp.lds.servlet;
 
+import br.com.ifsp.lds.beans.Alocacao;
 import br.com.ifsp.lds.beans.Justificativa;
 import br.com.ifsp.lds.beans.Usuario;
 import br.com.ifsp.lds.dao.JustificativaDAO;
 import br.com.ifsp.lds.dao.UsuarioDAO;
 import br.com.ifsp.lds.util.JPAUtil;
 import br.com.ifsp.lds.util.UseRules;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,11 +31,12 @@ import javax.websocket.Session;
  */
 public class UsuarioControlador implements Tarefa {
     /*
-    * @permAdmin É um Map estático utilizado para especificar 
-    * os nomes dos métodos de classes de models que são permitidos 
-    * apenas para usuários que são administradores do sistema.
+     * @permAdmin É um Map estático utilizado para especificar 
+     * os nomes dos métodos de classes de models que são permitidos 
+     * apenas para usuários que são administradores do sistema.
      */
-    private static final String[] permAdmin = {""};
+
+    private static final String[] permAdmin = {"cadastrar", "listartudo", "excluir", "alterar", "buscar", "buscarPeloNome"};
     private UsuarioDAO userdao = new UsuarioDAO();
     private UseRules validation = new UseRules();
 
@@ -40,87 +44,108 @@ public class UsuarioControlador implements Tarefa {
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp) {
         return this.permAdmin;
     }
-    
+
     /**
      * Exibe a pagina inicial do usuario
+     *
      * @param req
      * @param resp
      * @return pagina para redirecinamento
      */
     public String inicio(HttpServletRequest req, HttpServletResponse resp) {
-        
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
         req.setAttribute("usuario", usuario);
-
-        String segmento;
         if (usuario.getAdministrador() != 1) {
-            segmento = "colaborador";
+            return iniciocolaborador(req, resp, usuario);
         } else {
-            segmento = "administrador";
+            return inicioCoordenador(req, resp);
         }
-                    
-        List<Justificativa> justificativas = new JustificativaDAO().consultarUltimas();
-        req.setAttribute("utltimasJustificativas", justificativas);
-
-        return "/WEB-INF/views/" + segmento + "/index.jsp";
     }
     
+    private String inicioCoordenador(HttpServletRequest req, HttpServletResponse resp) {
+        List<Justificativa> justificativas = new JustificativaDAO().consultarUltimas();
+        req.setAttribute("utltimasJustificativas", justificativas);
+        return "/WEB-INF/views/administrador/index.jsp";
+    }
+
+    private String iniciocolaborador(HttpServletRequest req, HttpServletResponse resp, Usuario usuario) {
+        GregorianCalendar calendar = new GregorianCalendar();
+        int totaltreinos = 0;
+        int treinospendentes = 0;
+        int faltas = 0;
+        int mes = calendar.get(GregorianCalendar.MONTH);
+        for (Alocacao a : usuario.getAlocacoes()) {
+            if (a.getDatainicio().getMonth() == mes || a.getDatafinal().getMonth() == mes) {
+                if (a.getStatus() == 0) {
+                    treinospendentes = treinospendentes + 1;
+                }
+                faltas = faltas + a.getFaltas().size();
+                totaltreinos = totaltreinos + 1;
+            }
+        }
+        req.setAttribute("treinosmes", totaltreinos);
+        req.setAttribute("totalfaltas", faltas);
+        req.setAttribute("pendentes", treinospendentes);
+
+        return "/WEB-INF/views/colaborador/index.jsp";
+    }
+
     /**
      * Exibe a pagina de perfil do usuario
+     *
      * @param req
      * @param resp
      * @return pagina para redirecinamento
      */
     public String perfil(HttpServletRequest req, HttpServletResponse resp) {
-        
+
         return "/WEB-INF/views/administrador/perfil.jsp";
     }
-    
+
     /**
-     * Acessa pagina de novo usuario
+     * Efetua o processedimento para realização de login. Abre uma sessão caso o
+     * login e a senha do usuário estejam corretos
+     *
      * @param req
      * @param resp
-     * @return pagina para redirecinamento
-     */
-    public String novousuario(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/administrador/novo-usuario.jsp";
-    }
-    
-    /**
-     * Efetua o processedimento para realização de login. 
-     * Abre uma sessão caso o login e a senha do usuário estejam
-     * corretos
-     * @param req
-     * @param resp
-     * @return pagina inicial caso o login seja efetuado com sucesso ou 
-     * pagina de login novamente caso ocorra um erro durante o login
+     * @return pagina inicial caso o login seja efetuado com sucesso ou pagina
+     * de login novamente caso ocorra um erro durante o login
      */
     public String login(HttpServletRequest req, HttpServletResponse resp) {
-         String senha = req.getParameter("senha");
-         String login = req.getParameter("username");
-         /* Quando forem fixar usuário e senha no login, 
-          usar o gitignore pra não fixar para todos que puxarem o projeto do git
+        String senha = req.getParameter("senha");
+        String login = req.getParameter("username");
+        /* Quando forem fixar usuário e senha no login, 
+         usar o gitignore pra não fixar para todos que puxarem o projeto do git
          */
-         
+        String pagina = "/index.jsp";
         Usuario usuario = userdao.buscaUsuario(login);
-        if (usuario != null && usuario.getSenha().equals(senha)) {
-            HttpSession session = req.getSession();
-            session.setAttribute("usuarioLogado", usuario);
-            
-            return this.inicio(req, resp);
+        if (usuario != null) {
+            if (usuario.getSenha().equals(senha)) {
+                System.out.println("Here");
+                HttpSession session = req.getSession();
+                session.setAttribute("usuarioLogado", usuario);
+                pagina =  inicio(req, resp);
+            } else {
+                req.setAttribute("erro", "<b>Erro!</b> A Senha está incorreta!");
+            }
+        } else {
+            req.setAttribute("erro", "<b>Erro!</b> Login digitado incorretamente "
+                    + "ou o usuário não está cadastrado na base de dados!");
         }
-        return "/index.jsp";
+        return pagina;
     }
-    
+
     /**
-     * Procedimento para realizar logoff, finalização de 
-     * de sessão e redirecionamento para a pagina inicial
+     * Procedimento para realizar logoff, finalização de de sessão e
+     * redirecionamento para a pagina inicial
+     *
      * @param req
      * @param resp
      * @return pagina inicial apos realizar o logoff
      */
     public String logoff(HttpServletRequest req, HttpServletResponse resp) {
         req.getSession().removeAttribute("usuarioLogado");
+        req.setAttribute("sucesso", "Você foi deslogado com sucesso!");
         return "/index.jsp";
     }
 
@@ -180,7 +205,7 @@ public class UsuarioControlador implements Tarefa {
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
         int codigo = Integer.parseInt(req.getParameter("codigo"));
         Usuario usuario = userdao.Consultar(codigo);
-        
+
         if (req.getParameter("alterar") != null) {
             try {
                 validation.addRule("required", "nome", req.getParameter("nome"));
@@ -229,9 +254,13 @@ public class UsuarioControlador implements Tarefa {
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }
 
-    @Override
-    public String buscar(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void buscarPeloNome(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession session =  req.getSession();
+        String users = new UsuarioDAO().buscaPeloNome((String) req.getParameter("name"),(String) session.getAttribute("baseURL"));
+        resp.setContentType("text/plain");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(users);
+
     }
 
     @Override
@@ -243,5 +272,10 @@ public class UsuarioControlador implements Tarefa {
             req.setAttribute("erro", "Não foi possível excluir o Usuário!");
         }
         return this.listartudo(req, resp);
+    }
+
+    @Override
+    public String buscar(HttpServletRequest req, HttpServletResponse resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

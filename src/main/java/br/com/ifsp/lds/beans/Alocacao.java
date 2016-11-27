@@ -62,6 +62,9 @@ public class Alocacao {
     @Column(name = "aloc_sabado")
     private boolean sabado;
     
+    @Column(name = "aloc_status")
+    private int status;
+    
     @ManyToOne()
     @JoinColumn(name = "aloc_usua_cd")
     private Usuario usuario;
@@ -267,5 +270,19 @@ public class Alocacao {
      */
     public void setFaltas(List<Falta> faltas) {
         this.faltas = faltas;
+    }
+
+    /**
+     * @return the status
+     */
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
