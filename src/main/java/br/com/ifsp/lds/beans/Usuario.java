@@ -68,7 +68,7 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Alocacao> alocacoes;
     
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "responsavelReposicao")
     private List<Reposicao> reposicoesIndicadas;
     
     /**

@@ -27,11 +27,10 @@ public class Reposicao {
     @Column(name = "repo_cd")
     private int codigo;
     
-    @OneToOne(fetch = FetchType.LAZY, mappedBy="reposicao", optional = true)
+    @OneToOne
     private Falta falta;
     
     @ManyToOne()
-    @JoinColumn(name = "repo_resp_cd")
     private Usuario responsavelReposicao;
     
     @Column(name = "repo_data")
