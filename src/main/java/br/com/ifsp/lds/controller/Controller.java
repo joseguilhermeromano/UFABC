@@ -10,6 +10,7 @@ import br.com.ifsp.lds.servlet.Tarefa;
 import br.com.ifsp.lds.servlet.UsuarioControlador;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -73,7 +74,13 @@ public class Controller extends HttpServlet {
             
             pagina="/erro404.jsp";
             
-        } catch (Exception ex) {
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         

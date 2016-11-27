@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FaltaControlador implements Tarefa {
 
-    private static final String[] permAdmin = {"cadastrar","listartudo","excluir","alterar","buscar"};
+    private static final String[] permAdmin = {"cadastrar","excluir","alterar"};
 
     private FaltaDAO faltaDAO = new FaltaDAO();
     private ArrayList<Falta> faltas;

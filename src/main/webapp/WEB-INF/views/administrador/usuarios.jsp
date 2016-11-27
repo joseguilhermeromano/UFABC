@@ -16,7 +16,6 @@
     <body>
         <div id="wrapper"><!-- Corpo da Página --> 
             <c:import url="../layout/menu.jsp"></c:import>
-            
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
@@ -50,7 +49,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                <div class="input-group">
-                                    <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Nome do Usuário...">
+                                    <input type="text" class="form-control estilo-botao-busca"  placeholder="Buscar por Nome do Usuário..." id="busca" name="busca">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default estilo-botao-busca" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                     </span>
@@ -61,22 +60,22 @@
                             </div>
                         </div><!-- /row -->
                         <br><br>
-                        <div class="table-responsive"><!-- TABELA-->
+                        <div class="table-responsive pessoas"><!-- TABELA-->
                             <table class="table ls-table" id="tabela1">
-                                <thead>
-                                    <tr>
-                                            <th >Nome</th>
-                                            <th class="text-center">Permissão</th>                                           
-                                            <th class="text-center">E-mail</th>
-                                            <th class="text-center">Telefone</th>
-                                            <th class="text-center">Detalhar/Alterar</th>
-                                            <th class="text-center">Excluir</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                            <thead>
+                                <tr>
+                                        <th >Nome</th>
+                                        <th class="text-center">Permissão</th>                                           
+                                        <th class="text-center">E-mail</th>
+                                        <th class="text-center">Telefone</th>
+                                        <th class="text-center">Detalhar/Alterar</th>
+                                        <th class="text-center">Excluir</th>
+                                </tr>
+                            </thead>
+                                
                                     <c:forEach items="${usuarios}" var="usuario" varStatus="loop">
+                                   
                                     <tr>    
-
                                             <td>${usuario.nome}</td>
                                             <td class="text-center"><c:if test="${usuario.administrador == 1}">Administrador(a)</c:if>
                                                                     <c:if test="${usuario.administrador == 0}">Colaborador</c:if></td>                                           
@@ -92,8 +91,10 @@
                                             </td>
 
                                     </tr>
+                                    
                                     </c:forEach>
-                                </tbody>
+                               
+                               
                             </table>
                         </div><!-- /TABELA-->
                         <nav><!-- Paginação -->
@@ -125,3 +126,4 @@
         <c:import url="../layout/footer.jsp"></c:import>
     </body>
 </html>
+<c:import url="../js/searchUser.jsp"></c:import>
