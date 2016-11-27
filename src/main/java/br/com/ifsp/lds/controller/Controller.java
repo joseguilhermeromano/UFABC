@@ -71,6 +71,8 @@ public class Controller extends HttpServlet {
             
             //criar pagina para o erro 404
             
+            pagina="/erro404.jsp";
+            
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

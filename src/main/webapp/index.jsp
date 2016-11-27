@@ -11,7 +11,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <c:import url="WEB-INF/views/layout/importes.jsp"></c:import>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <!-- Bootstrap -->
+            <link href="http://localhost:8080/UFABC/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+            <!-- ESTILO CSS PERSONALIZADO -->
+            <link href="http://localhost:8080/UFABC/bootstrap/css/estilo.css" rel="stylesheet"/>
         <title>Login</title>
     </head>
     <body>
@@ -59,6 +66,5 @@
 		</div>
             </div>
 	</div>	
-        <c:import url="WEB-INF/views/layout/footer.jsp"></c:import>
     </body>
 </html>
