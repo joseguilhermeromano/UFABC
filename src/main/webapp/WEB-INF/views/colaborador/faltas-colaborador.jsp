@@ -76,7 +76,7 @@
                                             
                                             <td class="text-center"><c:if test="${not empty item.reposicao}">Reposição marcada</c:if>
                                                             <c:if test="${item.status == 0 && empty item.reposicao}">Sem reposição
-                                                                <c:if test="${empty item.reposicao && item.status == 1}">
+                                                                <c:if test="${empty item.reposicao && item.justificativa.status == 1}">
                                                                     <input type="hidden" name="codigo" value="${item.codigo}" form="addReposicao">
                                                                     <button  class="btn small btn-default" form="addReposicao">
                                                                         adicionar reposição
