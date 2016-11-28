@@ -1,7 +1,7 @@
 <%-- 
-    Document   : index
-    Created on : 19/09/2016, 22:01:00
-    Author     : José Guilherme
+    Document   : perfil
+    Created on : Nov 14, 2016, 10:00:57 PM
+    Author     : eddie
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Alocaçao</title>
+        <title>Perfil</title>
         <c:import url="../layout/importes.jsp"></c:import>
     </head>
     <body>
@@ -28,7 +28,7 @@
                     <div class="col-lg-12">
 
                         <!-- AQUI COMEÇA O CONTEÚDO DA PÁGINA -->
-                        <h3><span class="glyphicon glyphicon-plus"></span> Alocação</h3><hr>
+                        <h3><span class="glyphicon glyphicon-plus"></span> Perfil do Usuário </h3><hr>
                         
                         <!-- Mensagens sucesso/erro -->
                         <c:if test="${not empty erros}">
@@ -50,84 +50,70 @@
                         </c:if>
                         <!-- / Mensagens sucesso/erro -->
                         
-                        <form action="${baseURL}area-restrita/alocacao/cadastrar" method="POST"><!--FORM -->
+                        <form action="${baseURL}area-restrita/usuario/cadastrar" method="POST"><!--FORM -->
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                    <b><label for="dataIni">Data Inicial</label></b>
-                                    <input type="text" name="dataIni" placeholder="Data Inicial" class="form-control estilo-input"  />
+                                    <b><label for="nome">Nome Completo</label></b>
+                                    <input type="text" name="nome" placeholder="Nome Completo" class="form-control estilo-input"  />
                                     </div>
                                 </div>
-                            </div>
+                            </div>                           
+                           
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                    <b><label for="dataFin">Data Final</label></b>
-                                    <input type="text" name="dataFin" placeholder="Data Final" class="form-control estilo-input"  />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                    <b><label for="horaIni">Horário de Início</label></b>
-                                    <input type="text" name="horaIni" placeholder="Horário de Inicio" class="form-control estilo-input"  />
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                    <b><label for="horaFin">Horário de Término</label></b>
-                                    <input type="text" name="horaTerm" placeholder="Horário de Término" class="form-control estilo-input"  />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                    <b><label for="codCol">Código Colaborador</label></b>
-                                    <input type="text" name="codCol" value="" placeholder="Código do Colaborador" class="form-control estilo-input"  />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                    <b><label for="codTreinamento">Código Treinamento</label></b>
-                                    <input type="text" name="codTreina" placeholder="Código do Treinamento" class="form-control estilo-input"  />
+                                    <b><label for="nome">E-mail</label></b>
+                                    <input type="text" name="email" placeholder="ex: exemplo@exemplo.com.br" class="form-control estilo-input"  />
                                     </div>
                                 </div>
                             </div>                                                        
-                            <div class="col-md-6">
+                            <!--<div class="row">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <b><label for="diaSemana">Dias da Semana</label></b><br>
+                                    <b><label for="nome">Especialidade</label></b>
+                                    <select name="especialidade" class="form-control estilo-input">
+                                        <option value="valor1">Valor 1</option> 
+                                        <option value="valor2" selected>Valor 2</option>
+                                        <option value="valor3">Valor 3</option>
+                                      </select>
+                                    </div>
+                                </div>-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <b><label for="permissao">Permissão de Acesso</label></b><br>
                                     <div class="col-md-6">
-                                        <input type="radio" name="seg" value="1">Segunda-Feira
+                                        <input type="radio" name="permissao" value="1"> Administrador do Sistema
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="radio" name="ter" value="2">Terça-Feira<br>
+                                        <input type="radio" name="permissao" value="0"> Colaborador<br>
                                     </div>
-                                    <div class="col-md-6">
-                                        <input type="radio" name="qua" value="3">Quarta-Feira<br>
-                                    </div>   
-                                    <div class="col-md-6">
-                                        <input type="radio" name="quin" value="4">Quinta-Feira<br>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="radio" name="sex" value="5">Sexta-Feira<br>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="radio" name="sab" value="6">Sábado<br>
-                                    </div>    
                                     </div>
                                 </div>
-                            </div>                                                        
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    <b><label for="nome">Username</label></b>
+                                    <input type="text" name="login" placeholder="usuario01" class="form-control estilo-input"  />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    <b><label for="cpf">Senha</label></b>
+                                    <input type="password" name="senha" value="" placeholder="*******" class="form-control estilo-input"  />
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+
                             <!-- BOTÃO DO FORMULÁRIO -->
                             <center><input type="submit" value="Cadastrar"  class="btn btn-success button" /></center>
-                            
+                            <input type="hidden" name="cadastrar" value="1">
                         </form><!-- /FORMULÁRIO -->
-                            
                     </div>
                 </div>
             </div>

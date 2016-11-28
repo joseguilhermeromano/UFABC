@@ -13,11 +13,11 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
-<!--    <session-config>
+    <session-config>
         <session-timeout>
             30
         </session-timeout>
-    </session-config>-->
+    </session-config>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
@@ -34,14 +34,28 @@
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     
+    <filter>
+        <filter-name>FiltroExterno</filter-name>
+        <filter-class>br.com.ifsp.lds.controller.FiltroExterno</filter-class>
+    </filter>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/erro404.jsp</location>
+    </error-page>
+
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>br.com.ifsp.lds.controller.Controller</servlet-class>
+        <multipart-config>
+            <max-file-size>15000000</max-file-size>
+            <max-request-size>418018841</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
     </servlet>
     
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/area-restrita/*</url-pattern>
     </servlet-mapping>
-
 </web-app>

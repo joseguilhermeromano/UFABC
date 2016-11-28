@@ -5,6 +5,7 @@
  */
 package br.com.ifsp.lds.util;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,13 +13,45 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
+
 /**
  *
  * @author rafin
  */
 public class FormValidation {
-   
+
+    private static final int fileLimit = 15000;
+    private static final String types[] = {"pdf", "png", "jpg", "jpeg", "doc", "docx"};
     private List<String> erros = new ArrayList<String>();
+
+    protected boolean validaArquivo(String ext, String size) {
+        if (isInteger("arquivo", size)) {
+            if ((Integer.parseInt(size) / 1024) > fileLimit) {
+                System.out.println("O tamanho do arquivo excede o limit de " + fileLimit + " kbytes...  {" + (Integer.parseInt(size) / 1024) + "}");
+                this.erros.add("O tamanho do arquivo excede o limit de " + fileLimit + " kbytes...");
+                return false;
+            }
+        }
+        String extension = "";
+
+        int i = ext.lastIndexOf('.');
+        if (i > 0) {
+            extension = ext.substring(i + 1);
+            for (int j = 0; j < types.length; j++) {
+                if (extension.equals(types[j])) {
+                    System.out.println("olha eu aqui gentiii +" + extension );
+                    return true;
+                }
+            }
+            System.out.println("A extensão não é permitida");
+            this.erros.add("A extensão não é permitida");
+            return false;
+        }else{
+            return false;
+        }
+
+    }
+
     /**
      * @param str Como String que recebera um provável INT como conteudo
      * @param campo Será o nome do campo no formulário
@@ -55,7 +88,7 @@ public class FormValidation {
             this.erros.add(campo + ": Campo vazio !!! \n");
             return true;
         }
-        boolean verifica = Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}+\\.[A-Za-z]{2,}", str);
+        boolean verifica = Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z.]{2,}", str);//
         if (verifica) {
             return true;
         } else {
@@ -83,8 +116,8 @@ public class FormValidation {
         }
 
     }
-    
-    public boolean required(String campo,String dado ){
+
+    protected boolean required(String campo, String dado) {
         if (campo.isEmpty()) {
             campo = "Campo sem nome :";
         }
@@ -94,14 +127,15 @@ public class FormValidation {
         }
         return true;
     }
-    public boolean isValidHour(String campo, String dataV){
+
+    protected boolean isValidHour(String campo, String dataV) {
         if (campo.isEmpty()) {
             campo = "Campo sem nome :";
         }
         if (dataV == null || dataV.length() == 0) {
             return true;
         }
-        
+
         boolean verifica = Pattern.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]", dataV);
         if (verifica) {
             return true;
@@ -109,28 +143,32 @@ public class FormValidation {
             this.erros.add(campo + ": Campo em formato inválido!!! \n");
             return false;
         }
-        
+
     }
+
     protected List<String> getErros() {
-       return erros;
+        return erros;
     }
-    
+
     /**
      * Verifica se o valor já existe no banco de dados
-     * @param campo 
+     *
+     * @param campo
      * @param dado
-     * @param tabela 
+     * @param tabela
      * @return boolean
      */
     public boolean isUnique(String campo, String dado, String tabela) {
         boolean resultado = false;
-        if(this.required(campo, dado)) {
-            resultado =  new JPAUtil().getEntityManager()
-                .createQuery("From " + tabela +" t where t."+campo+"=:dado")
-                .setParameter("dado", dado).getSingleResult() == null;
-            if(!resultado) this.erros.add(campo + " já esta registrado!");
+        if (this.required(campo, dado)) {
+            resultado = new JPAUtil().getEntityManager()
+                    .createQuery("From " + tabela + " t where t." + campo + "=:dado")
+                    .setParameter("dado", dado).getSingleResult() == null;
+            if (!resultado) {
+                this.erros.add(campo + " já esta registrado!");
+            }
         }
         return resultado;
     }
-   
+
 }

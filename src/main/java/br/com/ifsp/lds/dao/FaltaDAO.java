@@ -24,17 +24,26 @@ public class FaltaDAO implements DAO<Falta>{
     EntityManager entityManager = new JPAUtil().getEntityManager();
     
     @Override
-    public void Cadastrar(Falta obj, HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean Cadastrar(Falta obj) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(obj);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+            return false;
+        }
     }
 
     @Override
-    public ArrayList<Falta> ConsultarTudo(String string, HttpServletRequest req, HttpServletResponse resp) {
+    public ArrayList<Falta> ConsultarTudo(String string) {
         try {  
             entityManager.getTransaction().begin();
             TypedQuery<Falta> query = null;            
-                query = entityManager.createQuery("select f from falta f",Falta.class);
-                ArrayList<Falta> faltaResult = (ArrayList<Falta>) query.getResultList();
+            query = entityManager.createQuery("select f from Falta f",Falta.class);
+            ArrayList<Falta> faltaResult = (ArrayList<Falta>) query.getResultList();
             entityManager.getTransaction().commit();
             return faltaResult;
         } catch (Exception ex) { 
@@ -47,17 +56,26 @@ public class FaltaDAO implements DAO<Falta>{
     }
 
     @Override
-    public Falta Consultar(int codigo, HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Falta Consultar(int codigo) {
+        Falta falta = entityManager.find(Falta.class, codigo);
+        return falta;
     }
 
     @Override
-    public void Alterar(Falta obj, HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean Alterar(Falta obj) {
+     try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(obj);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch(Exception ex) {
+            System.err.println(ex);
+            return false;
+        }
     }
 
     @Override
-    public void Deletar(int codigo, HttpServletRequest req, HttpServletResponse resp) {
+    public boolean Deletar(int codigo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

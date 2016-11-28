@@ -22,22 +22,21 @@ public class AlocacaoDAO implements DAO {
     private EntityManager entityManager = new JPAUtil().getEntityManager();
 
     @Override
-    public void Cadastrar(Object obj, HttpServletRequest req, HttpServletResponse resp) {
+    public boolean Cadastrar(Object obj) {
         try{
             entityManager.getTransaction().begin();
             entityManager.persist(obj);
             entityManager.getTransaction().commit();
-            entityManager.close();
-            req.setAttribute("sucesso", "A Alocação foi realizada com sucesso!");
+            return true;
         }catch(Exception ex){
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
-            req.setAttribute("erro", "Não foi possível realizar a Alocação!");
+            return false;
         }
     }
 
     @Override
-    public ArrayList ConsultarTudo(String string, HttpServletRequest req, HttpServletResponse resp) {
+    public ArrayList ConsultarTudo(String string) {
         try { 
             entityManager.getTransaction().begin();
             TypedQuery<Alocacao> query;
@@ -59,29 +58,41 @@ public class AlocacaoDAO implements DAO {
     }
 
     @Override
-    public Object Consultar(int codigo, HttpServletRequest req, HttpServletResponse resp) {
+    public Alocacao Consultar(int codigo) {
         Alocacao alocacao = entityManager.find(Alocacao.class, codigo);
         return alocacao;
     }
 
     @Override
-    public void Alterar(Object obj, HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean Alterar(Object obj) {
+         try { 
+            entityManager.getTransaction().begin();
+            entityManager.merge(obj);
+            entityManager.getTransaction().commit();
+
+            return true;
+        } catch (Exception ex) { 
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+            return false;
+        }
     }
 
     @Override
-    public void Deletar(int codigo, HttpServletRequest req, HttpServletResponse resp) {
+    public boolean Deletar(int codigo) {
         try { 
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select a from Alocacao a where a.codigo=" + codigo);
             Alocacao obj = (Alocacao) query.getResultList().get(0); 
             entityManager.remove(obj); 
             entityManager.getTransaction().commit();
-            req.setAttribute("sucesso", "A Alocação foi excluída com sucesso!");
+//            req.setAttribute("sucesso", "A Alocação foi excluída com sucesso!");
+            return true;
         } catch (Exception ex) { 
             ex.printStackTrace(); 
             entityManager.getTransaction().rollback();
-            req.setAttribute("erro", "Não foi possível excluir a Alocação!");
+//            req.setAttribute("erro", "Não foi possível excluir a Alocação!");
+            return false;
         }
     }
     

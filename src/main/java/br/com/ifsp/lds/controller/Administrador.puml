@@ -1,9 +1,0 @@
-@startuml
-
-class Administrador<? extends HttpServlet> {
-
-    #service(req:HttpServletRequest ,  resp:HttpServletResponse)
-
-}
-
-@enduml

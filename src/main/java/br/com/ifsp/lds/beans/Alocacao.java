@@ -5,6 +5,8 @@
  */
 package br.com.ifsp.lds.beans;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -60,6 +62,9 @@ public class Alocacao {
     @Column(name = "aloc_sabado")
     private boolean sabado;
     
+    @Column(name = "aloc_status")
+    private int status;
+    
     @ManyToOne()
     @JoinColumn(name = "aloc_usua_cd")
     private Usuario usuario;
@@ -67,7 +72,10 @@ public class Alocacao {
     @ManyToOne
     @JoinColumn(name = "aloc_trei_cd")
     private Treinamento treinamento;
-
+    
+    @OneToMany(mappedBy = "alocacao")
+    private List<Falta> faltas;
+    
     /**
      * @return the codigo
      */
@@ -120,7 +128,7 @@ public class Alocacao {
     /**
      * @param horainicio the horainicio to set
      */
-    public void setHorainicio(Date horainicio) {
+    public void setHorainicio(Time horainicio) {
         this.horainicio = horainicio;
     }
 
@@ -134,7 +142,7 @@ public class Alocacao {
     /**
      * @param horafim the horafim to set
      */
-    public void setHorafim(Date horafim) {
+    public void setHorafim(Time horafim) {
         this.horafim = horafim;
     }
 
@@ -248,5 +256,33 @@ public class Alocacao {
      */
     public void setTreinamento(Treinamento treinamento) {
         this.treinamento = treinamento;
+    }
+
+    /**
+     * @return the faltas
+     */
+    public List<Falta> getFaltas() {
+        return faltas;
+    }
+
+    /**
+     * @param faltas the faltas to set
+     */
+    public void setFaltas(List<Falta> faltas) {
+        this.faltas = faltas;
+    }
+
+    /**
+     * @return the status
+     */
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

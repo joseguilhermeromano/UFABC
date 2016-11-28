@@ -1,12 +1,11 @@
 <%-- 
-    Document   : index
-    Created on : 19/09/2016, 22:01:00
-    Author     : José Guilherme
+    Document   : faltas-colaborador
+    Created on : 07/11/2016, 21:07:17
+    Author     : Aluno
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,7 +26,7 @@
                             <span class="glyphicon glyphicon-menu-hamburger hidden-lg hidden-md hidden-sm"></span>
                         </a><!-- /#Botão de exibir/ocultar menu lateral -->
                     <div class="col-lg-12">
-                        <h3><span class="glyphicon glyphicon-list"></span> Faltas</h3><hr>
+                        <h3><span class="glyphicon glyphicon-list"></span> Minhas Faltas</h3><hr>
                     <div class="row">    
                          <div class="col-md-6 col-sm-6">
                                <form method="GET" action="${baseURL}area-restrita/treinamento/buscar"> 
@@ -57,39 +56,54 @@
                             <table class="table ls-table" id="tabela1">
                                 <thead>
                                     <tr>
-                                        <th class="text-center col-md-1">Código</th>
+                                        <th class="text-center col-md-1">Código </th>
                                         <th class="text-center col-md-1">Treinamento</th>
-                                        <th class="text-center col-md-1">Usuário</th>
                                         <th class="text-center col-md-3">Data</th>
-                                        <th class="text-center col-md-3">Status</th>
-                                        <th class="text-center col-md-3">Justificativa</th>
-                                        <th class="text-center col-md-1">Excluir</th>
+                                        
+                                        
+                                        <th class="text-center col-md-6">Status</th>
+                                        <th class="text-center col-md-6">Justificativa</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     <c:forEach var="item" items="${listaFaltas}">
-                                    <tr class="text-center">
+                                    <tr>
                                             <td class="text-center">${item.codigo}</td>
                                             <td class="text-center">${item.alocacao.treinamento.nome}</td>
-                                            <td class="text-center">${item.alocacao.usuario.nome}</td>
-                                            <td><fmt:formatDate pattern="dd/MM/yyyy" value="${item.data}"/></td>
-                                            <td class="text-center"><c:if test="${item.status == 1}">Reposição realizada</c:if>
-                                                            <c:if test="${item.status == 0}">Sem reposição</c:if>
+                                            <td class="text-center">${item.data}</td>
+                                            
+                                            <td class="text-center"><c:if test="${not empty item.reposicao}">Reposição marcada</c:if>
+                                                            <c:if test="${item.status == 0 && empty item.reposicao}">Sem reposição
+                                                                <c:if test="${empty item.reposicao && item.status == 1}">
+                                                                    <input type="hidden" name="codigo" value="${item.codigo}" form="addReposicao">
+                                                                    <button  class="btn small btn-default" form="addReposicao">
+                                                                        adicionar reposição
+                                                                    </button>
+                                                                </c:if>
+                                                            </c:if>
                                             </td>
-                                            <td><a href="<c:url value="${baseURL}area-restrita/justificativa/buscar">
+                                            
+                                            <td class="text-center">
+                                                <c:if test="${not empty item.justificativa}">
+                                                    <a href="<c:url value="${baseURL}area-restrita/justificativa/buscar">
                                                 <c:param name="codigo" value="${item.justificativa.codigo}"></c:param></c:url>">
                                                     <span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a>
-                                                    
-                                            </td>
-                                                    
-                                            <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
-                                                onclick="setCodigo('${item.codigo}'); setLink('${baseURL}area-restrita/falta/excluir?codigo=');">
-                                                    <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
+                                                </c:if>
+                                                <c:if test="${ empty item.justificativa}">
+                                                    <a href="<c:url value="${baseURL}area-restrita/justificativa/cadastrar">
+                                                    <c:param name="codigo" value="${item.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-plus estilo-botao-edicao"></span></a>
+                                                </c:if>
                                             </td>
                                     </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            
+                            <!--FORM PARA ADICIONAR REPOSIÇÃO -->
+                            <form action="${baseURL}area-restrita/reposicao/cadastrar" method="post" id="addReposicao"></form>
+                            
                         </div><!-- /TABELA-->
                         <nav><!-- Paginação -->
                             <ul class="pagination">

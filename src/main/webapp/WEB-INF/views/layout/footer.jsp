@@ -34,6 +34,9 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
+<!--select2-->
+<script src="${baseURL}bootstrap/js/select2.min.js"></script>
+
 <!-- Menu Toggle Script -->
 <script>
     
@@ -45,7 +48,7 @@
 
 
     $(function() {
-        $("#datepicker-13,#datepicker-14" ).datepicker({
+        $(".datepicker").datepicker({
                 dateFormat: 'dd/mm/yy',
                 dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
                 dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
@@ -54,11 +57,13 @@
                 monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
                 nextText: 'Próximo',
                 prevText: 'Anterior'
+                
             });
-        $("#datepicker-13,#datepicker-14" ).datepicker("show");
-        
+        $(".datepicker").datepicker(); 
     });
-    
+    $(document).ready(function() {
+        $(".select2").select2();
+    });
 
 </script>
 <script text="javascript">
@@ -68,6 +73,7 @@
     function setCodigo(codigo){
         this.codigo=codigo;
     }
+    
     
     function setLink(link){
         this.link=link;

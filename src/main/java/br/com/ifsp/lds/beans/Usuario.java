@@ -68,6 +68,9 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Alocacao> alocacoes;
     
+    @OneToMany(mappedBy = "responsavelReposicao")
+    private List<Reposicao> reposicoesIndicadas;
+    
     /**
      * @return the cola_cd
      */
@@ -276,5 +279,19 @@ public class Usuario {
      */
     public void setAlocacoes(List<Alocacao> alocacoes) {
         this.alocacoes = alocacoes;
+    }
+
+    /**
+     * @return the reposicoesIndicadas
+     */
+    public List<Reposicao> getReposicoesIndicadas() {
+        return reposicoesIndicadas;
+    }
+
+    /**
+     * @param reposicoesIndicadas the reposicoesIndicadas to set
+     */
+    public void setReposicoesIndicadas(List<Reposicao> reposicoesIndicadas) {
+        this.reposicoesIndicadas = reposicoesIndicadas;
     }
 }

@@ -50,7 +50,7 @@
                         </c:if>
                         <!-- / Mensagens sucesso/erro -->
                         
-                        <form action="" method=""><!--FORM -->
+                        <form action="${baseURL}area-restrita/usuario/alterar" method="post"><!--FORM -->
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -139,20 +139,20 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <b><label for="cpf">Permissão de Acesso</label></b><br>
+                                        <b><label for="permissao">Permissão de Acesso</label></b><br>
                                     <div class="col-md-6">
-                                        <input type="radio" name="acesso" value="1" <c:if test="${usuario.administrador eq 0}">checked="checked"</c:if>> Administrador do Sistema
+                                        <input type="radio" name="permissao" value="1" <c:if test="${usuario.administrador eq 1}">checked="checked"</c:if>> Administrador do Sistema
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="radio" name="acesso" value="0" <c:if test="${usuario.administrador eq 0}">checked="checked"</c:if>> Colaborador<br>
+                                        <input type="radio" name="permissao" value="0" <c:if test="${usuario.administrador eq 0}">checked="checked"</c:if>> Colaborador<br>
                                     </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- BOTÃO DO FORMULÁRIO -->
-                            <center><input type="submit" value="Atualizar"  class="btn btn-success button" /></center>
-                            
+                            <center><input type="submit" value="Atualizar" name="alterar" class="btn btn-success button" /></center>
+                            <input type="hidden" name="codigo" value="${usuario.codigo}">
                         </form><!-- /FORMULÁRIO -->
                             
                     </div>

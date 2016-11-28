@@ -7,9 +7,10 @@ package br.com.ifsp.lds.controller;
 
 
 import br.com.ifsp.lds.servlet.Tarefa;
-import br.com.ifsp.lds.servlet.UsuarioModel;
+import br.com.ifsp.lds.servlet.UsuarioControlador;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -36,10 +37,10 @@ public class Controller extends HttpServlet {
         
         try {
             App app = new App(req);
-            String classe = app.getClasse()+"Model";
+            String classe = app.getClasse()+"Controlador";
             String metodo = app.getMetodo();
             String classname = "br.com.ifsp.lds.servlet." + classe;
-            
+            System.out.println("classe:"+classe+"|metodo:"+metodo);
             Class<?> tipo = Class.forName(classname);
             Tarefa instancia = (Tarefa) tipo.newInstance();
             
@@ -54,10 +55,10 @@ public class Controller extends HttpServlet {
                     break;
                 }
             }
-            
-            if (EstaNoArray==true && filtro.isAdmin(req)==false){
+            //check method here
+            if (EstaNoArray==true && filtro.isAdmin(req)==0){
                 //aqui deverá retornar uma página de erro.
-                pagina = "/index.jsp";
+                pagina = "/erroPermissao.jsp";
             }else{
                 pagina = (String) method.invoke(instancia, req,resp); 
             }
@@ -71,10 +72,21 @@ public class Controller extends HttpServlet {
             
             //criar pagina para o erro 404
             
-        } catch (Exception ex) {
+            pagina="/erro404.jsp";
+            
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        req.getRequestDispatcher(pagina).forward(req, resp);
+        System.out.print(pagina);
+        if(pagina != null) {
+            req.getRequestDispatcher(pagina).forward(req, resp);
+        }
     }
 }

@@ -25,38 +25,39 @@ public class TreinamentoDAO implements DAO<Treinamento> {
     
     //Método cadastra treinamento
     @Override
-    public void Cadastrar(Treinamento treina,HttpServletRequest req, HttpServletResponse resp) {
+    public boolean Cadastrar(Treinamento treina) {
         try{
             entityManager.getTransaction().begin();
             entityManager.persist(treina);
             entityManager.getTransaction().commit();
             entityManager.close();
-            req.setAttribute("sucesso", "O Treinamento foi cadastrado com sucesso!");
+            return true;
         }catch(Exception ex){
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
-            req.setAttribute("erro", "Não foi possível cadastrar o Treinamento!");
+            return false;
         }
     }
     
     //Método que atualiza as informações de treinamento
     @Override
-    public void Alterar(Treinamento obj,HttpServletRequest req, HttpServletResponse resp){
+    public boolean Alterar(Treinamento obj){
         try { 
             entityManager.getTransaction().begin();
             entityManager.merge(obj);
             entityManager.getTransaction().commit();
-            req.setAttribute("sucesso", "O Treinamento foi atualizado com sucesso!");
+
+            return true;
         } catch (Exception ex) { 
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
-            req.setAttribute("erro", "Não foi possível atualizar o Treinamento!");
+            return false;
         }
     }
     
     //Método consulta todos os treinametos cadastrados
     @Override
-    public ArrayList<Treinamento> ConsultarTudo(String string,HttpServletRequest req, HttpServletResponse resp){
+    public ArrayList<Treinamento> ConsultarTudo(String string){
         try { 
             entityManager.getTransaction().begin();
             TypedQuery<Treinamento> query;
@@ -80,7 +81,7 @@ public class TreinamentoDAO implements DAO<Treinamento> {
      
     //Método consulta treinamento específico 
     @Override
-    public Treinamento Consultar(int codigo,HttpServletRequest req, HttpServletResponse resp) {
+    public Treinamento Consultar(int codigo) {
         Treinamento treina = entityManager.find(Treinamento.class, codigo);
         return treina;
     } 
@@ -88,18 +89,18 @@ public class TreinamentoDAO implements DAO<Treinamento> {
     
     //Método deleta treinamento específico
     @Override
-    public void Deletar(int codigo,HttpServletRequest req, HttpServletResponse resp) {      
+    public boolean Deletar(int codigo) {      
         try { 
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("select t from Treinamento t where t.codigo=" + codigo);
             Treinamento obj = (Treinamento) query.getResultList().get(0); 
             entityManager.remove(obj); 
             entityManager.getTransaction().commit();
-            req.setAttribute("sucesso", "O Treinamento foi excluído com sucesso!");
+            return true;
         } catch (Exception ex) { 
             ex.printStackTrace(); 
             entityManager.getTransaction().rollback();
-            req.setAttribute("erro", "Não foi possível excluir o Treinamento!");
+            return false;
         }
     }
     
