@@ -12,7 +12,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Nova Reposição</title>
-        <c:import url="../layout/importes.jsp"></c:import>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            
+            <c:import url="../layout/importes.jsp"></c:import>
     </head>
     <body>
         <div id="wrapper"><!-- Corpo da Página --> 
@@ -52,50 +54,66 @@
                         <!-- / Mensagens sucesso/erro -->
                         <h4>Informações:</h4>
                         <p class="text-justify text-center">
-                            <b>Código da alocação:</b> ${alocacao.codigo} <br>
-                            <b>Treinamento: </b> ${alocacao.treinamento.nome} <br>
-                            <b>Data de inicio: </b> <fmt:formatDate value="${alocacao.datainicio}" pattern="dd/MM/yyyy" /> <br>
-                            <b>Data de Termino: </b> <fmt:formatDate value="${alocacao.datafinal}" pattern="dd/MM/yyyy" /> <br>
-                            <b>Professor responsavel: </b> ${alocacao.usuario.nome}<br>
-                            <b>Dias da Semana: </b>
-                            <ul class="col-md-6">
-                                    <c:if test="${alocacao.segunda}"> <li>Segunda</li> </c:if>
-                                    <c:if test="${alocacao.terca}"> <li>Terça </li></c:if>
-                                    <c:if test="${alocacao.quarta}"><li> Quarta</li> </c:if>
-                                    <c:if test="${alocacao.quinta}"><li> Quinta</li> </c:if>
-                                    <c:if test="${alocacao.sexta}"><li> Sexta</li> </c:if>
-                                    <c:if test="${alocacao.sabado}"><li> Sábado</li> </c:if>
-                            </ul>
+                            <b>Código da falta</b> ${falta.codigo} <br>
+                            <b>Treinamento: </b> ${falta.alocacao.treinamento.nome} <br>
+                            <b>Data da falta: </b> <fmt:formatDate value="${falta.data}" pattern="dd/MM/yyyy" /> <br>
+                            <b>Professor responsavel: </b> ${falta.alocacao.usuario.nome}<br>
+                            
+                            <p class="">
+                                <b>Dias em que o treinamento é realizado: </b>
+                                    <c:if test="${falta.alocacao.segunda}"> Segunda </c:if>
+                                    <c:if test="${falta.alocacao.terca}"> Terça </c:if>
+                                    <c:if test="${falta.alocacao.quarta}"> Quarta </c:if>
+                                    <c:if test="${falta.alocacao.quinta}"> Quinta </c:if>
+                                    <c:if test="${falta.alocacao.sexta}"> Sexta </c:if>
+                                    <c:if test="${falta.alocacao.sabado}"> Sábado </c:if>
+                            </p>
                         
-                                            
-                        <form action="${baseURL}area-restrita/falta/cadastrar" method="post"><!--FORM -->
+                                  
+                        </div>
+                        <form action="${baseURL}area-restrita/reposicao/cadastrar" method="post"><!--FORM -->
+                            
                             <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                    <b><label for="cpf">Defina a data da reposição:</label></b>
-                                    <input type="text" name="data" value="" class="form-control estilo-input datepicker"  />
+                                        <b><label for="cpf">Defina a data da reposição:</label></b>
+                                        <input type="text" placeholder="Data da reposição" name="data" value="" class="form-control estilo-input datepicker"  />
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <b><label for="horaIni">Horário de Início</label></b>
-                                    <input type="text" id="campoHora" name="horaIni" placeholder="Horário de Inicio" class="form-control estilo-input" />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                    <b><label for="horaFin">Horário de Término</label></b>
-                                    <input type="text" id="campoHora" name="horaTerm" placeholder="Horário de Término" class="form-control estilo-input"  />
+                                        <b><label for="horaIni">Horário de Início</label></b>
+                                        <input type="text" id="campoHora" name="horaInicio" placeholder="Horário de Inicio" class="form-control estilo-input" />
                                     </div>
-                            </div>
-                            
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <b><label for="horaFin">Horário de Término</label></b>
+                                        <input type="text" id="campoHora" name="horaFim" placeholder="Horário de Término" class="form-control estilo-input"  />
+                                    </div>
+                                </div>
+                                    <div class="form-group col-md-12">
+                                        <div class=""><input id="opcao1" type="checkbox" value="1" onclick="ativaSelect('colaboradorSelect','opcao1')"> 
+                                            <label for="opcao1"> Indicar colaborador para realizar a reposição</label>
+                                        </div>
+
+                                        <select class="select2 col-md-4 " name="codigoColaborador" disabled id="colaboradorSelect">
+                                            <option value="-1">Selecione um colaborador</option>
+                                            <c:forEach items="${colaboradores}" var="c" varStatus="loop">
+                                                <option value="${c.codigo}">${c.nome}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                            </div>    
                             <!-- BOTÃO DO FORMULÁRIO -->
-                            <center><input type="submit" value="Cadastrar" name="cadastrar"  class="btn btn-success button" /></center>
+                            
+                            
+                            <input type="hidden" name="codigo" value="${falta.codigo}">
+                            <center><input type="submit" value="cadastrar" name="cadastrar"  class="btn btn-success button" /></center>
                             <input type="hidden" name="codigoAlocacao" value="${alocacao.codigo}">
                         </form><!-- /FORMULÁRIO -->
-                            
                     </div>
                 </div>
             </div>
@@ -104,6 +122,16 @@
             
         </div><!-- /Corpo da Página --> 
         <c:import url="../layout/footer.jsp"></c:import>
+        <script type="text/javascript">
+            function ativaSelect(selectId, radioId) {
+                var radio = document.getElementById(radioId);
+                var select = document.getElementById(selectId);
+                if(radio.checked) {
+                    select.disabled = false;
+                } else select.disabled = true;
+                
+            }
+        </script>
     </body>
 </html>
 

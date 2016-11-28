@@ -248,8 +248,8 @@ public class UsuarioControlador implements Tarefa {
 
     @Override
     public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
-        String nome = req.getParameter("nome") == null ? "" : req.getParameter("nome");
-        List<Usuario> usuarios = userdao.ConsultarTudo(nome);
+        
+        List<Usuario> usuarios = userdao.ConsultarTudo("");
         req.setAttribute("usuarios", usuarios);
         return "/WEB-INF/views/administrador/usuarios.jsp";
     }

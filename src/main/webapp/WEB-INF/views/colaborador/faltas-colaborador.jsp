@@ -74,8 +74,15 @@
                                             <td class="text-center">${item.alocacao.treinamento.nome}</td>
                                             <td class="text-center">${item.data}</td>
                                             
-                                            <td class="text-center"><c:if test="${item.status == 1}">Reposição realizada</c:if>
-                                                            <c:if test="${item.status == 0}">Sem reposição</c:if>
+                                            <td class="text-center"><c:if test="${not empty item.reposicao}">Reposição marcada</c:if>
+                                                            <c:if test="${item.status == 0 && empty item.reposicao}">Sem reposição
+                                                                <c:if test="${empty item.reposicao}">
+                                                                    <input type="hidden" name="codigo" value="${item.codigo}" form="addReposicao">
+                                                                    <button  class="btn small btn-default" form="addReposicao">
+                                                                        adicionar reposição
+                                                                    </button>
+                                                                </c:if>
+                                                            </c:if>
                                             </td>
                                             
                                             <td class="text-center">
@@ -93,6 +100,10 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            
+                            <!--FORM PARA ADICIONAR REPOSIÇÃO -->
+                            <form action="${baseURL}area-restrita/reposicao/cadastrar" method="post" id="addReposicao"></form>
+                            
                         </div><!-- /TABELA-->
                         <nav><!-- Paginação -->
                             <ul class="pagination">

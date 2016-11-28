@@ -108,7 +108,7 @@
                                            <input type="checkbox" name="qua" value="3"> Quarta-Feira
                                        </div>
                                        <div class="col-md-6">
-                                           <input type="checkbox" name="quin" value="4"> Quinta-Feira<br>
+                                           <input type="checkbox" name="qui" value="4"> Quinta-Feira<br>
                                            <input type="checkbox" name="sex" value="5"> Sexta-Feira<br>
                                             <input type="checkbox" name="sab" value="6">Sábado
                                        </div>

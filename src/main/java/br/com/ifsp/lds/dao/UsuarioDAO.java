@@ -8,6 +8,7 @@ package br.com.ifsp.lds.dao;
 import br.com.ifsp.lds.beans.Usuario;
 import br.com.ifsp.lds.util.JPAUtil;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -52,6 +53,7 @@ public class UsuarioDAO implements DAO<Usuario> {
             return null;
         }
     }
+    
     public String preparaUsuarioSelect(ArrayList<Usuario> consulta, String url_base) {
         String options=" <select class=\'select2\' name=\'codCol\' style=\'width: 100%\'> ";
         options+="<option  value=\'\' selected>Digite o nome do colaborador</option>";
@@ -61,7 +63,7 @@ public class UsuarioDAO implements DAO<Usuario> {
         options+="</select>";
         return options;
     }
-
+    
     public String preparaUsuarioTable(ArrayList<Usuario> consulta, String url_base) {
 
         String usuarioHtml = ""
@@ -89,6 +91,16 @@ public class UsuarioDAO implements DAO<Usuario> {
         return usuarioHtml;
 
     }
+    
+    /**
+     * Consulta apenas colaboradores
+     * @return retorna uma uma lista de colaboradores
+     */
+    public List<Usuario> consultarColaboradores() {
+        Query query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.administrador != 1");
+        return query.getResultList();
+    }
+    
 
     @Override
     public boolean Cadastrar(Usuario obj) {
