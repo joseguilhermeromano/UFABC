@@ -5,9 +5,13 @@
  */
 package br.com.ifsp.lds.dao;
 
+import br.com.ifsp.lds.beans.Justificativa;
+import br.com.ifsp.lds.beans.Reposicao;
 import br.com.ifsp.lds.util.JPAUtil;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -50,8 +54,14 @@ public class ReposicaoDAO implements DAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
-   
+    /**
+     * Consulta as ultimas 5 reposições
+     * @return uma lista de reposições
+     */
+    public List<Reposicao> consultarUltimas() {
+        Query query = entityManager.createQuery("SELECT r FROM Reposicao r ORDER BY r.codigo DESC");
+        return query.setMaxResults(5).getResultList();
+    }
     
     
 }

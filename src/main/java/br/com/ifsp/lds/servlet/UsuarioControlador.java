@@ -7,8 +7,10 @@ package br.com.ifsp.lds.servlet;
 
 import br.com.ifsp.lds.beans.Alocacao;
 import br.com.ifsp.lds.beans.Justificativa;
+import br.com.ifsp.lds.beans.Reposicao;
 import br.com.ifsp.lds.beans.Usuario;
 import br.com.ifsp.lds.dao.JustificativaDAO;
+import br.com.ifsp.lds.dao.ReposicaoDAO;
 import br.com.ifsp.lds.dao.UsuarioDAO;
 import br.com.ifsp.lds.util.JPAUtil;
 import br.com.ifsp.lds.util.UseRules;
@@ -64,7 +66,9 @@ public class UsuarioControlador implements Tarefa {
     
     private String inicioCoordenador(HttpServletRequest req, HttpServletResponse resp) {
         List<Justificativa> justificativas = new JustificativaDAO().consultarUltimas();
-        req.setAttribute("utltimasJustificativas", justificativas);
+        List<Reposicao> reposicoes = new ReposicaoDAO().consultarUltimas();
+        req.setAttribute("ultimasReposicoes", reposicoes);
+        req.setAttribute("ultimasJustificativas", justificativas);
         return "/WEB-INF/views/administrador/index.jsp";
     }
 

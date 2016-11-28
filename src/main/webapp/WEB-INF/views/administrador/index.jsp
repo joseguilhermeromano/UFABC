@@ -63,7 +63,7 @@
                                         <th class="text text-center">Data Justificativa</th>
                                     </tr>
                                 </thead>
-                                <c:forEach var="j" items="${utltimasJustificativas}" >
+                                <c:forEach var="j" items="${ultimasJustificativas}" >
                                     <tr>
                                         <td class="text text-center">${j.falta.alocacao.usuario.nome}</td>
                                         <td class="text text-center">${j.falta.alocacao.treinamento.nome}</td>
@@ -88,7 +88,7 @@
                                         <th class="text text-center">Data da Reposição</th>
                                     </tr>
                                 </thead>
-                                <c:forEach var="r" items="${utltimasReposicoes}" >
+                                <c:forEach var="r" items="${ultimasReposicoes}" >
                                     <tr>
                                         <td class="text text-center">${r.falta.alocacao.usuario.nome}</td>
                                         <td class="text text-center">${r.falta.alocacao.treinamento.nome}</td>
