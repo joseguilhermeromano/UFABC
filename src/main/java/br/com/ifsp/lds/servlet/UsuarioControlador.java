@@ -6,9 +6,11 @@
 package br.com.ifsp.lds.servlet;
 
 import br.com.ifsp.lds.beans.Alocacao;
+import br.com.ifsp.lds.beans.Falta;
 import br.com.ifsp.lds.beans.Justificativa;
 import br.com.ifsp.lds.beans.Reposicao;
 import br.com.ifsp.lds.beans.Usuario;
+import br.com.ifsp.lds.dao.FaltaDAO;
 import br.com.ifsp.lds.dao.JustificativaDAO;
 import br.com.ifsp.lds.dao.ReposicaoDAO;
 import br.com.ifsp.lds.dao.UsuarioDAO;
@@ -90,6 +92,8 @@ public class UsuarioControlador implements Tarefa {
         req.setAttribute("treinosmes", totaltreinos);
         req.setAttribute("totalfaltas", faltas);
         req.setAttribute("pendentes", treinospendentes);
+        List<Falta> ultimasFaltas = new FaltaDAO().consultaFaltasColaborador(usuario.getCodigo());
+        req.setAttribute("ultimasFaltas", ultimasFaltas);
 
         return "/WEB-INF/views/colaborador/index.jsp";
     }

@@ -60,6 +60,23 @@ public class FaltaDAO implements DAO<Falta>{
         Falta falta = entityManager.find(Falta.class, codigo);
         return falta;
     }
+    
+    public ArrayList<Falta> consultaFaltasColaborador(int codigo){
+         try {  
+            entityManager.getTransaction().begin();
+            TypedQuery<Falta> query = null;            
+            query = entityManager.createQuery("select f from Falta f where f.alocacao.usuario.codigo="+codigo+" order by f.codigo desc",Falta.class);
+            ArrayList<Falta> faltaResult = (ArrayList<Falta>) query.setMaxResults(5).getResultList();
+            entityManager.getTransaction().commit();
+            return faltaResult;
+        } catch (Exception ex) { 
+            ex.printStackTrace(); 
+            entityManager.getTransaction().rollback();
+        }
+        entityManager.close();
+        
+        return null;
+    }
 
     @Override
     public boolean Alterar(Falta obj) {
