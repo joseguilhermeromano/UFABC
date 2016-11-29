@@ -73,8 +73,8 @@
                                             <td class="text-center">${item.alocacao.treinamento.nome}</td>
                                             <td class="text-center">${item.alocacao.usuario.nome}</td>
                                             <td><fmt:formatDate pattern="dd/MM/yyyy" value="${item.data}"/></td>
-                                            <td class="text-center"><c:if test="${item.status == 1}">Reposição realizada</c:if>
-                                                            <c:if test="${item.status == 0}">Sem reposição</c:if>
+                                            <td class="text-center"><c:if test="${not empty item.reposicao}">Reposição realizada</c:if>
+                                                            <c:if test="${empty item.reposicao}">Sem reposição</c:if>
                                             </td>
                                             <td><a href="<c:url value="${baseURL}area-restrita/justificativa/buscar">
                                                 <c:param name="codigo" value="${item.justificativa.codigo}"></c:param></c:url>">

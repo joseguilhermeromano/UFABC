@@ -55,8 +55,15 @@ public class ReposicaoControlador implements Tarefa {
         int codigo = Integer.parseInt(req.getParameter("codigo"));
         Falta falta = new FaltaDAO().Consultar(codigo);
         req.setAttribute("falta", falta);
-        
-        req.setAttribute("colaboradores", new UsuarioDAO().consultarColaboradores());
+        Usuario usuario= (Usuario) req.getSession().getAttribute("usuarioLogado");
+        ArrayList<Usuario> colaboradores = new ArrayList<>(); 
+        for(Usuario u:new UsuarioDAO().consultarColaboradores()){
+            if (usuario.getCodigo()==u.getCodigo()) {
+                break;
+            } 
+            colaboradores.add(u);
+        }
+        req.setAttribute("colaboradores",colaboradores);
         
         
         if(req.getParameter("cadastrar") != null) {
@@ -74,12 +81,15 @@ public class ReposicaoControlador implements Tarefa {
                     reposicao.setStatus(0);
                     reposicao.setHoraInicio(horaInicio);
                     reposicao.setHoraFim(horaFim);
-                    Usuario usuario;
+                    Usuario indicado;
                     if(req.getParameter("codigoColaborador") != null) {
-                        usuario = new UsuarioDAO().Consultar(Integer.
+                        indicado = new UsuarioDAO().Consultar(Integer.
                                 parseInt(req.getParameter("codigoColaborador")));
-                        reposicao.setResponsavelReposicao(usuario);
+                        reposicao.setResponsavelReposicao(indicado);
                         
+                    }
+                    else{   
+                        reposicao.setResponsavelReposicao(usuario);
                     }
                     FaltaDAO faltaDao = new FaltaDAO();
                     reposicao.setFalta(faltaDao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
