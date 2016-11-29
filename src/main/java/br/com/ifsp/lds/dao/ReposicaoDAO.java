@@ -64,4 +64,20 @@ public class ReposicaoDAO implements DAO {
     }
     
     
+    /**
+     * Consulta a última reposição atribuída ao colaborador
+     * @return um objeto do tipo Reposição
+     */
+    public Reposicao ultimaReposicaoColaborador(int codigo){
+        try{
+            Query query = entityManager.createQuery("SELECT r FROM Reposicao r where r.falta.alocacao.usuario.codigo="+codigo
+                    +" and MONTH(r.data) = MONTH(now()) and YEAR(r.data) = YEAR(now())");
+            Reposicao reposicao = (Reposicao) query.getSingleResult();
+            return reposicao;
+        }catch(Exception ex){
+            return null;
+        }
+    }
+    
+    
 }

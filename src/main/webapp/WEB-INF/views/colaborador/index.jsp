@@ -100,7 +100,7 @@
                                     </tr>
                                 
                             </table>
-                            <button class="col-lg-12 col-sm-12 col-xs-12 col-md-12 btn btn-success">Visualisar todas as justificativas</button>
+                            <a href="${baseURL}area-restrita/falta/listartudo" class="col-lg-12 col-sm-12 col-xs-12 col-md-12 btn btn-success">Visualisar todas as justificativas</a>
                             </c:if>
                         </div>
                         
@@ -124,7 +124,7 @@
                                     </tr>
                             </table>
                             
-                            <button class="col-lg-12 col-sm-12 col-xs-12 col-md-12 btn btn-success">Visualisar todas as reposições</button>
+                            <a href="${baseURL}area-restrita/reposicao/listartudo" class="col-lg-12 col-sm-12 col-xs-12 col-md-12 btn btn-success">Visualisar todas as reposições</a>
                             </c:if>
                         </div>
                         

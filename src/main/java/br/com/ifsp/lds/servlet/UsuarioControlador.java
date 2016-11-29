@@ -94,6 +94,11 @@ public class UsuarioControlador implements Tarefa {
         req.setAttribute("pendentes", treinospendentes);
         List<Falta> ultimasFaltas = new FaltaDAO().consultaFaltasColaborador(usuario.getCodigo());
         req.setAttribute("ultimasFaltas", ultimasFaltas);
+        Justificativa justificativa = new JustificativaDAO().ultimaJustificativaColaborador(usuario.getCodigo());
+        req.setAttribute("justificativa",justificativa);
+        Reposicao reposicao = new ReposicaoDAO().ultimaReposicaoColaborador(usuario.getCodigo());
+        req.setAttribute("reposicao",reposicao);
+        
 
         return "/WEB-INF/views/colaborador/index.jsp";
     }
