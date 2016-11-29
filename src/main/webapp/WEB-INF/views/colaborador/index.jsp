@@ -96,7 +96,7 @@
                                     <tr>
                                         <td class="text text-center">${justificativa.falta.alocacao.usuario.nome}</td>
                                         <td class="text text-center">${justificativa.falta.alocacao.treinamento.nome}</td>
-                                        <td class="text text-center">${justificativa.data}</td>
+                                        <td class="text text-center"><fmt:formatDate pattern="dd/MM/yyyy" value="${justificativa.data}"/></td>
                                     </tr>
                                 
                             </table>
@@ -120,7 +120,7 @@
                                     <tr>
                                         <td class="text text-center">${reposicao.falta.alocacao.usuario.nome}</td>
                                         <td class="text text-center">${reposicao.falta.alocacao.treinamento.nome}</td>
-                                        <td class="text text-center">${reposicao.data}</td>
+                                        <td class="text text-center"><fmt:formatDate pattern="dd/MM/yyyy" value="${reposicao.data}"/></td>
                                     </tr>
                             </table>
                             
