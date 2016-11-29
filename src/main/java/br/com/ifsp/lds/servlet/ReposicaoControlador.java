@@ -59,7 +59,7 @@ public class ReposicaoControlador implements Tarefa {
         ArrayList<Usuario> colaboradores = new ArrayList<>(); 
         for(Usuario u:new UsuarioDAO().consultarColaboradores()){
             if (usuario.getCodigo()==u.getCodigo()) {
-                break;
+                continue;
             } 
             colaboradores.add(u);
         }
