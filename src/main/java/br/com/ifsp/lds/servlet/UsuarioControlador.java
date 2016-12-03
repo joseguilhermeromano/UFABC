@@ -60,7 +60,7 @@ public class UsuarioControlador implements Tarefa {
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
         req.setAttribute("usuario", usuario);
         if (usuario.getAdministrador() != 1) {
-            return iniciocolaborador(req, resp, usuario);
+            return inicioColaborador(req, resp, usuario);
         } else {
             return inicioCoordenador(req, resp);
         }
@@ -74,7 +74,7 @@ public class UsuarioControlador implements Tarefa {
         return "/WEB-INF/views/administrador/index.jsp";
     }
 
-    private String iniciocolaborador(HttpServletRequest req, HttpServletResponse resp, Usuario usuario) {
+    private String inicioColaborador(HttpServletRequest req, HttpServletResponse resp, Usuario usuario) {
         GregorianCalendar calendar = new GregorianCalendar();
         int totaltreinos = 0;
         int treinospendentes = 0;
