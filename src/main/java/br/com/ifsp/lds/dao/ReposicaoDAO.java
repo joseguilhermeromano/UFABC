@@ -41,7 +41,8 @@ public class ReposicaoDAO implements DAO {
 
     @Override
     public Object Consultar(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Reposicao reposicao = entityManager.find(Reposicao.class, codigo);
+        return reposicao;
     }
 
     @Override
@@ -71,8 +72,8 @@ public class ReposicaoDAO implements DAO {
     public Reposicao ultimaReposicaoColaborador(int codigo){
         try{
             Query query = entityManager.createQuery("SELECT r FROM Reposicao r where r.falta.alocacao.usuario.codigo="+codigo
-                    +" and MONTH(r.data) = MONTH(now()) and YEAR(r.data) = YEAR(now())");
-            Reposicao reposicao = (Reposicao) query.getSingleResult();
+                    +" and MONTH(r.data) = MONTH(now()) and YEAR(r.data) = YEAR(now()) ORDER BY r.codigo DESC");
+            Reposicao reposicao = (Reposicao) query.setMaxResults(1).getSingleResult();
             return reposicao;
         }catch(Exception ex){
             return null;

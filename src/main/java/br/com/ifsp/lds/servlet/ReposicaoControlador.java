@@ -6,6 +6,7 @@
 
 package br.com.ifsp.lds.servlet;
 
+import br.com.ifsp.lds.beans.Alocacao;
 import br.com.ifsp.lds.beans.Falta;
 import br.com.ifsp.lds.beans.Reposicao;
 import br.com.ifsp.lds.beans.Usuario;
@@ -19,7 +20,9 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -123,10 +126,76 @@ public class ReposicaoControlador implements Tarefa {
         
         return "/WEB-INF/views/colaborador/nova-reposicao.jsp";
     }
+    
+    
 
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int codigo = Integer.parseInt(req.getParameter("codigo"));
+        ArrayList<Usuario> colaboradores = new UsuarioDAO().consultarColaboradores();
+        Usuario user = (Usuario) req.getSession().getAttribute("usuarioLogado");
+        req.setAttribute("colaboradores",colaboradores);
+        Reposicao rep = (Reposicao) new ReposicaoDAO().Consultar(codigo);
+        req.setAttribute("reposicao", rep);
+        Falta falta = rep.getFalta();
+        req.setAttribute("falta", falta);
+        
+        if(req.getParameter("alterar") != null) {
+//            try {
+//                validation.addRule("required", "data", req.getParameter("data"));
+//                validation.addRule("required", "data", req.getParameter("horaInicio"));
+//                validation.addRule("required", "data", req.getParameter("horaFim"));
+//                if(validation.executaRegras()) {
+//                    Reposicao reposicao = new Reposicao();
+//                    SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
+//                    SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
+//                    Time horaInicio = new Time(tm.parse(req.getParameter("horaInicio")).getTime());
+//                    Time horaFim = new Time(tm.parse(req.getParameter("horaFim")).getTime());
+//                    reposicao.setData(dataFormat.parse(req.getParameter("data")));
+//                    reposicao.setStatus(0);
+//                    reposicao.setHoraInicio(horaInicio);
+//                    reposicao.setHoraFim(horaFim);
+//                    Usuario indicado;
+//                    if(req.getParameter("codigoColaborador") != null) {
+//                        indicado = new UsuarioDAO().Consultar(Integer.
+//                                parseInt(req.getParameter("codigoColaborador")));
+//                        reposicao.setResponsavelReposicao(indicado);
+//                        
+//                    }
+//                    else{   
+//                        reposicao.setResponsavelReposicao(usuario);
+//                    }
+//                    FaltaDAO faltaDao = new FaltaDAO();
+//                    reposicao.setFalta(faltaDao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
+//                    falta.setReposicao(reposicao);
+//                    faltaDao.Alterar(falta);
+//                    if(reposicaoDao.Cadastrar(reposicao)) {
+//                        req.setAttribute("sucesso", "reposição cadastrada com sucesso");
+//                        return new FaltaControlador().listartudo(req, resp);
+//                    } else {
+//                        req.setAttribute("erro", "Não foi possivel cadastrar a reposição!");
+//                    }
+//                } else {
+//                    req.setAttribute("erro", "Não foi possivel cadastrar a reposição!");
+//                    req.setAttribute("erros", validation.getTodosErros());
+//                }
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (InstantiationException ex) {
+//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IllegalAccessException ex) {
+//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IllegalArgumentException ex) {
+//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (InvocationTargetException ex) {
+//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (NoSuchMethodException ex) {
+//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (ParseException ex) {
+//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        }
+        return "/WEB-INF/views/colaborador/edita-reposicao.jsp";
     }
 
     @Override

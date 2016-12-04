@@ -14,7 +14,6 @@ import br.com.ifsp.lds.dao.FaltaDAO;
 import br.com.ifsp.lds.dao.JustificativaDAO;
 import br.com.ifsp.lds.dao.ReposicaoDAO;
 import br.com.ifsp.lds.dao.UsuarioDAO;
-import br.com.ifsp.lds.util.JPAUtil;
 import br.com.ifsp.lds.util.UseRules;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
