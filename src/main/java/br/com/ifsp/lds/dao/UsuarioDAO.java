@@ -96,9 +96,10 @@ public class UsuarioDAO implements DAO<Usuario> {
      * Consulta apenas colaboradores
      * @return retorna uma uma lista de colaboradores
      */
-    public List<Usuario> consultarColaboradores() {
+    public ArrayList<Usuario> consultarColaboradores() {
         Query query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.administrador != 1");
-        return query.getResultList();
+         ArrayList<Usuario> usuarios = (ArrayList<Usuario>) query.getResultList();
+         return usuarios;
     }
     
 

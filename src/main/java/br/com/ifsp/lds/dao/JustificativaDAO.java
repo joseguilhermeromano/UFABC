@@ -80,8 +80,8 @@ public class JustificativaDAO implements DAO{
     public Justificativa ultimaJustificativaColaborador(int codigo){
         try{
             Query query = entityManager.createQuery("SELECT j FROM Justificativa j where j.falta.alocacao.usuario.codigo="+codigo
-                    +" and MONTH(j.data) = MONTH(now()) and YEAR(j.data) = YEAR(now())");
-            Justificativa justificativa = (Justificativa) query.getSingleResult();
+                    +" and MONTH(j.data) = MONTH(now()) and YEAR(j.data) = YEAR(now()) ORDER BY j.codigo DESC");
+            Justificativa justificativa = (Justificativa) query.setMaxResults(1).getSingleResult();
             return justificativa;
         }catch(Exception ex){
             return null;
