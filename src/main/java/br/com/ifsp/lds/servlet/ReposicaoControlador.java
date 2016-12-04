@@ -65,7 +65,6 @@ public class ReposicaoControlador implements Tarefa {
         }
         req.setAttribute("colaboradores",colaboradores);
         
-        
         if(req.getParameter("cadastrar") != null) {
             try {
                 validation.addRule("required", "data", req.getParameter("data"));

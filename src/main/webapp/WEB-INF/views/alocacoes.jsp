@@ -79,7 +79,7 @@
                                </div><!-- /input-group -->
                              </div><!-- /.col-lg-3 -->
                             <div class="col-md-1 col-sm-1">
-                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/alocacao/cadastrar" style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Alocação</a>
+                                <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/alocacao/cadastrar" style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Alocação</a>
                             </div>
                         </div><!-- /row -->
                         <br><br>
