@@ -32,6 +32,7 @@ import javax.servlet.http.HttpSession;
  */
 public class ReposicaoControlador implements Tarefa {
     
+    
     private UseRules validation = new UseRules();
     private ReposicaoDAO reposicaoDao = new ReposicaoDAO();
     
@@ -43,7 +44,8 @@ public class ReposicaoControlador implements Tarefa {
         return "/WEB-INF/views/colaborador/indicar-colaborador.jsp";
     }
     
-    private static final String[] permAdmin = {"aceitarecusa"};
+    private static final String[] permAdmin = {"aceitarecusa", "listartudo"};
+    
     @Override
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp) {
        return this.permAdmin;
@@ -121,13 +123,15 @@ public class ReposicaoControlador implements Tarefa {
     }
 
     @Override
-    public String listartudo(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String listartudo(HttpServletRequest req, HttpServletResponse resp) {        
+        List<Reposicao> repo = reposicaoDao.ConsultarTudo("");
+        req.setAttribute("repo", repo);
+        return "/WEB-INF/views/administrador/listarReposicao.jsp";
     }
 
     @Override
     public String buscar(HttpServletRequest req, HttpServletResponse resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return "/WEB-INF/views/administrador/teste.jsp";
     }
 
     @Override

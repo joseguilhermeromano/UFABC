@@ -50,7 +50,7 @@
                         </c:if>
                         <!-- / Mensagens sucesso/erro -->
                         
-                        <form action="${baseURL}area-restrita/usuario/cadastrar" method="POST"><!--FORM -->
+                        <form action="${baseURL}area-restrita/usuario/perfil" method="POST"><!--FORM -->
 
                             <div class="row">
                                 <div class="col-md-12">

@@ -27,13 +27,14 @@
 <!-- jQuery -->
 <script src="${baseURL}bootstrap/js/jquery.min.js"></script>
 
+
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="${baseURL}bootstrap/js/bootstrap.min.js"></script>
 
 <!-- date -->
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
+<script src="${baseURL}bootstrap/js/jquery.dataTables.min.js"></script>
 <!--select2-->
 <script src="${baseURL}bootstrap/js/select2.min.js"></script>
 
@@ -82,6 +83,17 @@
     function Excluir(){
         window.location=this.link+this.codigo;
     }   
+    
+    
+    
+
+    $('#example').DataTable( {
+        
+        
+    } );
+
+
+
 </script>
 
 
