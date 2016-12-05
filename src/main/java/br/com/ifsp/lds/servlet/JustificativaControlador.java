@@ -103,13 +103,7 @@ public class JustificativaControlador implements Tarefa {
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
             return "/WEB-INF/views/administrador/justificativa.jsp";
-        } catch (IOException ex) {
-            return "/WEB-INF/views/administrador/justificativa.jsp";
-        } catch (ServletException ex) {
-            return "/WEB-INF/views/administrador/justificativa.jsp";
-        } catch (ParseException ex) {
-            return "/WEB-INF/views/administrador/justificativa.jsp";
-        }
+        } 
     }
 
     private String getExt(String ext) {
@@ -136,9 +130,69 @@ public class JustificativaControlador implements Tarefa {
 
     }
 
+    public String getInfoToUpdate(HttpServletRequest req, HttpServletResponse resp) {
+       try{
+        validation.addRule("required", "codigo", req.getParameter("codigo"));
+        validation.addRule("isInteger", "codigo", req.getParameter("codigo"));
+        if (validation.executaRegras()) {
+            Justificativa justificado = new JustificativaDAO().Consultar(Integer.parseInt(req.getParameter("codigo")));
+            String tempInfoFile = "Tamanho: " + justificado.getTamanho()+" Nome: " + justificado.getNome()+ " Tipo:" + justificado.getTipo();
+            req.setAttribute("tempInfoFile",tempInfoFile);
+            req.setAttribute("dataBanco",justificado.getData());
+            req.setAttribute("motivoBanco",justificado.getMotivodesc());
+            req.setAttribute("nomeBanco",justificado.getNome());
+            return "/WEB-INF/views/colaborador/edita-justificativa.jsp";        
+        }else{
+              return "/WEB-INF/views/visualizar-justificativa.jsp";
+        }
+       }catch(Exception e){
+             return "/WEB-INF/views/visualizar-justificativa.jsp";
+       }
+        
+    }
+
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
-        return "/WEB-INF/views/colaborador/edita-justificativa.jsp";
+        try {
+            Part filePart = req.getPart("userfile"); // Retrieves <input type="file" name="file">
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.            
+            //InputStream fileContent = filePart.getInputStream();
+            validation.addRule("required", "codigo", req.getParameter("codigo"));
+            validation.addRule("isInteger", "codigo", req.getParameter("codigo"));
+            validation.addRule("validaArquivo", fileName, Integer.toString((int) filePart.getSize()));
+            validation.addRule("required", "nome", req.getParameter("nome"));
+            validation.addRule("required", "data", req.getParameter("data"));
+            validation.addRule("isValidDate", "data", req.getParameter("data"));
+            validation.addRule("required", "motivo", req.getParameter("motivo"));
+            if (validation.executaRegras()) {
+                //req.setAttribute("justificativa", justificadao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
+                FaltaDAO faltadao = new FaltaDAO();
+                HttpSession session = req.getSession();
+                Justificativa justificador = new Justificativa();
+                Usuario user = (Usuario) session.getAttribute("usuarioLogado");
+                SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+                justificador.setComprovante(this.readFully(filePart.getInputStream()));
+                justificador.setData(data.parse(req.getParameter("data")));
+                justificador.setMotivodesc(req.getParameter("motivo"));
+                justificador.setTamanho(Integer.toString((int) filePart.getSize()));
+                justificador.setNome(fileName);
+                justificador.setTipo(this.getExt(fileName));
+                justificador.setFalta(faltadao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
+
+                if (justificaDao.Alterar(justificador)) {
+                    return new FaltaControlador().listartudo(req, resp);
+                } else {
+                    req.setAttribute("erro", "Não foi possível cadastrar a justificativa");
+                    return "/WEB-INF/views/colocaborador/edita-justificativa.jsp";
+                }
+            } else {
+                req.setAttribute("erros", validation.getTodosErros());
+                req.setAttribute("erro", "Não foi possível cadastrar a justificativa");
+                return "/WEB-INF/views/colocaborador/edita-justificativa.jsp";
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
+            return "/WEB-INF/views/colocaborador/edita-justificativa.jsp";
+        } 
     }
 
     public String aceitarecusa(HttpServletRequest req, HttpServletResponse resp) {
@@ -162,7 +216,7 @@ public class JustificativaControlador implements Tarefa {
                         req.setAttribute("erro", "Não foi possível recusar a justificativa! Por favor, escreva o motivo da recusa!");
                         req.setAttribute("erros", validation.getTodosErros());
                     }
-                } catch (        ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
                     Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
                 }
 

@@ -45,7 +45,9 @@
                         
                         <div class="row">
                             <div class="col-sm-6">
+                                <c:if test="${sessionScope.usuarioLogado.administrador==1}">
                                 <a class="btn btn-default visible-xs" href="${baseURL}area-restrita/alocacao/cadastrar"><span class="glyphicon glyphicon-plus" ></span> Nova Alocação</a><br>
+                                </c:if>
                             </div>
                         </div>
                         <div class="row">
@@ -79,7 +81,9 @@
                                </div><!-- /input-group -->
                              </div><!-- /.col-lg-3 -->
                             <div class="col-md-1 col-sm-1">
+                                <c:if test="${sessionScope.usuarioLogado.administrador==1}">
                                 <a class="btn btn-default hidden-xs" href="${baseURL}area-restrita/alocacao/cadastrar" style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Alocação</a>
+                                </c:if>
                             </div>
                         </div><!-- /row -->
                         <br><br>
