@@ -18,6 +18,7 @@
                 <li>
                     <a href="${baseURL}area-restrita/usuario/perfil"><span class="glyphicon glyphicon-cog"></span> Perfil</a>
                 </li>
+                <c:if test="${sessionScope.usuarioLogado.administrador==1}">
                 <hr>
                 <li>
                     <a href="${baseURL}area-restrita/usuario/listartudo"><span class="glyphicon glyphicon-list"></span> Usuários</a>
@@ -26,6 +27,7 @@
                 <li>
                     <a href="${baseURL}area-restrita/treinamento/listartudo"><span class="glyphicon glyphicon-list"></span> Treinamentos</a>
                 </li>
+                </c:if>
                 <hr>
                 <li>
                     <a href="${baseURL}area-restrita/alocacao/listartudo"><span class="glyphicon glyphicon-list"></span> Alocação</a>
@@ -33,11 +35,11 @@
                 <hr>
                 <li>
                     <a href="${baseURL}area-restrita/falta/listartudo"><span class="glyphicon glyphicon-copy"></span> Faltas</a>
-                </li>              
+                </li>
                 <hr>
                 <li>
-                    <a href="${baseURL}area-restrita/justificativa/listartudo"><span class="glyphicon glyphicon-copy"></span> Justificativas</a>
-                </li> 
+                    <a href="${baseURL}area-restrita/reposicao/listartudo"><span class="glyphicon glyphicon-list"></span> Reposições</a>                    
+                </li>
                 <hr>
                 <li>
                     <a href="${baseURL}area-restrita/usuario/logoff"><span class="glyphicon glyphicon-log-out"></span> Sair</a>                    
