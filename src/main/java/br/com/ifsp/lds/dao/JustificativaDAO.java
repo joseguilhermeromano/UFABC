@@ -73,6 +73,22 @@ public class JustificativaDAO implements DAO{
     }
     
     
+    /**
+     * Consulta a última justificativa realizada pelo colaborador
+     * @return um objeto do tipo Justificativa
+     */
+    public Justificativa ultimaJustificativaColaborador(int codigo){
+        try{
+            Query query = entityManager.createQuery("SELECT j FROM Justificativa j where j.falta.alocacao.usuario.codigo="+codigo
+                    +" and MONTH(j.data) = MONTH(now()) and YEAR(j.data) = YEAR(now()) ORDER BY j.codigo DESC");
+            Justificativa justificativa = (Justificativa) query.setMaxResults(1).getSingleResult();
+            return justificativa;
+        }catch(Exception ex){
+            return null;
+        }
+    }
+    
+    
     @Override
     public boolean Deletar(int codigo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

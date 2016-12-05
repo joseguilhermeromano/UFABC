@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -48,15 +49,85 @@
                             </div>
                         </div>
                         <br>
-                        <h4><span class="glyphicon glyphicon-alert"></span><b> Notificações</b></h4>
+                                                <h4><span class="glyphicon glyphicon-alert"></span><b> Notificações</b></h4>
                         <br>
-                        <div class="alert alert-info" role="alert">
-                            <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+                        
+                        
+                        <div class="col-md-4">
+                            <h4 class="text text-center"><b>Últimas Faltas</b></h4>
+                            <c:if test="${empty ultimasFaltas}"><p class="alert alert-info text-center">Não há faltas cadastrada</p></c:if>
+                            <c:if test="${not empty ultimasFaltas}">
+                        
+                            <table id="tabela1" class="table ls-table">
+                                <thead>
+                                    <tr>
+                                        <th class="text text-center">Usuario</th>
+                                        <th class="text text-center">Treinamento</th>
+                                        <th class="text text-center">Data da Falta</th>
+                                    </tr>
+                                </thead>
+                                <c:forEach var="r" items="${ultimasFaltas}" >
+                                    <tr>
+                                        <td class="text text-center">${r.alocacao.usuario.nome}</td>
+                                        <td class="text text-center">${r.alocacao.treinamento.nome}</td>
+                                        <td class="text text-center"><fmt:formatDate pattern="dd/MM/yyyy" value="${r.data}"/></td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                            
+                            <a href="${baseURL}area-restrita/falta/listartudo" class="col-lg-12 col-sm-12 col-xs-12 col-md-12 btn btn-success">Visualisar todas as faltas</a>
+                            </c:if>
                         </div>
-
-                        <div class="alert alert-danger" role="alert">
-                            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                        
+                        <div class="col-md-4">
+                            <h4 class="text text-center"><b>Última Justificativa</b></h4>
+                        <c:if test="${empty justificativa}"><p class="alert alert-info text-center">Não há justificativa cadastrada</p></c:if>
+                        <c:if test="${not empty justificativa}">
+                            <table class="table ls-table" id="tabela1">
+                                
+                                <thead>
+                                    <tr>
+                                        <th class="text text-center">Usuario</th>
+                                        <th class="text text-center">Treinameto</th>
+                                        <th class="text text-center">Data Justificativa</th>
+                                    </tr>
+                                </thead>
+                                
+                                    <tr>
+                                        <td class="text text-center">${justificativa.falta.alocacao.usuario.nome}</td>
+                                        <td class="text text-center">${justificativa.falta.alocacao.treinamento.nome}</td>
+                                        <td class="text text-center"><fmt:formatDate pattern="dd/MM/yyyy" value="${justificativa.data}"/></td>
+                                    </tr>
+                                
+                            </table>
+                            <a href="${baseURL}area-restrita/falta/listartudo" class="col-lg-12 col-sm-12 col-xs-12 col-md-12 btn btn-success">Visualisar todas as justificativas</a>
+                            </c:if>
                         </div>
+                        
+                        <div class="col-md-4">
+                            <h4 class="text text-center"><b>Última Reposição</b></h4>
+                            <c:if test="${empty reposicao}"><p class="alert alert-info text-center">Não há reposição cadastrada</p></c:if>
+                            <c:if test="${not empty reposicao}">
+                        
+                            <table id="tabela1" class="table ls-table">
+                                <thead>
+                                    <tr>
+                                        <th class="text text-center">Usuario</th>
+                                        <th class="text text-center">Treinameto</th>
+                                        <th class="text text-center">Data da Reposição</th>
+                                    </tr>
+                                </thead>
+                                    <tr>
+                                        <td class="text text-center">${reposicao.falta.alocacao.usuario.nome}</td>
+                                        <td class="text text-center">${reposicao.falta.alocacao.treinamento.nome}</td>
+                                        <td class="text text-center"><fmt:formatDate pattern="dd/MM/yyyy" value="${reposicao.data}"/></td>
+                                    </tr>
+                            </table>
+                            
+                            <a href="${baseURL}area-restrita/reposicao/listartudo" class="col-lg-12 col-sm-12 col-xs-12 col-md-12 btn btn-success">Visualisar todas as reposições</a>
+                            </c:if>
+                        </div>
+                        
 
                     </div>
                 </div>

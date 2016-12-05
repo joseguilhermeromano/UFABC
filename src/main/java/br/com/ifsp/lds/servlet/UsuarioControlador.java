@@ -6,13 +6,14 @@
 package br.com.ifsp.lds.servlet;
 
 import br.com.ifsp.lds.beans.Alocacao;
+import br.com.ifsp.lds.beans.Falta;
 import br.com.ifsp.lds.beans.Justificativa;
 import br.com.ifsp.lds.beans.Reposicao;
 import br.com.ifsp.lds.beans.Usuario;
+import br.com.ifsp.lds.dao.FaltaDAO;
 import br.com.ifsp.lds.dao.JustificativaDAO;
 import br.com.ifsp.lds.dao.ReposicaoDAO;
 import br.com.ifsp.lds.dao.UsuarioDAO;
-import br.com.ifsp.lds.util.JPAUtil;
 import br.com.ifsp.lds.util.UseRules;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -58,7 +59,7 @@ public class UsuarioControlador implements Tarefa {
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
         req.setAttribute("usuario", usuario);
         if (usuario.getAdministrador() != 1) {
-            return iniciocolaborador(req, resp, usuario);
+            return inicioColaborador(req, resp, usuario);
         } else {
             return inicioCoordenador(req, resp);
         }
@@ -72,7 +73,7 @@ public class UsuarioControlador implements Tarefa {
         return "/WEB-INF/views/administrador/index.jsp";
     }
 
-    private String iniciocolaborador(HttpServletRequest req, HttpServletResponse resp, Usuario usuario) {
+    private String inicioColaborador(HttpServletRequest req, HttpServletResponse resp, Usuario usuario) {
         GregorianCalendar calendar = new GregorianCalendar();
         int totaltreinos = 0;
         int treinospendentes = 0;
@@ -90,6 +91,13 @@ public class UsuarioControlador implements Tarefa {
         req.setAttribute("treinosmes", totaltreinos);
         req.setAttribute("totalfaltas", faltas);
         req.setAttribute("pendentes", treinospendentes);
+        List<Falta> ultimasFaltas = new FaltaDAO().consultaFaltasColaborador(usuario.getCodigo());
+        req.setAttribute("ultimasFaltas", ultimasFaltas);
+        Justificativa justificativa = new JustificativaDAO().ultimaJustificativaColaborador(usuario.getCodigo());
+        req.setAttribute("justificativa",justificativa);
+        Reposicao reposicao = new ReposicaoDAO().ultimaReposicaoColaborador(usuario.getCodigo());
+        req.setAttribute("reposicao",reposicao);
+        
 
         return "/WEB-INF/views/colaborador/index.jsp";
     }
