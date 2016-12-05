@@ -102,8 +102,15 @@ public class JustificativaControlador implements Tarefa {
                 return "/WEB-INF/views/administrador/justificativa.jsp";
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
-            return "/WEB-INF/views/administrador/justificativa.jsp";
+            
+        } catch (IOException ex) {
+            Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException ex) {
+            Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(JustificativaControlador.class.getName()).log(Level.SEVERE, null, ex);
         } 
+        return "/WEB-INF/views/administrador/justificativa.jsp";
     }
 
     private String getExt(String ext) {
@@ -190,7 +197,7 @@ public class JustificativaControlador implements Tarefa {
                 req.setAttribute("erro", "Não foi possível cadastrar a justificativa");
                 return "/WEB-INF/views/colocaborador/edita-justificativa.jsp";
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
+        } catch (ParseException|ServletException|IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
             return "/WEB-INF/views/colocaborador/edita-justificativa.jsp";
         } 
     }
