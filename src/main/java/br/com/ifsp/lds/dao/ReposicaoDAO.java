@@ -47,7 +47,16 @@ public class ReposicaoDAO implements DAO {
 
     @Override
     public boolean Alterar(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try { 
+            entityManager.getTransaction().begin();
+            entityManager.merge(obj);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception ex) { 
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+            return false;
+        }
     }
 
     @Override
