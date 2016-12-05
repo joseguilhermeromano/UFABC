@@ -38,14 +38,6 @@ public class ReposicaoControlador implements Tarefa {
     private UseRules validation = new UseRules();
     private ReposicaoDAO reposicaoDao = new ReposicaoDAO();
     
-    public String indicar(HttpServletRequest req, HttpServletResponse resp){
-        HttpSession session =  req.getSession();
-        ArrayList<Usuario> userList = new UsuarioDAO().ConsultarTudo("");
-        String users =  new UsuarioDAO().preparaUsuarioSelect(userList, (String)session.getAttribute("baseURL"));
-        req.setAttribute("options", users);
-        return "/WEB-INF/views/colaborador/indicar-colaborador.jsp";
-    }
-    
     private static final String[] permAdmin = {"aceitarecusa"};
     @Override
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp) {
