@@ -6,6 +6,7 @@
 package br.com.ifsp.lds.beans;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.*;
 
@@ -70,6 +71,51 @@ public class Usuario {
     
     @OneToMany(mappedBy = "responsavelReposicao")
     private List<Reposicao> reposicoesIndicadas;
+    
+    /**
+     * verifica se a nova alocação não possui conflitos com as 
+     * outras alocações de usuario
+     * @param novaAlocacao
+     * @return 
+     */
+    public boolean verficaDisponibilidade(Alocacao novaAlocacao) {
+        for(Alocacao a : alocacoes) {
+            if(a.existeConflitos(novaAlocacao.getDatainicio(), 
+                novaAlocacao.getDiasSemana(), novaAlocacao.getHorainicio())) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * verifica se a nova reposição não possui conflitos com as 
+     * outras reposições de usuario
+     * @param novaReposicao
+     * @return 
+     */
+    public boolean verficaDisponibilidade(Reposicao novaReposicao) {
+        boolean[] diasSemanas = new boolean[7];
+        Calendar c = Calendar.getInstance();
+        c.setTime(novaReposicao.getData());
+        int dia = c.get(Calendar.DAY_OF_WEEK);
+        if(dia == 1) return false;
+        diasSemanas[dia - 2] = true;
+        
+        for(Reposicao r : reposicoesIndicadas) {
+            if(r.exiteConflitos(novaReposicao.getData(), 
+                    novaReposicao.getHoraInicio())) {
+                return false;
+            }
+        }
+        for(Alocacao a : alocacoes) {
+            if(a.existeConflitos(novaReposicao.getData(), diasSemanas, novaReposicao.getHoraInicio())) {
+                return false;
+            }
+        } 
+        return true;
+    }
+    
     
     /**
      * @return the cola_cd

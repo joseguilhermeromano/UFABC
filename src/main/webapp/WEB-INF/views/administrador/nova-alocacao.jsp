@@ -38,6 +38,14 @@
                                 </div>
                             </c:forEach>
                         </c:if>
+                        
+                        <c:if test="${not empty erro}">
+                            <div class="alert alert-danger" role="alert">
+                                  ${erro}
+                            </div>
+                        </c:if>
+                
+                        
                         <!-- / Mensagens sucesso/erro -->
                         
                         <form action="${baseURL}area-restrita/alocacao/cadastrar" method="POST"><!--FORM -->
