@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -35,8 +36,25 @@ public class ReposicaoDAO implements DAO {
     }
 
     @Override
-    public ArrayList ConsultarTudo(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Reposicao> ConsultarTudo(String string) {
+        try { 
+            entityManager.getTransaction().begin();
+            TypedQuery<Reposicao> query;
+            if(string.equals("")){
+                query = entityManager.createQuery("select r from Reposicao r",Reposicao.class);
+            }else{
+                query = (TypedQuery<Reposicao>) entityManager.createQuery("select r from Reposicao r where r.nome like '%"+string+"%'");
+            }
+            ArrayList<Reposicao> cont = (ArrayList<Reposicao>) query.getResultList();
+            entityManager.getTransaction().commit();
+            return cont;
+        } catch (Exception ex) { 
+            ex.printStackTrace(); 
+            entityManager.getTransaction().rollback();
+        }
+        entityManager.close();
+        
+        return null;
     }
 
     @Override
