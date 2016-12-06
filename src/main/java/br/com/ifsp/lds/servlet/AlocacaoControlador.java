@@ -66,7 +66,6 @@ public class AlocacaoControlador implements Tarefa {
                 Time timeini = new Time(tm.parse(req.getParameter("horaIni")).getTime());
                 Time timefin = new Time(tm.parse(req.getParameter("horaTerm")).getTime());
                 aloca.setTreinamento(new TreinamentoDAO().Consultar(Integer.parseInt(req.getParameter("codTreina"))));
-
                 aloca.setDatainicio(data.parse(req.getParameter("dataIni")));
                 aloca.setDatafinal(data.parse(req.getParameter("dataFin")));
                 aloca.setHorainicio(timeini);
@@ -77,39 +76,29 @@ public class AlocacaoControlador implements Tarefa {
                 aloca.setQuinta(req.getParameter("qui") != null ? true : false);
                 aloca.setSexta(req.getParameter("sex") != null ? true : false);
                 aloca.setSabado(req.getParameter("sab") != null ? true : false);
-
-                boolean conflito = false;
-                for (Alocacao a : usuario.getAlocacoes()) {
-                    System.out.print(a.getCodigo());
-                    if (a.existeConflitosAlocacao(aloca)) {
-                        conflito = true;
-                        break;
-                    }
-                }
                 aloca.setUsuarios(usuario);
 
-                if (!conflito) {
+                if (usuario.verficaDisponibilidade(aloca)) {
                     if (alocaDAO.Cadastrar(aloca)) 
                         req.setAttribute("sucesso", "A Alocação foi realizada com sucesso!");
                     else 
                         req.setAttribute("erro", "Não foi possível realizar a Alocação!");
                 }
-                else req.setAttribute("erro", "Existem conflitos relacionados com outras alocações desse usuario");
+                else{ 
+                    req.setAttribute("erro", "Existem conflitos relacionados a outras alocações desse usuario");
+                    return "/WEB-INF/views/administrador/nova-alocacao.jsp";
+                }
                 listartudo(req, resp);
                 return "/WEB-INF/views/alocacoes.jsp";
             } else {
                 List<String> erros = validation.getTodosErros();
                 req.setAttribute("erros", erros);
-                for (String temp : erros) {
-                    System.out.println(temp);
-                }
             }
         } catch (NoSuchMethodException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(TreinamentoControlador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(AlocacaoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return "/WEB-INF/views/administrador/nova-alocacao.jsp";
     }
 

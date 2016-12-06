@@ -48,6 +48,28 @@ public class Reposicao {
     @Column(name = "repo_status")
     private int status;
     
+    
+    /**
+     * verifica se há a possibilidade de haver um conlito com a data da presente
+     * reposição
+     *
+     * @param novaData
+     * @return boolean true se tiver conflito, false se não tiver conflito
+     */
+    public boolean possuiConflitosData(Date novaData) {
+        return (novaData.compareTo(data) == 0);
+    }
+        
+    public boolean possuiConflitosHoras(Date novaHora) {
+        return (novaHora.compareTo(horaInicio) == 0
+                || novaHora.compareTo(horaFim) == 0
+                || (novaHora.after(horaInicio) && novaHora.before(horaFim)));
+    }
+    
+    public boolean exiteConflitos(Date novaData, Date novaHora) {
+        return possuiConflitosData(novaData) && possuiConflitosHoras(novaHora);
+    }
+    
     /**
      * @return the codigo
      */

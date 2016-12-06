@@ -145,10 +145,9 @@ public class Alocacao {
                 || (novaHora.after(horainicio) && novaHora.before(horafim)));
     }
 
-    public boolean existeConflitosAlocacao(Alocacao novaAlocacao) {
-        return possuiConflitosData(novaAlocacao.getDatainicio())  
-                && possuiConflitosDias(novaAlocacao.getDiasSemana())
-                && possuiConflitosHoras(novaAlocacao.getHorainicio());
+    public boolean existeConflitos(Date dataInicio, boolean[] diasSemana, Date horaInicio) {
+        return possuiConflitosData(dataInicio)  && possuiConflitosDias(diasSemana)
+                && possuiConflitosHoras(horaInicio);
     }
 
     /**

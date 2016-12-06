@@ -42,6 +42,10 @@
                 </li>
                 <hr>
                 <li>
+                    <a href="${baseURL}area-restrita/reposicao/listartudo"><span class="glyphicon glyphicon-copy"></span> Reposição</a>
+                </li> 
+                <hr>
+                <li>
                     <a href="${baseURL}area-restrita/usuario/logoff"><span class="glyphicon glyphicon-log-out"></span> Sair</a>                    
                 </li>
                 <hr>
