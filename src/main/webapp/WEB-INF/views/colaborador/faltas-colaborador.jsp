@@ -76,12 +76,12 @@
                                             
                                             <td class="text-center"><c:if test="${not empty item.reposicao}">Reposição marcada</c:if>
                                                             <c:if test="${item.status == 0 && empty item.reposicao}">Sem reposição
-                                                                <c:if test="${empty item.reposicao && item.justificativa.status == 1}">
+                                                                
                                                                     <input type="hidden" name="codigo" value="${item.codigo}" form="addReposicao">
-                                                                    <button  class="btn small btn-default" form="addReposicao">
+                                                                    <button  class="btn small btn-default <c:if test="${item.justificativa.status != 1 || empty item.justificativa}"> disabled </c:if>" form="addReposicao">
                                                                         adicionar reposição
                                                                     </button>
-                                                                </c:if>
+                                                                
                                                             </c:if>
                                             </td>
                                             

@@ -9,6 +9,7 @@ package br.com.ifsp.lds.dao;
 
 import br.com.ifsp.lds.beans.Justificativa;
 import br.com.ifsp.lds.controller.Controller;
+import br.com.ifsp.lds.servlet.JustificativaControlador;
 import br.com.ifsp.lds.util.JPAUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,11 +57,11 @@ public class JustificativaDAO implements DAO{
     public boolean Alterar(Object obj) {
           try { 
             entityManager.getTransaction().begin();
-            entityManager.merge(obj);
+            entityManager.merge((Justificativa) obj);
             entityManager.getTransaction().commit();
             return true;
         } catch (Exception ex){ 
-            ex.printStackTrace();
+            Logger.getLogger(JustificativaDAO.class.getName()).log(Level.SEVERE, null, ex);
             entityManager.getTransaction().rollback();
             return false;
         }

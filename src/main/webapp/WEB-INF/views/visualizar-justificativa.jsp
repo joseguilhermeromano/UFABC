@@ -113,7 +113,12 @@
                         </c:if>        
                             <!-- BOTÃO DO FORMULÁRIO -->
                             
-                        
+                        <c:if test="${usuario.administrador != 1}">
+                            <form method="post" action="${baseURL}area-restrita/justificativa/getInfoToUpdate">
+                                <button class="col-md-offset-4 col-md-3 btn btn-default" type="submit" name="alterar" value="">Alterar</button>
+                                <input type="hidden" name="codigo" value="${justificativa.codigo}">
+                            </form>
+                        </c:if>
                     </c:if>        
                         
                     </div>
@@ -165,6 +170,7 @@
                     </div>
                     <input type="hidden" name="codigo" value="${justificativa.codigo}">
                     </form>
+                    
                 </div>
             </div>
         </div> 

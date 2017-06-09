@@ -145,9 +145,7 @@ public class JustificativaControlador implements Tarefa {
             Justificativa justificado = new JustificativaDAO().Consultar(Integer.parseInt(req.getParameter("codigo")));
             String tempInfoFile = "Tamanho: " + justificado.getTamanho()+" Nome: " + justificado.getNome()+ " Tipo:" + justificado.getTipo();
             req.setAttribute("tempInfoFile",tempInfoFile);
-            req.setAttribute("dataBanco",justificado.getData());
-            req.setAttribute("motivoBanco",justificado.getMotivodesc());
-            req.setAttribute("nomeBanco",justificado.getNome());
+            req.setAttribute("justificativa", justificado);
             return "/WEB-INF/views/colaborador/edita-justificativa.jsp";        
         }else{
               return "/WEB-INF/views/visualizar-justificativa.jsp";
@@ -161,6 +159,7 @@ public class JustificativaControlador implements Tarefa {
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            req.setAttribute("justificativa", new JustificativaDAO().Consultar(Integer.parseInt(req.getParameter("codigo"))));
             Part filePart = req.getPart("userfile"); // Retrieves <input type="file" name="file">
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.            
             //InputStream fileContent = filePart.getInputStream();
@@ -190,15 +189,15 @@ public class JustificativaControlador implements Tarefa {
                     return new FaltaControlador().listartudo(req, resp);
                 } else {
                     req.setAttribute("erro", "Não foi possível cadastrar a justificativa");
-                    return "/WEB-INF/views/colocaborador/edita-justificativa.jsp";
+                    return "/WEB-INF/views/colaborador/edita-justificativa.jsp";
                 }
             } else {
                 req.setAttribute("erros", validation.getTodosErros());
                 req.setAttribute("erro", "Não foi possível cadastrar a justificativa");
-                return "/WEB-INF/views/colocaborador/edita-justificativa.jsp";
+                return "/WEB-INF/views/colaborador/edita-justificativa.jsp";
             }
         } catch (ParseException|ServletException|IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException ex) {
-            return "/WEB-INF/views/colocaborador/edita-justificativa.jsp";
+            return "/WEB-INF/views/colaborador/edita-justificativa.jsp";
         } 
     }
 

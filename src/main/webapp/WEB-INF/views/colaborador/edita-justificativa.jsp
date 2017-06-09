@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,21 +55,9 @@
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">="Comprovante" class="form-control estilo-input" value="
-                                    <%= 
-                                        if(request.getParameter("tempInfoFile") == null){    
-                                                request.getParameter("tempInfoFile") 
-                                        }        
-                                    %>       
-                                    "
+                                    <div class="form-group">${tempInfoFile}
                                     <b><label for="data">Comprovante</label></b>
-                                    <input type="file" name="userfile" placeholder="Comprovante" class="form-control estilo-input" value="
-                                    <%= 
-                                        if(request.getParameter("tempInfoFile") == null){    
-                                                request.getParameter("tempInfoFile") 
-                                        }        
-                                    %>       
-                                    " />
+                                    <input type="file" name="userfile" placeholder="Comprovante" class="form-control estilo-input" value="${justificativa.comprovante}" />
                                     </div>
                                 </div>                                
                             </div>
@@ -76,13 +65,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="nome">Nome</label></b>
-                                    <input type="text" name="nome" placeholder="Nome" class="form-control estilo-input" value="
-                                    <%= 
-                                        if(request.getParameter("nomeBanco") == null){    
-                                                request.getParameter("nomeBanco") 
-                                        }        
-                                    %>       
-                                    " />
+                                    <input type="text" name="nome" placeholder="Nome" class="form-control estilo-input" value="${justificativa.nome}" />
                                     </div>
                                 </div>
                             </div>
@@ -91,33 +74,19 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                     <b><label for="data">Data</label></b>
-                                    <input type="text" name="data" placeholder="Data" class="form-control estilo-input datepicker" value="
-                                    <%= 
-                                        if(request.getParameter("dataBanco") == null){    
-                                                request.getParameter("dataBanco") 
-                                        }        
-                                    %>       
-                                    " />
+                                    <input type="text" name="data" placeholder="Data" class="form-control estilo-input datepicker" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${justificativa.data}"/>" />
                                     </div>
                                 </div>                                
                             </div>
                              <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="motivo">Motivo:</label>
-                                    <textarea class="form-control" id="editor" name="motivo" rows="10" cols='10'>
-                                     <%= 
-                                        if(request.getParameter("motivoBanco") == null){    
-                                                request.getParameter("motivoBanco") 
-                                        }        
-                                    %>
-
-                                    </textarea>
+                                    <textarea class="form-control" id="editor" name="motivo" rows="10" cols='10'>${justificativa.motivodesc}</textarea>
                                 </div>
-                            </div>
-                            </div>      
-                            <input type="hidden" value="<%= request.getParameter("codigo") %>" name="codigo" id="codigo">
+                                
+                            <input type="hidden" value="${justificativa.codigo}" name="codigo" id="codigo">
                             <!-- BOTÃO DO FORMULÁRIO -->
-                            <center><input type="submit" value="Cadastrar"  class="btn btn-success button" /></center>
+                            <center><input type="submit" value="Cadastrar"  class="btn btn-success button " /></center>
                             
                         </form><!-- /FORMULÁRIO -->
                             
