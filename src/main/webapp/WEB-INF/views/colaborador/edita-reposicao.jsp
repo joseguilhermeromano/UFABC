@@ -71,7 +71,7 @@
                         
                                   
                         </div>
-                        <form action="${baseURL}area-restrita/reposicao/cadastrar" method="post"><!--FORM -->
+                        <form action="${baseURL}area-restrita/reposicao/alterar" method="post"><!--FORM -->
                             
                             <div class="row">
                                 <div class="col-md-6">
@@ -96,22 +96,26 @@
                                 </div>
                                     <div class="form-group col-md-12">
                                         <div class="">
-                                            <c:if test="${reposicao.falta.alocacao.usuario==usuarioLogado.codigo}">
+                                            <c:if test="${reposicao.falta.alocacao.usuario.codigo==sessionScope.usuarioLogado.codigo}">
                                                 <input id="opcao1" type="checkbox" value="1" onclick="ativaSelect('colaboradorSelect','opcao1')"> 
                                             </c:if>
-                                            <c:if test="${reposicao.falta.alocacao.usuario!=usuarioLogado.codigo}">
+                                            <c:if test="${reposicao.falta.alocacao.usuario.codigo!=sessionScope.usuarioLogado.codigo}">
                                                 <input id="opcao1" type="checkbox" value="1" onclick="ativaSelect('colaboradorSelect','opcao1')" checked>
                                             </c:if>
                                             <label for="opcao1"> Indicar colaborador para realizar a reposição</label>
                                         </div>
-
-                                        <select class="select2 col-md-4 " name="codigoColaborador" disabled id="colaboradorSelect">
+                                        <c:if test="${reposicao.falta.alocacao.usuario.codigo==sessionScope.usuarioLogado.codigo}">
+                                            <select class="select2 col-md-4 " name="codigoColaborador" disabled id="colaboradorSelect">
+                                        </c:if>
+                                        <c:if test="${reposicao.falta.alocacao.usuario.codigo!=sessionScope.usuarioLogado.codigo}">
+                                            <select class="select2 col-md-4 " name="codigoColaborador" id="colaboradorSelect">
+                                        </c:if>        
                                             <option value="-1">Selecione um colaborador</option>
-                                            <c:if test="${reposicao.falta.alocacao.usuario!=usuarioLogado.codigo}">
-                                                <option value="${reposicao.falta.alocacao.usuario.codigo}" selected>${reposicao.falta.alocacao.usuario.nome}</option>
+                                            <c:if test="${reposicao.falta.alocacao.usuario.codigo!=sessionScope.usuarioLogado.codigo}">
+                                                <option value="${reposicao.falta.alocacao.usuario.codigo}" selected>${reposicao.responsavelReposicao.nome}</option>
                                             </c:if>
                                             <c:forEach items="${colaboradores}" var="c" varStatus="loop">
-                                                <c:if test="${c.codigo!=usuarioLogado.codigo}">
+                                                <c:if test="${c.codigo!=reposicao.responsavelReposicao.codigo}">
                                                     <option value="${c.codigo}">${c.nome}</option>
                                                 </c:if>
                                             </c:forEach>
@@ -121,9 +125,10 @@
                             <!-- BOTÃO DO FORMULÁRIO -->
                             
                             
-                            <input type="hidden" name="codigo" value="${falta.codigo}">
-                            <center><input type="submit" value="cadastrar" name="cadastrar"  class="btn btn-success button" /></center>
-                            <input type="hidden" name="codigoAlocacao" value="${alocacao.codigo}">
+                            <input type="hidden" name="codigo" value="${reposicao.codigo}">
+                            <input type="hidden" name="codigoFalta" value="${reposicao.falta.codigo}">
+                            <center><input type="submit" value="atualizar" name="alterar"  class="btn btn-success button" /></center>
+                            <input type="hidden" name="codigoAlocacao" value="${reposicao.falta.alocacao.codigo}">
                         </form><!-- /FORMULÁRIO -->
                     </div>
                 </div>

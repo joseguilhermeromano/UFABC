@@ -37,17 +37,8 @@ public class ReposicaoControlador implements Tarefa {
     
     private UseRules validation = new UseRules();
     private ReposicaoDAO reposicaoDao = new ReposicaoDAO();
-
-    public String indicar(HttpServletRequest req, HttpServletResponse resp) {
-        HttpSession session = req.getSession();
-        ArrayList<Usuario> userList = new UsuarioDAO().ConsultarTudo("");
-        String users = new UsuarioDAO().preparaUsuarioSelect(userList, (String) session.getAttribute("baseURL"));
-        req.setAttribute("options", users);
-        return "/WEB-INF/views/colaborador/indicar-colaborador.jsp";
-    }
     
-    private static final String[] permAdmin = {"aceitarecusa", "listartudo"};
-    
+    private static final String[] permAdmin = {"aceitarecusa"};
     @Override
     public String[] getPermAdmin(HttpServletRequest req, HttpServletResponse resp) {
         return this.permAdmin;
@@ -130,68 +121,73 @@ public class ReposicaoControlador implements Tarefa {
     @Override
     public String alterar(HttpServletRequest req, HttpServletResponse resp) {
         int codigo = Integer.parseInt(req.getParameter("codigo"));
-        ArrayList<Usuario> colaboradores = new UsuarioDAO().consultarColaboradores();
-        Usuario user = (Usuario) req.getSession().getAttribute("usuarioLogado");
-        req.setAttribute("colaboradores", colaboradores);
-        Reposicao rep = (Reposicao) new ReposicaoDAO().Consultar(codigo);
-        req.setAttribute("reposicao", rep);
-        Falta falta = rep.getFalta();
+        Usuario usuario= (Usuario) req.getSession().getAttribute("usuarioLogado");
+        ArrayList<Usuario> colaboradores = new ArrayList<>(); 
+        for(Usuario u:new UsuarioDAO().consultarColaboradores()){
+            if (usuario.getCodigo()==u.getCodigo()) {
+                continue;
+            } 
+            colaboradores.add(u);
+        }
+        req.setAttribute("colaboradores",colaboradores);
+        Reposicao reposicao = (Reposicao) new ReposicaoDAO().Consultar(codigo);
+        req.setAttribute("reposicao", reposicao);
+        Falta falta = reposicao.getFalta();
         req.setAttribute("falta", falta);
-
-        if (req.getParameter("alterar") != null) {
-//            try {
-//                validation.addRule("required", "data", req.getParameter("data"));
-//                validation.addRule("required", "data", req.getParameter("horaInicio"));
-//                validation.addRule("required", "data", req.getParameter("horaFim"));
-//                if(validation.executaRegras()) {
-//                    Reposicao reposicao = new Reposicao();
-//                    SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
-//                    SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
-//                    Time horaInicio = new Time(tm.parse(req.getParameter("horaInicio")).getTime());
-//                    Time horaFim = new Time(tm.parse(req.getParameter("horaFim")).getTime());
-//                    reposicao.setData(dataFormat.parse(req.getParameter("data")));
-//                    reposicao.setStatus(0);
-//                    reposicao.setHoraInicio(horaInicio);
-//                    reposicao.setHoraFim(horaFim);
-//                    Usuario indicado;
-//                    if(req.getParameter("codigoColaborador") != null) {
-//                        indicado = new UsuarioDAO().Consultar(Integer.
-//                                parseInt(req.getParameter("codigoColaborador")));
-//                        reposicao.setResponsavelReposicao(indicado);
-//                        
-//                    }
-//                    else{   
-//                        reposicao.setResponsavelReposicao(usuario);
-//                    }
-//                    FaltaDAO faltaDao = new FaltaDAO();
-//                    reposicao.setFalta(faltaDao.Consultar(Integer.parseInt(req.getParameter("codigo"))));
-//                    falta.setReposicao(reposicao);
-//                    faltaDao.Alterar(falta);
-//                    if(reposicaoDao.Cadastrar(reposicao)) {
-//                        req.setAttribute("sucesso", "reposição cadastrada com sucesso");
-//                        return new FaltaControlador().listartudo(req, resp);
-//                    } else {
-//                        req.setAttribute("erro", "Não foi possivel cadastrar a reposição!");
-//                    }
-//                } else {
-//                    req.setAttribute("erro", "Não foi possivel cadastrar a reposição!");
-//                    req.setAttribute("erros", validation.getTodosErros());
-//                }
-//            } catch (ClassNotFoundException ex) {
-//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (InstantiationException ex) {
-//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (IllegalAccessException ex) {
-//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (IllegalArgumentException ex) {
-//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (InvocationTargetException ex) {
-//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (NoSuchMethodException ex) {
-//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (ParseException ex) {
-//                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+        
+        if(req.getParameter("alterar") != null) {
+            try {
+                validation.addRule("required", "data", req.getParameter("data"));
+                validation.addRule("required", "data", req.getParameter("horaInicio"));
+                validation.addRule("required", "data", req.getParameter("horaFim"));
+                if(validation.executaRegras()) {
+                    SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    SimpleDateFormat tm = new SimpleDateFormat("HH:mm");
+                    Time horaInicio = new Time(tm.parse(req.getParameter("horaInicio")).getTime());
+                    Time horaFim = new Time(tm.parse(req.getParameter("horaFim")).getTime());
+                    reposicao.setData(dataFormat.parse(req.getParameter("data")));
+                    reposicao.setStatus(0);
+                    reposicao.setHoraInicio(horaInicio);
+                    reposicao.setHoraFim(horaFim);
+                    Usuario indicado;
+                    if(req.getParameter("codigoColaborador") != null) {
+                        indicado = new UsuarioDAO().Consultar(Integer.
+                                parseInt(req.getParameter("codigoColaborador")));
+                        reposicao.setResponsavelReposicao(indicado);
+                        
+                    }
+                    else{   
+                        reposicao.setResponsavelReposicao(usuario);
+                    }
+                    FaltaDAO faltaDao = new FaltaDAO();
+                    reposicao.setFalta(faltaDao.Consultar(Integer.parseInt(req.getParameter("codigoFalta"))));
+                    falta.setReposicao(reposicao);
+                    faltaDao.Alterar(falta);
+                    if(reposicaoDao.Alterar(reposicao)) {
+                        req.setAttribute("sucesso", "Reposição alterada com sucesso!");
+                        return new FaltaControlador().listartudo(req, resp);
+                    } else {
+                        req.setAttribute("erro", "Não foi possivel alterar a reposição!");
+                    }
+                } else {
+                    req.setAttribute("erro", "Não foi possivel alterar a reposição!");
+                    req.setAttribute("erros", validation.getTodosErros());
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(ReposicaoControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return "/WEB-INF/views/colaborador/edita-reposicao.jsp";
     }

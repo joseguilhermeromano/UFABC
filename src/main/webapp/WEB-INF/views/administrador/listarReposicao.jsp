@@ -28,6 +28,7 @@
                     <div class="col-lg-12">
                         <h3><span class="glyphicon glyphicon-list"></span> Reposição</h3><hr>
                         
+                        
                         <!-- Mensagens sucesso/erro -->
                         <c:if test="${not empty sucesso}">
                             <div class="alert alert-success" role="alert">
@@ -56,20 +57,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="item" items="${repo}">
+                                    <c:forEach var="repo" items="${repo}">
                                     <tr>
                                             <td class="text-center">${repo.codigo}</td>
                                             <td>${repo.data}</td>
                                             <td>${repo.horaInicio}</td>
                                             <td>${repo.horaFim}</td>
-                                            <td>${repo.horaInicio}</td>
                                             <td>${repo.status}</td>
+                                            <td>${repo.falta.codigo}</td>
+                                             <td>${repo.responsavelReposicao.nome}</td>
                                             <td class="text-center">
-                                                <a href="<c:url value="${baseURL}area-restrita/treinamento/alterar">
-                                                <c:param name="codigo" value="${item.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
+                                                <a href="<c:url value="${baseURL}area-restrita/reposicao/alterar">
+                                                <c:param name="codigo" value="${repo.codigo}"></c:param></c:url>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
                                             </td>
                                             <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir" 
-                                                onclick="setCodigo('${item.codigo}'); setLink('${baseURL}area-restrita/treinamento/excluir?codigo=');">
+                                                onclick="setCodigo('${repo.codigo}'); setLink('${baseURL}area-restrita/reposicao/excluir?codigo=');">
                                                     <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
                                             </td>
                                     </tr>
